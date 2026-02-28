@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- 모바일 환경에서 강제 확대 방지 (아이폰 최적화 필수 태그) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    
+    <title>인스타 공백 변환기 | 깔끔한 줄바꿈 & 해시태그</title>
+    <meta name="description" content="인스타그램 띄어쓰기, 줄바꿈 오류를 1초 만에 해결해주는 가장 깔끔한 무료 공백 변환기입니다. 실시간 글자수 계산과 상황별 해시태그 자동 추천 기능까지 제공합니다.">
+    <meta name="keywords" content="인스타 공백, 인스타 띄어쓰기, 인스타 줄바꿈, 인스타 글자수, 인스타 해시태그 추천, 인스타 공백 변환기">
+    <meta property="og:title" content="인스타 공백 변환기 | 깔끔한 줄바꿈 & 해시태그">
+    <meta property="og:description" content="광고로 도배된 변환기는 그만! 1초 만에 인스타 줄바꿈을 해결하고 복사하세요.">
+    <meta property="og:type" content="website">
+
+    <style>
+        :root {
+            --bg-color: #f5f5f7;
+            --container-bg: #ffffff;
+            --text-main: #1d1d1f;
+            --text-sub: #86868b;
+            --border-color: #e5e5ea;
+            --tag-bg: #f2f2f7;
+            --tag-hover: #e5e5ea;
+            --btn-bg: #1d1d1f;
+            --btn-text: #ffffff;
+            --ad-bg: #f9f9f9;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #000000;
+                --container-bg: #1c1c1e;
+                --text-main: #f5f5f7;
+                --text-sub: #98989d;
+                --border-color: #38383a;
+                --tag-bg: #2c2c2e;
+                --tag-hover: #3a3a3c;
+                --btn-bg: #f5f5f7;
+                --btn-text: #1d1d1f;
+                --ad-bg: #2c2c2e;
+            }
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: var(--container-bg);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: background-color 0.3s;
+        }
+
+        header { text-align: center; margin-bottom: 20px; }
+        h1 { font-size: 22px; font-weight: 700; margin-bottom: 5px; letter-spacing: -0.5px; }
+        p.subtitle { font-size: 14px; color: var(--text-sub); }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 8px;
+        }
+        .char-count { font-size: 13px; color: var(--text-sub); font-weight: 500; }
+        .clear-btn {
+            background: none;
+            border: none;
+            color: #ff3b30;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+        .clear-btn:hover { background-color: rgba(255, 59, 48, 0.1); }
+
+        textarea {
+            width: 100%;
+            height: 250px;
+            padding: 16px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 12px;
+            background-color: transparent;
+            color: var(--text-main);
+            font-size: 16px; /* 아이폰 자동 확대 방지를 위해 무조건 16px 이상 유지 */
+            resize: none;
+            outline: none;
+            transition: border-color 0.3s;
+            margin-bottom: 15px;
+            font-family: inherit;
+        }
+        textarea:focus { border-color: #007aff; }
+
+        .hashtag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .tag-btn {
+            background-color: var(--tag-bg);
+            color: #007aff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .tag-btn:hover { background-color: var(--tag-hover); }
+
+        .action-btn {
+            width: 100%;
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.1s, opacity 0.2s;
+        }
+        .action-btn:active { transform: scale(0.98); }
+        .action-btn:hover { opacity: 0.9; }
+
+        .ad-space {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: var(--ad-bg);
+            border: 1px dashed var(--border-color);
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-sub);
+            border-radius: 8px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--text-main);
+            color: var(--container-bg);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            pointer-events: none;
+        }
+        /* 모바일 사파리 하단바에 안 가려지도록 높이 수정 (80px) */
+        .toast.show { bottom: 80px; opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>인스타 공백 변환기 ✨</h1>
+            <p class="subtitle">글 작성 후 버튼 하나면 띄어쓰기 오류 끝!</p>
+        </header>
+
+        <div class="toolbar">
+            <span class="char-count" id="charCount">0 / 2200자</span>
+            <button class="clear-btn" onclick="clearText()">휴지통 비우기</button>
+        </div>
+
+        <textarea id="inputText" placeholder="여기에 인스타그램에 올릴 글을 작성하세요. 엔터(줄바꿈)를 자유롭게 치셔도 됩니다." oninput="updateCharCount()"></textarea>
+
+        <p style="font-size: 13px; color: var(--text-sub); margin-bottom: 8px; font-weight: 600;">자동 해시태그 추가</p>
+        <div class="hashtag-group">
+            <button class="tag-btn" onclick="addHashtags('daily')">#일상/소통</button>
+            <button class="tag-btn" onclick="addHashtags('food')">#맛집/카페</button>
+            <button class="tag-btn" onclick="addHashtags('workout')">#오운완/운동</button>
+            <button class="tag-btn" onclick="addHashtags('business')">#소상공인</button>
+        </div>
+
+        <button class="action-btn" onclick="convertAndCopy()">✨ 변환하고 바로 복사하기</button>
+
+        <div class="ad-space">
+            [추후 수익 창출용 구글 광고가 들어갈 자리입니다]
+        </div>
+    </div>
+
+    <div id="toast" class="toast">✅ 성공적으로 복사되었습니다! 인스타에 붙여넣기 하세요.</div>
+
+    <script>
+        const textArea = document.getElementById('inputText');
+        const charCount = document.getElementById('charCount');
+
+        const hashtagDB = {
+            daily: "#일상 #소통 #맞팔 #좋반 #데일리 #일상스타그램 #좋아요반사 #선팔하면맞팔",
+            food: "#맛집 #맛집추천 #먹스타그램 #카페투어 #핫플 #카페스타그램 #푸드스타그램",
+            workout: "#오운완 #헬스타그램 #운동하는남자 #운동하는여자 #다이어트 #눈바디 #헬린이",
+            business: "#창업 #소상공인 #자영업자 #스마트스토어 #마케팅 #동기부여 #성장"
+        };
+
+        function updateCharCount() {
+            const length = textArea.value.length;
+            charCount.innerText = `${length} / 2200자`;
+            if(length > 2200) {
+                charCount.style.color = '#ff3b30';
+            } else {
+                charCount.style.color = 'var(--text-sub)';
+            }
+        }
+
+        function clearText() {
+            if(textArea.value.trim() !== '') {
+                if(confirm("작성하신 내용을 모두 지우시겠습니까?")) {
+                    textArea.value = '';
+                    updateCharCount();
+                    textArea.focus();
+                }
+            }
+        }
+
+        function addHashtags(category) {
+            const currentText = textArea.value;
+            // 로직 개선: 텍스트가 비어있으면 엔터 없이 바로 입력, 글이 있으면 엔터 두 번 치고 입력
+            if (currentText.trim() === '') {
+                textArea.value = hashtagDB[category];
+            } else {
+                textArea.value = currentText.trimEnd() + "\n\n" + hashtagDB[category];
+            }
+            textArea.scrollTop = textArea.scrollHeight;
+            updateCharCount();
+        }
+
+        function convertAndCopy() {
+            let text = textArea.value;
+
+            if(text.trim() === '') {
+                alert("글을 먼저 작성해주세요!");
+                return;
+            }
+
+            // 로직 전면 개선: 빈 줄(엔터만 쳐진 줄)을 찾아 투명 점자 공백(\u2800)으로 완벽 치환
+            let lines = text.split(/\r?\n/);
+            let convertedText = lines.map(line => {
+                // 줄에 아무 글자도 없거나 띄어쓰기만 있는 경우 투명 공백 삽입
+                return line.trim() === '' ? '\u2800' : line;
+            }).join('\n');
+
+            navigator.clipboard.writeText(convertedText).then(() => {
+                showToast();
+            }).catch(err => {
+                // 복사 API 미지원 구형 브라우저를 위한 폴백
+                textArea.value = convertedText;
+                textArea.select();
+                document.execCommand('copy');
+                showToast();
+            });
+        }
+
+        let toastTimeout;
+        function showToast() {
+            const toast = document.getElementById("toast");
+            toast.classList.add("show");
+            
+            // 타이머 초기화 (버튼 여러번 누를 때 알림창 깜빡임 방지)
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
