@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- ✅ 구글 3신기 탑재 (CCTV, 서치콘솔, 애드센스) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4PG2DEJS2P');
+    </script>
+    <meta name="google-site-verification" content="KC_FGR3LD6TwJWG73cK14iJu44l-nzTBk9AvjvW4Mo8" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
+
+    <!-- ✅ LoserDuck 시그니처 파비콘 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22%23191f28%22/><text x=%2250%22 y=%2268%22 font-size=%2260%22 text-anchor=%22middle%22>���</text></svg>">
+    
+    <title>유튜브 타임스탬프 생성기 | by LoserDuck</title>
+    <meta name="description" content="유튜브 챕터(목차) 나누기, 시간순 자동 정렬과 1초 복사로 끝내세요! (1시간 이상 영상 지원, 자동저장 기능 포함)">
+    
+    <meta property="og:title" content="⏱️ 유튜브 타임스탬프 생성기">
+    <meta property="og:description" content="시간순 자동 정렬! 새로고침해도 안 날아감! 유튜브 영상 목차를 10초만에 깔끔하게 만드세요.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80">
+    <meta property="og:type" content="website">
+
+    <style>
+        :root {
+            --bg-color: #f0f2f5;       
+            --card-bg: #ffffff;        
+            --text-title: #191f28;     
+            --text-normal: #333d4b;    
+            --text-sub: #8b95a1;       
+            --primary-color: #ff0000;  
+            --danger-red: #f04452;     
+            --input-bg: #f9fafb;       
+            --border-light: #e5e8eb;   
+            --border-strong: #d1d6db;  
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+            background-color: var(--bg-color); color: var(--text-normal);
+            display: flex; justify-content: center; align-items: flex-start;
+            min-height: 100vh; padding: 0; line-height: 1.5;
+        }
+
+        .app-container {
+            width: 100%; max-width: 500px; background: var(--card-bg);
+            min-height: 100vh; padding: 40px 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06); 
+        }
+
+        @media (min-width: 481px) {
+            body { align-items: center; padding: 40px 20px; }
+            .app-container { min-height: auto; border-radius: 28px; border: 1px solid var(--border-light); }
+        }
+
+        .header { margin-bottom: 30px; text-align: center; }
+        .header h1 { font-size: 24px; font-weight: 800; color: var(--text-title); letter-spacing: -0.6px; margin-bottom: 8px; }
+        .header p { font-size: 14px; color: var(--text-sub); font-weight: 500; }
+
+        .input-box {
+            background: var(--card-bg); border: 2px solid var(--border-strong);
+            border-radius: 16px; padding: 12px 16px; margin-bottom: 24px;
+            display: flex; gap: 10px; transition: all 0.2s ease;
+        }
+        .input-box:focus-within { border-color: var(--primary-color); box-shadow: 0 4px 16px rgba(255, 0, 0, 0.1); }
+
+        .input-time {
+            width: 90px; font-size: 18px; font-weight: 700; text-align: center;
+            border: none; background: var(--input-bg); border-radius: 10px;
+            padding: 12px 4px; color: var(--text-title); outline: none;
+            transition: background 0.2s;
+        }
+        .input-time:focus { background: #feeef0; }
+        
+        .input-title {
+            flex: 1; font-size: 15px; border: none; background: transparent;
+            color: var(--text-title); outline: none; min-width: 0; /* flex 버그 방지 */
+        }
+        .input-title::placeholder { color: #b0b8c1; }
+        
+        .add-btn {
+            background: var(--text-title); color: white; border: none;
+            border-radius: 10px; padding: 0 14px; font-weight: 700;
+            cursor: pointer; transition: 0.2s; white-space: nowrap; font-size: 14px;
+        }
+        .add-btn:hover { background: #333d4b; }
+        .add-btn:active { transform: scale(0.95); }
+
+        .list-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 12px; font-size: 13px; font-weight: 600; color: var(--text-sub);
+        }
+        .reset-btn {
+            background: none; border: 1px solid var(--border-light);
+            color: var(--text-sub); padding: 4px 10px; border-radius: 8px;
+            font-size: 12px; cursor: pointer; transition: 0.2s;
+        }
+        .reset-btn:hover { background: #feeef0; color: var(--danger-red); border-color: #fdd8dc; }
+        
+        .timeline-list { list-style: none; margin-bottom: 30px; min-height: 150px; }
+
+        .timeline-item {
+            display: flex; align-items: flex-start; padding: 14px 16px;
+            background: var(--input-bg); border-radius: 14px; margin-bottom: 8px;
+            border: 1px solid var(--border-light); animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .item-time { font-size: 16px; font-weight: 800; color: var(--primary-color); width: 75px; margin-top: 1px; flex-shrink: 0; }
+        .item-title { 
+            flex: 1; font-size: 15px; font-weight: 500; color: var(--text-title); 
+            padding-right: 8px; word-break: break-word; line-height: 1.4;
+        }
+        
+        .delete-btn {
+            background: none; border: none; color: #b0b8c1; font-size: 18px;
+            cursor: pointer; padding: 4px; border-radius: 6px; transition: 0.2s; 
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .delete-btn:hover { color: var(--danger-red); background: #feeef0; }
+
+        .copy-btn {
+            width: 100%; background-color: var(--text-title); color: #ffffff;
+            border: none; border-radius: 16px; padding: 18px; font-size: 17px;
+            font-weight: 700; cursor: pointer; box-shadow: 0 8px 20px rgba(25, 31, 40, 0.2);
+            transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px;
+        }
+        .copy-btn:hover { background-color: #333d4b; transform: translateY(-2px); }
+        .copy-btn:active { transform: translateY(0); box-shadow: 0 4px 10px rgba(25, 31, 40, 0.2); }
+
+        .footer-brand {
+            text-align: center; margin-top: 30px; font-size: 13px; font-weight: 600;
+            color: var(--text-sub); display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .footer-brand svg { width: 16px; height: 16px; border-radius: 4px; }
+
+        .toast {
+            position: fixed; bottom: -60px; left: 50%; transform: translateX(-50%);
+            background-color: rgba(25, 31, 40, 0.9); color: #fff;
+            padding: 14px 28px; border-radius: 30px; font-size: 15px; font-weight: 600;
+            opacity: 0; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none; z-index: 1000; white-space: nowrap;
+        }
+        .toast.show { bottom: 80px; opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="header">
+            <h1>유튜브 타임스탬프 ⏱️</h1>
+            <p>1시간 이상 영상 지원 & 자동 정렬 & 자동 저장</p>
+        </div>
+
+        <div class="input-box">
+            <input type="text" id="timeInput" class="input-time" placeholder="01:23" inputmode="numeric" pattern="\d*">
+            <input type="text" id="titleInput" class="input-title" placeholder="챕터 내용 입력 후 엔터 ⏎">
+            <button class="add-btn" onclick="addTimestamp()">추가</button>
+        </div>
+
+        <div class="list-header">
+            <span id="countText">총 1개</span>
+            <button class="reset-btn" onclick="resetTimestamps()">전체 초기화</button>
+        </div>
+
+        <ul class="timeline-list" id="timelineList"></ul>
+
+        <button class="copy-btn" onclick="copyResult()">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            유튜브 설명란에 복사하기
+        </button>
+
+        <div class="footer-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#191f28"/><text x="50" y="68" font-size="60" text-anchor="middle">🦆</text></svg>
+            Powered by LoserDuck
+        </div>
+    </div>
+
+    <div id="toast" class="toast">✅ 복사 완료! 유튜브에 붙여넣으세요.</div>
+
+    <script>
+        // 🌟 [패치 4] 원본 데이터 무결성 보호를 위한 Factory 함수화
+        const createDefaultTimestamp = () => ({ 
+            id: 'default_0', timeStr: "00:00", seconds: 0, title: "오프닝" 
+        });
+        
+        let timestamps = [];
+
+        // 🌟 [패치 3] 시크릿 모드 등 스토리지 차단 환경에서의 에러 방어 (try-catch)
+        try {
+            const savedData = localStorage.getItem('loserduck_timestamps_v2');
+            if (savedData) {
+                timestamps = JSON.parse(savedData);
+            } else {
+                timestamps = [createDefaultTimestamp()];
+            }
+        } catch (e) {
+            timestamps = [createDefaultTimestamp()];
+        }
+
+        const timeInput = document.getElementById('timeInput');
+        const titleInput = document.getElementById('titleInput');
+        const listEl = document.getElementById('timelineList');
+        const countText = document.getElementById('countText');
+
+        renderList();
+
+        timeInput.addEventListener('input', function(e) {
+            let val = e.target.value.replace(/[^0-9]/g, ''); 
+            if(val.length > 6) val = val.slice(0,6); 
+
+            let formatted = val;
+            if(val.length > 4) { 
+                formatted = val.slice(0, -4) + ':' + val.slice(-4, -2) + ':' + val.slice(-2);
+            } else if(val.length > 2) { 
+                formatted = val.slice(0, -2) + ':' + val.slice(-2);
+            }
+            e.target.value = formatted;
+        });
+
+        titleInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addTimestamp();
+        });
+
+        // 🌟 [패치 1] XSS 보안 완벽 차단 함수
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag])
+            );
+        }
+
+        function validateTimeLogic(timeStr) {
+            const parts = timeStr.split(':').map(Number);
+            // 🌟 [패치 2] 60초, 60분 초과 입력 원천 차단
+            if (parts.length === 3) { // 시:분:초
+                if (parts[1] >= 60) return "분(Minute)은 59분까지만 입력 가능합니다.";
+                if (parts[2] >= 60) return "초(Second)는 59초까지만 입력 가능합니다.";
+            } else if (parts.length === 2) { // 분:초
+                if (parts[1] >= 60) return "초(Second)는 59초까지만 입력 가능합니다.";
+            }
+            return null; // 정상
+        }
+
+        function timeToSeconds(timeStr) {
+            const parts = timeStr.split(':').map(Number);
+            if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+            if (parts.length === 2) return parts[0] * 60 + parts[1];
+            return 0;
+        }
+
+        function addTimestamp() {
+            const timeVal = timeInput.value.trim();
+            const titleVal = titleInput.value.trim();
+
+            if(!timeVal || !timeVal.includes(':')) {
+                alert("시간을 올바르게 입력해주세요. (예: 123 입력 시 01:23 자동변환)");
+                timeInput.focus(); return;
+            }
+            
+            const errorMsg = validateTimeLogic(timeVal);
+            if (errorMsg) {
+                alert(errorMsg);
+                timeInput.focus(); return;
+            }
+
+            if(!titleVal) {
+                alert("챕터 내용을 입력해주세요.");
+                titleInput.focus(); return;
+            }
+
+            const secs = timeToSeconds(timeVal);
+            const safeTitle = escapeHTML(titleVal);
+
+            const existingIndex = timestamps.findIndex(t => t.seconds === secs);
+            if(existingIndex >= 0) {
+                timestamps[existingIndex].title = safeTitle;
+            } else {
+                timestamps.push({ id: Date.now().toString(), timeStr: timeVal, seconds: secs, title: safeTitle });
+            }
+
+            timestamps.sort((a, b) => a.seconds - b.seconds);
+
+            if(timestamps.length === 0 || timestamps[0].seconds !== 0) {
+                timestamps.unshift(createDefaultTimestamp());
+            }
+
+            saveAndRender();
+            timeInput.value = ''; titleInput.value = ''; timeInput.focus();
+        }
+
+        function deleteTimestamp(id) {
+            const itemToDelete = timestamps.find(t => t.id === id);
+            if(itemToDelete && itemToDelete.seconds === 0) {
+                alert("유튜브 챕터는 무조건 '00:00'부터 시작해야 합니다. 내용만 수정해 주세요.");
+                return;
+            }
+            timestamps = timestamps.filter(t => t.id !== id);
+            saveAndRender();
+        }
+
+        function resetTimestamps() {
+            if(confirm("모든 목차를 삭제하시겠습니까? (00:00 오프닝만 남습니다)")) {
+                timestamps = [createDefaultTimestamp()];
+                saveAndRender();
+            }
+        }
+
+        function saveAndRender() {
+            try {
+                localStorage.setItem('loserduck_timestamps_v2', JSON.stringify(timestamps));
+            } catch (e) {} // 시크릿모드 에러 무시
+            renderList();
+        }
+
+        function renderList() {
+            listEl.innerHTML = '';
+            timestamps.forEach(t => {
+                const li = document.createElement('li');
+                li.className = 'timeline-item';
+                
+                let displayTime = t.timeStr;
+                if(displayTime.split(':').length === 2 && displayTime.split(':')[0].length === 1) {
+                    displayTime = '0' + displayTime;
+                }
+
+                // 🌟 [패치 5] 긴 텍스트 UI 붕괴 방어용 flex 레이아웃 보완
+                li.innerHTML = `
+                    <span class="item-time">${displayTime}</span>
+                    <span class="item-title">${t.title}</span>
+                    <button class="delete-btn" onclick="deleteTimestamp('${t.id}')" title="삭제">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                `;
+                listEl.appendChild(li);
+            });
+            countText.innerText = `총 ${timestamps.length}개`;
+        }
+
+        function copyResult() {
+            if(timestamps.length === 0) return;
+
+            let resultText = "📺 [영상 타임라인]\n\n";
+            timestamps.forEach(t => {
+                let finalTime = t.timeStr;
+                if(finalTime.split(':').length === 2 && finalTime.split(':')[0].length === 1) {
+                    finalTime = '0' + finalTime;
+                }
+                // 복사될 때는 XSS 방어(Escape) 된 텍스트를 다시 원래대로 복원해서 깔끔하게 복사
+                let unescapedTitle = t.title.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+                resultText += `${finalTime} ${unescapedTitle}\n`;
+            });
+            
+            resultText += "\n--------------------------\n🔗 챕터 자동생성기: https://loserduck.github.io/timestamp";
+
+            navigator.clipboard.writeText(resultText).then(() => {
+                showToast();
+            }).catch(err => {
+                alert("복사에 실패했습니다.");
+            });
+        }
+
+        let toastTimeout;
+        function showToast() {
+            const toast = document.getElementById("toast");
+            toast.classList.add("show");
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => { toast.classList.remove("show"); }, 2000);
+        }
+    </script>
+</body>
+</html>
