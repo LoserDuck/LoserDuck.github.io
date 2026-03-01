@@ -32,6 +32,7 @@
             --accent-green: #34c759;
             --accent-purple: #af52de;
             --accent-orange: #ff9500;
+            --accent-cyan: #32ade6; /* 6호점 포인트 컬러 */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,7 +40,6 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Inter", sans-serif;
             background-color: var(--bg-base);
-            /* 심해의 깊이감을 주는 로비 배경 */
             background-image: 
                 radial-gradient(circle at 15% 50%, rgba(49, 130, 246, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 85% 30%, rgba(255, 45, 85, 0.05) 0%, transparent 50%);
@@ -79,12 +79,10 @@
             border: 1px solid var(--card-border); border-radius: 28px;
             padding: 32px 28px; transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s;
             display: flex; flex-direction: column; height: 100%;
-            /* JS 마우스 추적 변수 */
             --mouse-x: 50%; --mouse-y: 50%;
             opacity: 0; transform: translateY(20px); animation: fadeInUp 0.6s forwards;
         }
         
-        /* 마우스 글로우 이펙트 */
         .tool-card::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             background: radial-gradient(circle 250px at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 80%);
@@ -104,7 +102,6 @@
             font-size: 28px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
         }
         
-        /* 뱃지 스타일 */
         .badges { display: flex; gap: 6px; }
         .badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
         .badge.lang-kr { background: rgba(49, 130, 246, 0.15); color: var(--accent-blue); }
@@ -122,6 +119,7 @@
         .card-3 .card-icon { color: var(--accent-purple); }
         .card-4 .card-icon { color: var(--accent-pink); }
         .card-5 .card-icon { color: var(--accent-blue); }
+        .card-6 .card-icon { color: var(--accent-cyan); }
 
         .footer-brand { margin-top: 80px; font-size: 14px; font-weight: 600; color: #555; text-align: center; }
 
@@ -141,14 +139,11 @@
     <div class="tools-grid">
 
         <!-- 1호점: 인스타 공백 변환기 -->
-        <!-- 🚨 주의: href 경로를 실제 폴더명이나 html 파일명으로 맞춰주세요 -->
         <a href="./insta.html" class="tool-card card-1" style="animation-delay: 0.1s;">
             <div class="card-content">
                 <div class="card-header">
                     <div class="card-icon">✨</div>
-                    <div class="badges">
-                        <span class="badge lang-kr">KR</span>
-                    </div>
+                    <div class="badges"><span class="badge lang-kr">KR</span></div>
                 </div>
                 <h2 class="card-title">인스타 공백 변환기</h2>
                 <p class="card-desc">인스타그램 줄바꿈 오류를 1초 만에 해결하세요. 완벽한 피드 정리를 위한 필수 툴입니다.</p>
@@ -161,9 +156,7 @@
             <div class="card-content">
                 <div class="card-header">
                     <div class="card-icon">💸</div>
-                    <div class="badges">
-                        <span class="badge lang-kr">KR</span>
-                    </div>
+                    <div class="badges"><span class="badge lang-kr">KR</span></div>
                 </div>
                 <h2 class="card-title">3.3% 프리랜서 계산기</h2>
                 <p class="card-desc">알바, 프리랜서, 외주 작업자를 위한 실수령액 및 시급 자동 계산기입니다.</p>
@@ -176,9 +169,7 @@
             <div class="card-content">
                 <div class="card-header">
                     <div class="card-icon">⏱️</div>
-                    <div class="badges">
-                        <span class="badge lang-kr">KR</span>
-                    </div>
+                    <div class="badges"><span class="badge lang-kr">KR</span></div>
                 </div>
                 <h2 class="card-title">유튜브 타임스탬프</h2>
                 <p class="card-desc">유튜브 영상 챕터를 가장 빠르고 쉽게 작성하고 복사할 수 있는 편집자용 도구입니다.</p>
@@ -191,9 +182,7 @@
             <div class="card-content">
                 <div class="card-header">
                     <div class="card-icon">🔴</div>
-                    <div class="badges">
-                        <span class="badge lang-en">EN / Global</span>
-                    </div>
+                    <div class="badges"><span class="badge lang-en">EN / Global</span></div>
                 </div>
                 <h2 class="card-title">YT Thumbnail HD</h2>
                 <p class="card-desc">Extract and download 4K/HD YouTube thumbnails instantly. No signup required.</p>
@@ -202,13 +191,11 @@
         </a>
 
         <!-- 5호점: 세이프 존 시뮬레이터 -->
-        <a href="./safezone" class="tool-card card-5" style="animation-delay: 0.5s;">
+        <a href="./safe-zone" class="tool-card card-5" style="animation-delay: 0.5s;">
             <div class="card-content">
                 <div class="card-header">
                     <div class="card-icon">📱</div>
-                    <div class="badges">
-                        <span class="badge lang-en">EN / Global</span>
-                    </div>
+                    <div class="badges"><span class="badge lang-en">EN / Global</span></div>
                 </div>
                 <h2 class="card-title">Safe Zone Simulator</h2>
                 <p class="card-desc">Preview TikTok, Reels, & Shorts UI overlays on your video to prevent text blocking.</p>
@@ -216,14 +203,18 @@
             </div>
         </a>
 
-        <!-- (미래의 6호점을 위한 빈 슬롯 / Coming Soon) -->
-        <div class="tool-card" style="animation-delay: 0.6s; border: 1px dashed rgba(255,255,255,0.1); cursor: default;">
-            <div class="card-content" style="align-items: center; justify-content: center; text-align: center; opacity: 0.5;">
-                <div class="card-icon" style="margin-bottom: 16px; background: transparent; border: none;">🚀</div>
-                <h2 class="card-title" style="margin-bottom: 8px;">Coming Soon</h2>
-                <p class="card-desc">New tool is brewing...</p>
+        <!-- 6호점: 유튜브 썸네일/제목 미리보기 (NEW!) -->
+        <a href="./yt-preview" class="tool-card card-6" style="animation-delay: 0.6s;">
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="card-icon">📺</div>
+                    <div class="badges"><span class="badge lang-en">EN / Global</span></div>
+                </div>
+                <h2 class="card-title">YT Thumbnail Preview</h2>
+                <p class="card-desc">Test your thumbnails and titles exactly as they appear on YouTube. Check text truncation instantly.</p>
+                <div class="card-footer" style="color:var(--accent-cyan);">Open Tool →</div>
             </div>
-        </div>
+        </a>
 
     </div>
 
