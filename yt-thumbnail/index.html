@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- ✅ Google Analytics, Search Console, AdSense -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4PG2DEJS2P');
+    </script>
+    <meta name="google-site-verification" content="KC_FGR3LD6TwJWG73cK14iJu44l-nzTBk9AvjvW4Mo8" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
+
+    <!-- ✅ LoserDuck Signature Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22%23191f28%22/><text x=%2250%22 y=%2268%22 font-size=%2260%22 text-anchor=%22middle%22>🦆</text></svg>">
+    
+    <title>YouTube Thumbnail Downloader HD | Free & Fast</title>
+    <meta name="description" content="Download high-quality (HD/4K) YouTube thumbnails for free. Just paste the video link and get the cover image instantly. No ads, no signup.">
+    
+    <meta property="og:title" content="🔴 YT Thumbnail Downloader HD">
+    <meta property="og:description" content="Grab High-Resolution YouTube thumbnails in 1 second. Clean, Fast, and Free.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80">
+    <meta property="og:type" content="website">
+
+    <style>
+        :root {
+            --bg-color: #0f0f11;       
+            --card-bg: #1c1c1f;        
+            --text-title: #ffffff;     
+            --text-normal: #d1d1d6;    
+            --text-sub: #8e8e93;       
+            --primary-color: #ff2d55;  
+            --primary-gradient: linear-gradient(135deg, #ff2d55 0%, #ff9500 100%);
+            --input-bg: #2c2c2e;       
+            --border-light: #3a3a3c;   
+            --border-strong: #48484a;  
+            --accent-blue: #0a84ff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color); color: var(--text-normal);
+            display: flex; justify-content: center; align-items: flex-start;
+            min-height: 100vh; padding: 0; line-height: 1.5;
+            -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+        }
+
+        .app-container {
+            width: 100%; max-width: 640px; background: var(--bg-color);
+            min-height: 100vh; padding: 50px 24px;
+        }
+
+        @media (min-width: 641px) {
+            body { align-items: center; padding: 40px 20px; }
+            .app-container { 
+                min-height: auto; background: var(--card-bg);
+                border-radius: 28px; border: 1px solid var(--border-light);
+                box-shadow: 0 24px 48px rgba(0,0,0,0.4);
+            }
+        }
+
+        /* 🌟 [UX 패치 1] 실리콘밸리 감성 그라데이션 타이틀 */
+        .header { margin-bottom: 36px; text-align: center; }
+        .header h1 { 
+            font-size: 32px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 12px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p { font-size: 15px; color: var(--text-sub); font-weight: 500; }
+
+        /* 🌟 [UX 패치 3] 입력창 에러 시 흔들림(Shake) 애니메이션 */
+        .search-wrapper { position: relative; margin-bottom: 32px; }
+        .search-box {
+            display: flex; align-items: center; gap: 8px;
+            background: var(--input-bg); border: 2px solid var(--border-strong);
+            border-radius: 18px; padding: 8px; transition: all 0.2s ease;
+        }
+        .search-box.focus {
+            border-color: var(--primary-color); background-color: #222224;
+            box-shadow: 0 4px 20px rgba(255, 45, 85, 0.15);
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+        .shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; border-color: #ff3b30 !important; }
+        
+        input[type="text"] {
+            flex: 1; background: transparent; border: none;
+            padding: 12px 0 12px 16px; font-size: 16px;
+            color: var(--text-title); outline: none; width: 100%;
+        }
+        input[type="text"]::placeholder { color: #666; }
+
+        /* 🌟 [UX 패치 4] 원클릭 초기화(Clear) 버튼 */
+        .clear-btn {
+            background: none; border: none; color: #888; font-size: 20px;
+            cursor: pointer; padding: 0 8px; display: none; transition: 0.2s;
+        }
+        .clear-btn:hover { color: #fff; }
+
+        .extract-btn {
+            background-color: var(--primary-color); color: white;
+            border: none; border-radius: 12px; padding: 14px 24px;
+            font-size: 15px; font-weight: 700; cursor: pointer; transition: 0.2s;
+            flex-shrink: 0; box-shadow: 0 4px 12px rgba(255, 45, 85, 0.2);
+        }
+        .extract-btn:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
+        .extract-btn:active { transform: translateY(1px); box-shadow: none; }
+
+        .result-area { display: none; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .thumbnail-card {
+            background: var(--card-bg); border: 1px solid var(--border-strong);
+            border-radius: 20px; margin-bottom: 24px; position: relative;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2); overflow: hidden; transform: translateZ(0);
+        }
+        
+        /* 🌟 [UX 패치 2] 로딩 중 은은하게 빛나는 스켈레톤 UI */
+        .img-container { position: relative; width: 100%; aspect-ratio: 16/9; background-color: #111; overflow: hidden; }
+        .skeleton {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, #1c1c1f 25%, #2c2c2e 50%, #1c1c1f 75%);
+            background-size: 200% 100%; animation: shimmer 1.5s infinite; z-index: 1;
+        }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+        /* 🌟 [UX 패치 5] 이미지 줌인 호버 애니메이션 */
+        .thumbnail-card img {
+            width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease, transform 0.4s ease;
+            position: relative; z-index: 2; display: block;
+        }
+        .thumbnail-card:hover img { transform: scale(1.03); }
+
+        .card-body { padding: 24px; position: relative; z-index: 3; background: var(--card-bg); }
+        
+        .quality-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--primary-color); color: #ffffff;
+            padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 700;
+            margin-bottom: 16px; letter-spacing: 0.2px; text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(255, 45, 85, 0.3);
+        }
+        .badge-sd { background: #3a3a3c; color: #ffffff; border: none; box-shadow: none; }
+        
+        .tip-text {
+            display: block; font-size: 13px; color: var(--text-normal);
+            margin-bottom: 16px; font-weight: 500;
+            background: rgba(255,255,255,0.04); padding: 12px 14px; border-radius: 10px;
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .action-btn {
+            display: block; width: 100%; text-align: center; padding: 16px 0; border-radius: 14px;
+            font-size: 16px; font-weight: 700; text-decoration: none; transition: 0.2s;
+            background: var(--accent-blue); color: #fff; border: none; cursor: pointer;
+        }
+        .action-btn:hover { background: #007aff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(10, 132, 255, 0.3); }
+        .action-btn:active { transform: translateY(0); box-shadow: 0 4px 10px rgba(10, 132, 255, 0.2); }
+
+        .footer-brand {
+            text-align: center; margin-top: 40px; font-size: 13px; font-weight: 600;
+            color: var(--text-sub); display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .footer-brand svg { width: 16px; height: 16px; border-radius: 4px; }
+
+        .toast {
+            position: fixed; bottom: -60px; left: 50%; transform: translateX(-50%);
+            background-color: #ff3b30; color: #fff; padding: 14px 28px;
+            border-radius: 30px; font-size: 14px; font-weight: 600;
+            opacity: 0; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none; z-index: 1000; white-space: nowrap; box-shadow: 0 10px 20px rgba(255, 59, 48, 0.3);
+        }
+        .toast.show { bottom: 40px; opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="header">
+            <h1>YT Thumbnail HD</h1>
+            <p>Paste any YouTube link to extract the cover</p>
+        </div>
+
+        <div class="search-wrapper">
+            <div class="search-box" id="searchBox">
+                <input type="text" id="urlInput" placeholder="https://youtube.com/watch?v=..." autocomplete="off">
+                <button class="clear-btn" id="clearBtn">&times;</button>
+                <button class="extract-btn" onclick="extractThumbnail()">Extract</button>
+            </div>
+        </div>
+
+        <div id="resultArea" class="result-area">
+            
+            <!-- High Definition (1080p) Card -->
+            <div id="hdCard" class="thumbnail-card">
+                <div class="img-container">
+                    <div class="skeleton" id="hdSkeleton"></div>
+                    <img id="imgHD" src="" alt="YouTube HD Thumbnail">
+                </div>
+                <div class="card-body">
+                    <div class="quality-badge">✨ HD / 4K Quality</div>
+                    <span class="tip-text">💡 Tip: Long-press or Right-click the image to save.</span>
+                    <a id="viewHD" href="#" target="_blank" class="action-btn">Open Full Image</a>
+                </div>
+            </div>
+
+            <!-- Standard Quality (480p) Card -->
+            <div id="sdCard" class="thumbnail-card">
+                <div class="img-container">
+                    <div class="skeleton" id="sdSkeleton"></div>
+                    <img id="imgSD" src="" alt="YouTube Standard Thumbnail">
+                </div>
+                <div class="card-body">
+                    <div class="quality-badge badge-sd">Standard Quality</div>
+                    <span class="tip-text">💡 Tip: Long-press or Right-click the image to save.</span>
+                    <a id="viewSD" href="#" target="_blank" class="action-btn" style="background:var(--input-bg); color:var(--text-title); border: 1px solid var(--border-light);">Open Standard Image</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#191f28"/><text x="50" y="68" font-size="60" text-anchor="middle">🦆</text></svg>
+            Powered by LoserDuck
+        </div>
+    </div>
+
+    <div id="toast" class="toast">Invalid YouTube URL! 🙅‍♂️</div>
+
+    <script>
+        const inputEl = document.getElementById('urlInput');
+        const searchBox = document.getElementById('searchBox');
+        const clearBtn = document.getElementById('clearBtn');
+        const resultArea = document.getElementById('resultArea');
+        const hdCard = document.getElementById('hdCard');
+        const sdCard = document.getElementById('sdCard');
+        const imgHD = document.getElementById('imgHD');
+        const imgSD = document.getElementById('imgSD');
+        const hdSkeleton = document.getElementById('hdSkeleton');
+        const sdSkeleton = document.getElementById('sdSkeleton');
+        
+        // 검색창 포커스 효과 제어
+        inputEl.addEventListener('focus', () => searchBox.classList.add('focus'));
+        inputEl.addEventListener('blur', () => searchBox.classList.remove('focus'));
+
+        // 입력 시 [X] 버튼 표시 제어
+        inputEl.addEventListener('input', function() {
+            clearBtn.style.display = this.value.length > 0 ? 'block' : 'none';
+        });
+
+        // [X] 버튼 클릭 시 초기화
+        clearBtn.addEventListener('click', function() {
+            inputEl.value = '';
+            this.style.display = 'none';
+            inputEl.focus();
+        });
+
+        inputEl.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') extractThumbnail();
+        });
+
+        function getVideoId(url) {
+            url = url.trim();
+            const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/|youtube\.com\/shorts\/)([^"&?\/\s]{11})/i;
+            const match = url.match(regExp);
+            return (match && match[1].length === 11) ? match[1] : null;
+        }
+
+        function triggerErrorShake() {
+            searchBox.classList.remove('shake');
+            void searchBox.offsetWidth; // DOM Reflow 강제 실행 (애니메이션 재시작 트릭)
+            searchBox.classList.add('shake');
+            showToast();
+        }
+
+        function extractThumbnail() {
+            if(document.activeElement === inputEl) {
+                inputEl.blur(); // 모바일 키보드 내림
+            }
+
+            const url = inputEl.value;
+            if (!url) return;
+
+            const videoId = getVideoId(url);
+
+            if (!videoId) {
+                triggerErrorShake();
+                return;
+            }
+
+            // 초기화 및 스켈레톤 켜기
+            imgHD.style.opacity = '0';
+            imgSD.style.opacity = '0';
+            hdSkeleton.style.display = 'block';
+            sdSkeleton.style.display = 'block';
+            
+            resultArea.style.display = 'none';
+            hdCard.style.display = 'block'; 
+
+            const hdUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+            const sdUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+
+            // HD 이미지 로드 완료 시
+            imgHD.onload = function() {
+                hdSkeleton.style.display = 'none'; // 스켈레톤 끄기
+                if (this.naturalWidth <= 120) {
+                    hdCard.style.display = 'none'; // 더미 이미지면 카드 숨김
+                } else {
+                    this.style.opacity = '1'; // 이미지 페이드인
+                }
+            };
+
+            // SD 이미지 로드 완료 시
+            imgSD.onload = function() {
+                sdSkeleton.style.display = 'none';
+                this.style.opacity = '1';
+            };
+
+            imgHD.src = hdUrl;
+            imgSD.src = sdUrl;
+
+            document.getElementById('viewHD').href = hdUrl;
+            document.getElementById('viewSD').href = sdUrl;
+
+            resultArea.style.display = 'block';
+            
+            setTimeout(() => {
+                resultArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+
+        let toastTimeout;
+        function showToast() {
+            const toast = document.getElementById("toast");
+            toast.classList.add("show");
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
