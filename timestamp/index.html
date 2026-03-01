@@ -4,7 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- ✅ 구글 3신기 탑재 (CCTV, 서치콘솔, 애드센스) -->
+    <!-- ✅ SEO 최적화 -->
+    <title>유튜브 타임스탬프 메이커 | 1SecTools</title>
+    <meta name="description" content="유튜브 영상 챕터(타임스탬프)를 1초 만에 가장 빠르고 쉽게 작성하는 편집자용 무료 툴. 콜론(:) 자동 입력 기능 탑재!">
+    <meta name="keywords" content="유튜브 타임스탬프, 유튜브 챕터, 영상 타임라인, 타임스탬프 생성기, 유튜브 타임라인, 1SecTools">
+    
+    <!-- ✅ Google Analytics, Search Console, AdSense -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -15,363 +20,377 @@
     <meta name="google-site-verification" content="KC_FGR3LD6TwJWG73cK14iJu44l-nzTBk9AvjvW4Mo8" />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
 
-    <!-- ✅ LoserDuck 시그니처 파비콘 -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22%23191f28%22/><text x=%2250%22 y=%2268%22 font-size=%2260%22 text-anchor=%22middle%22>���</text></svg>">
+    <!-- 1SecTools Custom Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233182f6'/><stop offset='100%' stop-color='%23ff2d55'/></linearGradient></defs><rect width='100' height='100' rx='25' fill='%23191f28'/><path d='M60 20 L25 60 L45 60 L40 85 L75 45 L55 45 Z' fill='url(%23grad)'/></svg>">
     
-    <title>유튜브 타임스탬프 생성기 | by LoserDuck</title>
-    <meta name="description" content="유튜브 챕터(목차) 나누기, 시간순 자동 정렬과 1초 복사로 끝내세요! (1시간 이상 영상 지원, 자동저장 기능 포함)">
-    
-    <meta property="og:title" content="⏱️ 유튜브 타임스탬프 생성기">
-    <meta property="og:description" content="시간순 자동 정렬! 새로고침해도 안 날아감! 유튜브 영상 목차를 10초만에 깔끔하게 만드세요.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80">
-    <meta property="og:type" content="website">
-
     <style>
         :root {
-            --bg-color: #f0f2f5;       
-            --card-bg: #ffffff;        
-            --text-title: #191f28;     
-            --text-normal: #333d4b;    
-            --text-sub: #8b95a1;       
-            --primary-color: #ff0000;  
-            --danger-red: #f04452;     
-            --input-bg: #f9fafb;       
-            --border-light: #e5e8eb;   
-            --border-strong: #d1d6db;  
+            --bg-base: #030305;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-title: #ffffff;
+            --text-sub: #8b95a1;
+            --accent-purple: #af52de;
+            --accent-blue: #3182f6;
+            --error-red: #ff3b30;
         }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
-            background-color: var(--bg-color); color: var(--text-normal);
-            display: flex; justify-content: center; align-items: flex-start;
-            min-height: 100vh; padding: 0; line-height: 1.5;
-        }
-
-        .app-container {
-            width: 100%; max-width: 500px; background: var(--card-bg);
-            min-height: 100vh; padding: 40px 24px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.06); 
-        }
-
-        @media (min-width: 481px) {
-            body { align-items: center; padding: 40px 20px; }
-            .app-container { min-height: auto; border-radius: 28px; border: 1px solid var(--border-light); }
-        }
-
-        .header { margin-bottom: 30px; text-align: center; }
-        .header h1 { font-size: 24px; font-weight: 800; color: var(--text-title); letter-spacing: -0.6px; margin-bottom: 8px; }
-        .header p { font-size: 14px; color: var(--text-sub); font-weight: 500; }
-
-        .input-box {
-            background: var(--card-bg); border: 2px solid var(--border-strong);
-            border-radius: 16px; padding: 12px 16px; margin-bottom: 24px;
-            display: flex; gap: 10px; transition: all 0.2s ease;
-        }
-        .input-box:focus-within { border-color: var(--primary-color); box-shadow: 0 4px 16px rgba(255, 0, 0, 0.1); }
-
-        .input-time {
-            width: 90px; font-size: 18px; font-weight: 700; text-align: center;
-            border: none; background: var(--input-bg); border-radius: 10px;
-            padding: 12px 4px; color: var(--text-title); outline: none;
-            transition: background 0.2s;
-        }
-        .input-time:focus { background: #feeef0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Inter", sans-serif; }
         
-        .input-title {
-            flex: 1; font-size: 15px; border: none; background: transparent;
-            color: var(--text-title); outline: none; min-width: 0; /* flex 버그 방지 */
+        body { 
+            background-color: var(--bg-base); color: var(--text-title); 
+            min-height: 100vh; display: flex; flex-direction: column;
+            -webkit-font-smoothing: antialiased;
         }
-        .input-title::placeholder { color: #b0b8c1; }
-        
-        .add-btn {
-            background: var(--text-title); color: white; border: none;
-            border-radius: 10px; padding: 0 14px; font-weight: 700;
-            cursor: pointer; transition: 0.2s; white-space: nowrap; font-size: 14px;
-        }
-        .add-btn:hover { background: #333d4b; }
-        .add-btn:active { transform: scale(0.95); }
 
-        .list-header {
+        /* --- Global Header --- */
+        .header { 
+            position: sticky; top: 0; z-index: 1000; 
+            background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(20px); 
+            border-bottom: 1px solid var(--card-border); 
+            padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; 
+        }
+        .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 800; font-size: 18px; letter-spacing: -0.5px;}
+        .header-badge { background: rgba(175, 82, 222, 0.15); border: 1px solid rgba(175, 82, 222, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-purple); font-weight: 700; }
+
+        /* --- Main Content --- */
+        .main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; width: 100%; max-width: 650px; margin: 0 auto; }
+        
+        .title-sec { text-align: center; margin-bottom: 32px; animation: fadeIn 0.6s ease-out; }
+        .title-sec h1 { font-size: clamp(24px, 5vw, 32px); font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; background: linear-gradient(135deg, #fff, #a1a1aa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .title-sec p { color: var(--text-sub); font-size: 15px; line-height: 1.6; word-break: keep-all; }
+
+        /* --- Ad Box --- */
+        .ad-container { width: 100%; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+
+        /* --- Input Panel --- */
+        .input-panel { 
+            width: 100%; background: var(--card-bg); backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border); border-radius: 20px; 
+            padding: 24px; display: flex; flex-direction: column; gap: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 24px;
+        }
+
+        .input-row { display: flex; gap: 12px; align-items: stretch; flex-wrap: wrap; }
+        
+        .time-input-group { flex: 1; min-width: 120px; display: flex; flex-direction: column; gap: 8px; }
+        .title-input-group { flex: 3; min-width: 200px; display: flex; flex-direction: column; gap: 8px; }
+        
+        .input-panel label { font-size: 13px; font-weight: 600; color: var(--text-sub); }
+        .input-panel input { 
+            width: 100%; height: 52px; background: rgba(0,0,0,0.4); 
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; 
+            padding: 0 16px; color: #fff; font-size: 16px; outline: none; transition: border 0.3s;
+        }
+        .input-panel input:focus { border-color: var(--accent-purple); box-shadow: 0 0 0 3px rgba(175, 82, 222, 0.15); }
+        .input-panel input::placeholder { color: #555; }
+        
+        .add-btn { 
+            width: 100%; height: 52px; border-radius: 12px; font-size: 16px; font-weight: 700; 
+            background: var(--accent-purple); color: #fff; border: none; cursor: pointer;
+            display: flex; justify-content: center; align-items: center; gap: 8px;
+            transition: all 0.2s; background-image: linear-gradient(135deg, #af52de 0%, #8b2ec4 100%);
+            box-shadow: 0 4px 15px rgba(175, 82, 222, 0.3);
+        }
+        .add-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(175, 82, 222, 0.4); }
+        .add-btn:active { transform: translateY(0); }
+
+        .helper-text { font-size: 12px; color: var(--text-sub); text-align: center; margin-top: -4px; }
+        .helper-text strong { color: var(--accent-purple); }
+
+        /* --- List Panel --- */
+        .list-panel { 
+            width: 100%; border: 1px solid var(--card-border); border-radius: 20px; 
+            background: rgba(0,0,0,0.2); display: flex; flex-direction: column; overflow: hidden;
+        }
+        
+        .list-header { 
+            padding: 16px 20px; background: rgba(255,255,255,0.03); 
+            border-bottom: 1px solid var(--card-border);
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 12px; font-size: 13px; font-weight: 600; color: var(--text-sub);
         }
-        .reset-btn {
-            background: none; border: 1px solid var(--border-light);
-            color: var(--text-sub); padding: 4px 10px; border-radius: 8px;
-            font-size: 12px; cursor: pointer; transition: 0.2s;
-        }
-        .reset-btn:hover { background: #feeef0; color: var(--danger-red); border-color: #fdd8dc; }
+        .list-header h3 { font-size: 15px; font-weight: 700; color: #fff; }
+        .list-count { font-size: 13px; color: var(--text-sub); background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 10px; }
+
+        .chapter-list { min-height: 100px; max-height: 400px; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
         
-        .timeline-list { list-style: none; margin-bottom: 30px; min-height: 150px; }
-
-        .timeline-item {
-            display: flex; align-items: flex-start; padding: 14px 16px;
-            background: var(--input-bg); border-radius: 14px; margin-bottom: 8px;
-            border: 1px solid var(--border-light); animation: slideDown 0.3s ease;
+        .chapter-item { 
+            display: flex; align-items: center; gap: 12px; padding: 12px 16px; 
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px; transition: background 0.2s; animation: fadeIn 0.3s ease;
         }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .item-time { font-size: 16px; font-weight: 800; color: var(--primary-color); width: 75px; margin-top: 1px; flex-shrink: 0; }
-        .item-title { 
-            flex: 1; font-size: 15px; font-weight: 500; color: var(--text-title); 
-            padding-right: 8px; word-break: break-word; line-height: 1.4;
-        }
+        .chapter-item:hover { background: rgba(255,255,255,0.05); }
         
-        .delete-btn {
-            background: none; border: none; color: #b0b8c1; font-size: 18px;
-            cursor: pointer; padding: 4px; border-radius: 6px; transition: 0.2s; 
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        .chap-time { font-weight: 700; color: var(--accent-purple); font-variant-numeric: tabular-nums; width: 60px; flex-shrink: 0; }
+        .chap-title { flex: 1; color: #fff; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        .del-btn { 
+            background: none; border: none; color: #666; cursor: pointer; 
+            padding: 4px; border-radius: 6px; transition: all 0.2s; display: flex;
         }
-        .delete-btn:hover { color: var(--danger-red); background: #feeef0; }
+        .del-btn:hover { color: var(--error-red); background: rgba(255, 59, 48, 0.1); }
 
-        .copy-btn {
-            width: 100%; background-color: var(--text-title); color: #ffffff;
-            border: none; border-radius: 16px; padding: 18px; font-size: 17px;
-            font-weight: 700; cursor: pointer; box-shadow: 0 8px 20px rgba(25, 31, 40, 0.2);
-            transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; gap: 8px;
-        }
-        .copy-btn:hover { background-color: #333d4b; transform: translateY(-2px); }
-        .copy-btn:active { transform: translateY(0); box-shadow: 0 4px 10px rgba(25, 31, 40, 0.2); }
+        .empty-state { padding: 40px 20px; text-align: center; color: #555; font-size: 14px; font-weight: 500; }
 
-        .footer-brand {
-            text-align: center; margin-top: 30px; font-size: 13px; font-weight: 600;
-            color: var(--text-sub); display: flex; align-items: center; justify-content: center; gap: 6px;
+        /* --- Action Area --- */
+        .action-area { width: 100%; display: flex; gap: 12px; margin-top: 16px; }
+        .btn-clear { 
+            padding: 0 20px; height: 56px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); 
+            background: rgba(255,255,255,0.05); color: var(--text-sub); font-weight: 600; cursor: pointer; transition: all 0.2s;
         }
-        .footer-brand svg { width: 16px; height: 16px; border-radius: 4px; }
+        .btn-clear:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        
+        .btn-copy { 
+            flex: 1; height: 56px; border-radius: 14px; border: none; background: #fff; color: #000; 
+            font-size: 16px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;
+            transition: all 0.2s; box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+        }
+        .btn-copy:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,255,255,0.3); }
 
-        .toast {
-            position: fixed; bottom: -60px; left: 50%; transform: translateX(-50%);
-            background-color: rgba(25, 31, 40, 0.9); color: #fff;
-            padding: 14px 28px; border-radius: 30px; font-size: 15px; font-weight: 600;
-            opacity: 0; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            pointer-events: none; z-index: 1000; white-space: nowrap;
+        /* --- Toast Notification --- */
+        .toast { 
+            position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(20px); 
+            background: rgba(52, 199, 89, 0.9); backdrop-filter: blur(10px);
+            color: #fff; padding: 14px 28px; border-radius: 100px; 
+            font-weight: 600; font-size: 15px; opacity: 0; pointer-events: none; 
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            box-shadow: 0 10px 30px rgba(52, 199, 89, 0.3); z-index: 2000; display: flex; align-items: center; gap: 8px;
         }
-        .toast.show { bottom: 80px; opacity: 1; }
+        .toast.error { background: rgba(255, 59, 48, 0.9); box-shadow: 0 10px 30px rgba(255, 59, 48, 0.3); }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* Custom Scrollbar */
+        .chapter-list::-webkit-scrollbar { width: 6px; }
+        .chapter-list::-webkit-scrollbar-track { background: transparent; }
+        .chapter-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        <div class="header">
-            <h1>유튜브 타임스탬프 ⏱️</h1>
-            <p>1시간 이상 영상 지원 & 자동 정렬 & 자동 저장</p>
+    <header class="header">
+        <a href="../" class="header-logo">
+            <svg width="24" height="24" viewBox="0 0 100 100"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>
+            1SecTools
+        </a>
+        <span class="header-badge">유튜브 챕터 메이커 ⏱️</span>
+    </header>
+
+    <main class="main">
+        <div class="title-sec">
+            <h1>초고�� 타임스탬프 생성</h1>
+            <p>숫자만 치면 <b>콜론(:)</b>이 자동 생성됩니다.<br>마우스 없이 <b>Enter</b>키만으로 챕터를 무한 추가하세요.</p>
         </div>
 
-        <div class="input-box">
-            <input type="text" id="timeInput" class="input-time" placeholder="01:23" inputmode="numeric" pattern="\d*">
-            <input type="text" id="titleInput" class="input-title" placeholder="챕터 내용 입력 후 엔터 ⏎">
-            <button class="add-btn" onclick="addTimestamp()">추가</button>
+        <!-- AdSense Container -->
+        <div class="ad-container">
+            <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110716268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
-        <div class="list-header">
-            <span id="countText">총 1개</span>
-            <button class="reset-btn" onclick="resetTimestamps()">전체 초기화</button>
+        <!-- 입력 패널 -->
+        <div class="input-panel">
+            <div class="input-row">
+                <div class="time-input-group">
+                    <label>시간 (숫자만 입력)</label>
+                    <!-- maxlength 6으로 제한하여 10:00:00 까지 커버 -->
+                    <input type="text" id="timeInput" placeholder="예: 0130 (01:30)" inputmode="numeric" maxlength="8">
+                </div>
+                <div class="title-input-group">
+                    <label>챕터 제목</label>
+                    <input type="text" id="titleInput" placeholder="하이라이트 장면" autocomplete="off">
+                </div>
+            </div>
+            <button class="add-btn" onclick="addChapter()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                목록에 추가 (Enter)
+            </button>
+            <div class="helper-text">💡 팁: 제목 입력 후 <strong>Enter</strong>를 누르면 바로 추가됩니다.</div>
         </div>
 
-        <ul class="timeline-list" id="timelineList"></ul>
-
-        <button class="copy-btn" onclick="copyResult()">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
-            유튜브 설명란에 복사하기
-        </button>
-
-        <div class="footer-brand">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#191f28"/><text x="50" y="68" font-size="60" text-anchor="middle">🦆</text></svg>
-            Powered by LoserDuck
+        <!-- 리스트 패널 -->
+        <div class="list-panel">
+            <div class="list-header">
+                <h3>생성된 챕터 목록</h3>
+                <span class="list-count" id="listCount">0개</span>
+            </div>
+            <div class="chapter-list" id="chapterList">
+                <div class="empty-state" id="emptyState">
+                    아직 추가된 챕터가 없습니다.<br>위에 시간과 제목을 입력하고 추가해보세요!
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div id="toast" class="toast">✅ 복사 완료! 유튜브에 붙여넣으세요.</div>
+        <!-- 하단 액션 버튼 -->
+        <div class="action-area">
+            <button class="btn-clear" onclick="clearAll()">전체 삭제</button>
+            <button class="btn-copy" onclick="copyToClipboard()" id="copyBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                유튜브용으로 복사하기
+            </button>
+        </div>
+    </main>
+
+    <!-- 토스트 알림 -->
+    <div class="toast" id="toast">알림 메시지</div>
 
     <script>
-        // 🌟 [패치 4] 원본 데이터 무결성 보호를 위한 Factory 함수화
-        const createDefaultTimestamp = () => ({ 
-            id: 'default_0', timeStr: "00:00", seconds: 0, title: "오프닝" 
-        });
-        
-        let timestamps = [];
-
-        // 🌟 [패치 3] 시크릿 모드 등 스토리지 차단 환경에서의 에러 방어 (try-catch)
-        try {
-            const savedData = localStorage.getItem('loserduck_timestamps_v2');
-            if (savedData) {
-                timestamps = JSON.parse(savedData);
-            } else {
-                timestamps = [createDefaultTimestamp()];
-            }
-        } catch (e) {
-            timestamps = [createDefaultTimestamp()];
-        }
-
         const timeInput = document.getElementById('timeInput');
         const titleInput = document.getElementById('titleInput');
-        const listEl = document.getElementById('timelineList');
-        const countText = document.getElementById('countText');
+        const chapterList = document.getElementById('chapterList');
+        const emptyState = document.getElementById('emptyState');
+        const listCount = document.getElementById('listCount');
+        const toast = document.getElementById('toast');
 
-        renderList();
+        let chapters = [];
 
+        // 1. 시간 오토-포맷팅 (숫자만 치면 : 자동 삽입)
         timeInput.addEventListener('input', function(e) {
-            let val = e.target.value.replace(/[^0-9]/g, ''); 
-            if(val.length > 6) val = val.slice(0,6); 
-
-            let formatted = val;
-            if(val.length > 4) { 
-                formatted = val.slice(0, -4) + ':' + val.slice(-4, -2) + ':' + val.slice(-2);
-            } else if(val.length > 2) { 
-                formatted = val.slice(0, -2) + ':' + val.slice(-2);
+            // 숫자만 남기기
+            let val = this.value.replace(/[^0-9]/g, '');
+            
+            // 길이별 콜론 삽입 로직
+            if(val.length > 4) { // 1시간 이상 (H:MM:SS)
+                val = val.substring(0, val.length - 4) + ':' + val.substring(val.length - 4, val.length - 2) + ':' + val.substring(val.length - 2);
+            } else if (val.length > 2) { // 분 단위 (M:SS 또는 MM:SS)
+                val = val.substring(0, val.length - 2) + ':' + val.substring(val.length - 2);
             }
-            e.target.value = formatted;
+            this.value = val;
+        });
+
+        // 2. 미친 UX (Enter 키 연동 로직)
+        timeInput.addEventListener('keypress', function(e) {
+            if(e.key === 'Enter') {
+                e.preventDefault();
+                if(this.value.trim() !== '') titleInput.focus(); // 시간 치고 엔터 -> 제목으로 이동
+            }
         });
 
         titleInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') addTimestamp();
+            if(e.key === 'Enter') {
+                e.preventDefault();
+                addChapter(); // 제목 치고 엔터 -> 목록 추가 후 다시 시간 입력창으로
+            }
         });
 
-        // 🌟 [패치 1] XSS 보안 완벽 차단 함수
-        function escapeHTML(str) {
-            return str.replace(/[&<>'"]/g, 
-                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag])
-            );
-        }
-
-        function validateTimeLogic(timeStr) {
-            const parts = timeStr.split(':').map(Number);
-            // 🌟 [패치 2] 60초, 60분 초과 입력 원천 차단
-            if (parts.length === 3) { // 시:분:초
-                if (parts[1] >= 60) return "분(Minute)은 59분까지만 입력 가능합니다.";
-                if (parts[2] >= 60) return "초(Second)는 59초까지만 입력 가능합니다.";
-            } else if (parts.length === 2) { // 분:초
-                if (parts[1] >= 60) return "초(Second)는 59초까지만 입력 가능합니다.";
-            }
-            return null; // 정상
-        }
-
-        function timeToSeconds(timeStr) {
-            const parts = timeStr.split(':').map(Number);
-            if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
-            if (parts.length === 2) return parts[0] * 60 + parts[1];
-            return 0;
-        }
-
-        function addTimestamp() {
+        // 3. 챕터 추가 로직
+        function addChapter() {
             const timeVal = timeInput.value.trim();
             const titleVal = titleInput.value.trim();
 
-            if(!timeVal || !timeVal.includes(':')) {
-                alert("시간을 올바르게 입력해주세요. (예: 123 입력 시 01:23 자동변환)");
-                timeInput.focus(); return;
-            }
+            if(!timeVal) { showToast('시간을 입력해주세요.', 'error'); timeInput.focus(); return; }
+            if(!titleVal) { showToast('제목을 입력해주세요.', 'error'); titleInput.focus(); return; }
+
+            // 데이터 배열에 푸시
+            chapters.push({ time: timeVal, title: titleVal });
+            renderList();
+
+            // 입력창 초기화 및 커서 복귀 (무한 루프 타이핑용)
+            timeInput.value = '';
+            titleInput.value = '';
+            timeInput.focus();
             
-            const errorMsg = validateTimeLogic(timeVal);
-            if (errorMsg) {
-                alert(errorMsg);
-                timeInput.focus(); return;
-            }
-
-            if(!titleVal) {
-                alert("챕터 내용을 입력해주세요.");
-                titleInput.focus(); return;
-            }
-
-            const secs = timeToSeconds(timeVal);
-            const safeTitle = escapeHTML(titleVal);
-
-            const existingIndex = timestamps.findIndex(t => t.seconds === secs);
-            if(existingIndex >= 0) {
-                timestamps[existingIndex].title = safeTitle;
-            } else {
-                timestamps.push({ id: Date.now().toString(), timeStr: timeVal, seconds: secs, title: safeTitle });
-            }
-
-            timestamps.sort((a, b) => a.seconds - b.seconds);
-
-            if(timestamps.length === 0 || timestamps[0].seconds !== 0) {
-                timestamps.unshift(createDefaultTimestamp());
-            }
-
-            saveAndRender();
-            timeInput.value = ''; titleInput.value = ''; timeInput.focus();
+            // 리스트 최하단으로 스크롤 이동
+            setTimeout(() => { chapterList.scrollTop = chapterList.scrollHeight; }, 50);
         }
 
-        function deleteTimestamp(id) {
-            const itemToDelete = timestamps.find(t => t.id === id);
-            if(itemToDelete && itemToDelete.seconds === 0) {
-                alert("유튜브 챕터는 무조건 '00:00'부터 시작해야 합니다. 내용만 수정해 주세요.");
+        // 4. 리스트 렌더링 로직
+        function renderList() {
+            if(chapters.length === 0) {
+                emptyState.style.display = 'block';
+                listCount.innerText = '0개';
+                // 기존 아이템들 삭제
+                const items = document.querySelectorAll('.chapter-item');
+                items.forEach(item => item.remove());
                 return;
             }
-            timestamps = timestamps.filter(t => t.id !== id);
-            saveAndRender();
+
+            emptyState.style.display = 'none';
+            listCount.innerText = `${chapters.length}개`;
+            
+            // 기존 아이템들 싹 지우고 재렌더링
+            const items = document.querySelectorAll('.chapter-item');
+            items.forEach(item => item.remove());
+
+            chapters.forEach((chap, index) => {
+                const div = document.createElement('div');
+                div.className = 'chapter-item';
+                div.innerHTML = `
+                    <div class="chap-time">${chap.time}</div>
+                    <div class="chap-title">${chap.title}</div>
+                    <button class="del-btn" onclick="deleteChapter(${index})" title="삭제">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                    </button>
+                `;
+                chapterList.appendChild(div);
+            });
         }
 
-        function resetTimestamps() {
-            if(confirm("모든 목차를 삭제하시겠습니까? (00:00 오프닝만 남습니다)")) {
-                timestamps = [createDefaultTimestamp()];
-                saveAndRender();
-            }
-        }
-
-        function saveAndRender() {
-            try {
-                localStorage.setItem('loserduck_timestamps_v2', JSON.stringify(timestamps));
-            } catch (e) {} // 시크릿모드 에러 무시
+        // 5. 개별 삭제 로직
+        function deleteChapter(index) {
+            chapters.splice(index, 1);
             renderList();
         }
 
-        function renderList() {
-            listEl.innerHTML = '';
-            timestamps.forEach(t => {
-                const li = document.createElement('li');
-                li.className = 'timeline-item';
-                
-                let displayTime = t.timeStr;
-                if(displayTime.split(':').length === 2 && displayTime.split(':')[0].length === 1) {
-                    displayTime = '0' + displayTime;
-                }
-
-                // 🌟 [패치 5] 긴 텍스트 UI 붕괴 방어용 flex 레이아웃 보완
-                li.innerHTML = `
-                    <span class="item-time">${displayTime}</span>
-                    <span class="item-title">${t.title}</span>
-                    <button class="delete-btn" onclick="deleteTimestamp('${t.id}')" title="삭제">
-                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
-                `;
-                listEl.appendChild(li);
-            });
-            countText.innerText = `총 ${timestamps.length}개`;
+        // 6. 전체 삭제 로직
+        function clearAll() {
+            if(chapters.length === 0) return;
+            if(confirm('모든 챕터 목록을 삭제하시겠습니까?')) {
+                chapters = [];
+                renderList();
+                timeInput.focus();
+            }
         }
 
-        function copyResult() {
-            if(timestamps.length === 0) return;
+        // 7. 클립보드 복사 로직 (유튜브 최적화 방어막 포함)
+        function copyToClipboard() {
+            if(chapters.length === 0) {
+                showToast('복사할 챕터가 없습니다.', 'error');
+                return;
+            }
 
-            let resultText = "📺 [영상 타임라인]\n\n";
-            timestamps.forEach(t => {
-                let finalTime = t.timeStr;
-                if(finalTime.split(':').length === 2 && finalTime.split(':')[0].length === 1) {
-                    finalTime = '0' + finalTime;
-                }
-                // 복사될 때는 XSS 방어(Escape) 된 텍스트를 다시 원래대로 복원해서 깔끔하게 복사
-                let unescapedTitle = t.title.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#39;/g, "'").replace(/&quot;/g, '"');
-                resultText += `${finalTime} ${unescapedTitle}\n`;
-            });
+            let resultText = '';
             
-            resultText += "\n--------------------------\n🔗 챕터 자동생성기: https://loserduck.github.io/timestamp";
+            // 유튜브 챕터 필수 조건 방어: 첫 챕터는 무조건 00:00 로 시작해야함
+            // 사용자가 00:00을 안 넣었을 경우 경고 문구 추가 삽입
+            if(chapters[0].time !== '00:00' && chapters[0].time !== '0:00') {
+                resultText += '00:00 도입부 (자동추가)\n';
+            }
+
+            chapters.forEach(chap => {
+                resultText += `${chap.time} ${chap.title}\n`;
+            });
 
             navigator.clipboard.writeText(resultText).then(() => {
-                showToast();
-            }).catch(err => {
-                alert("복사에 실패했습니다.");
+                showToast('<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;"><polyline points="20 6 9 17 4 12"></polyline></svg> 성공적으로 복사되었습니다!', 'success');
+            }).catch(() => {
+                // 구형 브라우저 Fallback
+                const temp = document.createElement('textarea');
+                temp.value = resultText;
+                document.body.appendChild(temp);
+                temp.select();
+                document.execCommand('copy');
+                document.body.removeChild(temp);
+                showToast('<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;"><polyline points="20 6 9 17 4 12"></polyline></svg> 성공적으로 복사되었습니다!', 'success');
             });
         }
 
+        // 8. 토스트 UI 함수
         let toastTimeout;
-        function showToast() {
-            const toast = document.getElementById("toast");
-            toast.classList.add("show");
+        function showToast(msg, type = 'success') {
+            toast.innerHTML = msg;
+            if(type === 'error') {
+                toast.classList.add('error');
+            } else {
+                toast.classList.remove('error');
+            }
+            
+            toast.classList.add('show');
             clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => { toast.classList.remove("show"); }, 2000);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
         }
     </script>
 </body>
