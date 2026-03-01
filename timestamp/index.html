@@ -6,9 +6,14 @@
     
     <!-- ✅ SEO 최적화 -->
     <title>유튜브 타임스탬프 메이커 | 1SecTools</title>
-    <meta name="description" content="유튜브 영상 챕터(타임스탬프)를 1초 만에 가장 빠르고 쉽게 작성하는 편집자용 무료 툴. 콜론(:) 자동 입력 기능 탑재!">
+    <meta name="description" content="유튜브 영상 챕터(타임스탬프)를 1초 만에 가장 빠르고 쉽게 작성하는 편집자용 무료 툴. 콜론(:) 자동 입력 및 시간순 정렬 기능 탑재!">
     <meta name="keywords" content="유튜브 타임스탬프, 유튜브 챕터, 영상 타임라인, 타임스탬프 생성기, 유튜브 타임라인, 1SecTools">
     
+    <!-- ✅ 구글 웹 폰트 강제 주입 (글자 깨짐 완벽 방어) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <!-- ✅ Google Analytics, Search Console, AdSense -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
     <script>
@@ -35,7 +40,7 @@
             --error-red: #ff3b30;
         }
         
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Inter", sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif; }
         
         body { 
             background-color: var(--bg-base); color: var(--text-title); 
@@ -109,10 +114,11 @@
             border-bottom: 1px solid var(--card-border);
             display: flex; justify-content: space-between; align-items: center;
         }
-        .list-header h3 { font-size: 15px; font-weight: 700; color: #fff; }
+        .list-header h3 { font-size: 15px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .list-header h3 span { font-size: 11px; font-weight: 500; color: var(--accent-purple); background: rgba(175, 82, 222, 0.15); padding: 2px 6px; border-radius: 6px; }
         .list-count { font-size: 13px; color: var(--text-sub); background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 10px; }
 
-        .chapter-list { min-height: 100px; max-height: 400px; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+        .chapter-list { min-height: 100px; max-height: 400px; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; scroll-behavior: smooth; }
         
         .chapter-item { 
             display: flex; align-items: center; gap: 12px; padding: 12px 16px; 
@@ -121,7 +127,7 @@
         }
         .chapter-item:hover { background: rgba(255,255,255,0.05); }
         
-        .chap-time { font-weight: 700; color: var(--accent-purple); font-variant-numeric: tabular-nums; width: 60px; flex-shrink: 0; }
+        .chap-time { font-weight: 700; color: var(--accent-purple); font-variant-numeric: tabular-nums; width: 64px; flex-shrink: 0; }
         .chap-title { flex: 1; color: #fff; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         
         .del-btn { 
@@ -146,6 +152,11 @@
             transition: all 0.2s; box-shadow: 0 4px 15px rgba(255,255,255,0.2);
         }
         .btn-copy:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,255,255,0.3); }
+
+        /* --- Footer Brand --- */
+        .footer-brand { margin-top: 40px; margin-bottom: 20px; font-size: 13px; font-weight: 600; color: #555; text-align: center; }
+        .powered-by { font-weight: 400; color: #777; margin-top: 6px; font-size: 12px; }
+        .duck-logo { color: #fff; }
 
         /* --- Toast Notification --- */
         .toast { 
@@ -179,8 +190,8 @@
 
     <main class="main">
         <div class="title-sec">
-            <h1>초고�� 타임스탬프 생성</h1>
-            <p>숫자만 치면 <b>콜론(:)</b>이 자동 생성됩니다.<br>마우스 없이 <b>Enter</b>키만으로 챕터를 무한 추가하세요.</p>
+            <h1>초고속 타임스탬프 생성</h1>
+            <p>숫자만 치면 <b>콜론(:)</b>이 자동 생성됩니다.<br>순서 상관없이 등록해도 알아서 <b>시간순 정렬</b>됩니다!</p>
         </div>
 
         <!-- AdSense Container -->
@@ -194,8 +205,7 @@
             <div class="input-row">
                 <div class="time-input-group">
                     <label>시간 (숫자만 입력)</label>
-                    <!-- maxlength 6으로 제한하여 10:00:00 까지 커버 -->
-                    <input type="text" id="timeInput" placeholder="예: 0130 (01:30)" inputmode="numeric" maxlength="8">
+                    <input type="text" id="timeInput" placeholder="예: 0130" inputmode="numeric" maxlength="8">
                 </div>
                 <div class="title-input-group">
                     <label>챕터 제목</label>
@@ -212,7 +222,7 @@
         <!-- 리스트 패널 -->
         <div class="list-panel">
             <div class="list-header">
-                <h3>생성된 챕터 목록</h3>
+                <h3>생성된 챕터 목록 <span>시간순 자동정렬 됨</span></h3>
                 <span class="list-count" id="listCount">0개</span>
             </div>
             <div class="chapter-list" id="chapterList">
@@ -229,6 +239,12 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 유튜브용으로 복사하기
             </button>
+        </div>
+
+        <!-- 🦆 Footer Branding -->
+        <div class="footer-brand">
+            <div>&copy; 2026 1SecTools. All rights reserved.</div>
+            <div class="powered-by">Powered by <span class="duck-logo">🦆 LoserDuck</span></div>
         </div>
     </main>
 
@@ -247,10 +263,7 @@
 
         // 1. 시간 오토-포맷팅 (숫자만 치면 : 자동 삽입)
         timeInput.addEventListener('input', function(e) {
-            // 숫자만 남기기
             let val = this.value.replace(/[^0-9]/g, '');
-            
-            // 길이별 콜론 삽입 로직
             if(val.length > 4) { // 1시간 이상 (H:MM:SS)
                 val = val.substring(0, val.length - 4) + ':' + val.substring(val.length - 4, val.length - 2) + ':' + val.substring(val.length - 2);
             } else if (val.length > 2) { // 분 단위 (M:SS 또는 MM:SS)
@@ -263,16 +276,26 @@
         timeInput.addEventListener('keypress', function(e) {
             if(e.key === 'Enter') {
                 e.preventDefault();
-                if(this.value.trim() !== '') titleInput.focus(); // 시간 치고 엔터 -> 제목으로 이동
+                if(this.value.trim() !== '') titleInput.focus();
             }
         });
 
         titleInput.addEventListener('keypress', function(e) {
             if(e.key === 'Enter') {
                 e.preventDefault();
-                addChapter(); // 제목 치고 엔터 -> 목록 추가 후 다시 시간 입력창으로
+                addChapter();
             }
         });
+
+        // 🛠️ 추가된 로직: HH:MM:SS 문자열을 초(Seconds)로 변환하여 정렬용으로 씀
+        function timeToSeconds(timeStr) {
+            const parts = timeStr.split(':').reverse(); // ['SS', 'MM', 'HH']
+            let seconds = 0;
+            for (let i = 0; i < parts.length; i++) {
+                seconds += parseInt(parts[i] || 0, 10) * Math.pow(60, i);
+            }
+            return seconds;
+        }
 
         // 3. 챕터 추가 로직
         function addChapter() {
@@ -284,14 +307,18 @@
 
             // 데이터 배열에 푸시
             chapters.push({ time: timeVal, title: titleVal });
+            
+            // 🚨 시간순 자동 정렬 실행
+            chapters.sort((a, b) => timeToSeconds(a.time) - timeToSeconds(b.time));
+            
             renderList();
 
-            // 입력창 초기화 및 커서 복귀 (무한 루프 타이핑용)
+            // 입력창 초기화 및 커서 복귀
             timeInput.value = '';
             titleInput.value = '';
             timeInput.focus();
             
-            // 리스트 최하단으로 스크롤 이동
+            // 제일 하단으로 스크롤 넘기기 (정렬되었어도 목록이 길면 스크롤 조정)
             setTimeout(() => { chapterList.scrollTop = chapterList.scrollHeight; }, 50);
         }
 
@@ -300,7 +327,6 @@
             if(chapters.length === 0) {
                 emptyState.style.display = 'block';
                 listCount.innerText = '0개';
-                // 기존 아이템들 삭제
                 const items = document.querySelectorAll('.chapter-item');
                 items.forEach(item => item.remove());
                 return;
@@ -309,7 +335,6 @@
             emptyState.style.display = 'none';
             listCount.innerText = `${chapters.length}개`;
             
-            // 기존 아이템들 싹 지우고 재렌더링
             const items = document.querySelectorAll('.chapter-item');
             items.forEach(item => item.remove());
 
@@ -343,7 +368,7 @@
             }
         }
 
-        // 7. 클립보드 복사 로직 (유튜브 최적화 방어막 포함)
+        // 7. 클립보드 복사 로직 (유튜브 최적화)
         function copyToClipboard() {
             if(chapters.length === 0) {
                 showToast('복사할 챕터가 없습니다.', 'error');
@@ -352,9 +377,8 @@
 
             let resultText = '';
             
-            // 유튜브 챕터 필수 조건 방어: 첫 챕터는 무조건 00:00 로 시작해야함
-            // 사용자가 00:00을 안 넣었을 경우 경고 문구 추가 삽입
-            if(chapters[0].time !== '00:00' && chapters[0].time !== '0:00') {
+            // 첫 챕터가 00:00 이 아니면 강제 삽입
+            if(timeToSeconds(chapters[0].time) !== 0) {
                 resultText += '00:00 도입부 (자동추가)\n';
             }
 
@@ -365,7 +389,6 @@
             navigator.clipboard.writeText(resultText).then(() => {
                 showToast('<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;"><polyline points="20 6 9 17 4 12"></polyline></svg> 성공적으로 복사되었습니다!', 'success');
             }).catch(() => {
-                // 구형 브라우저 Fallback
                 const temp = document.createElement('textarea');
                 temp.value = resultText;
                 document.body.appendChild(temp);
