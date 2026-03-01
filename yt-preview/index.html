@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- ✅ SEO Optimization -->
-    <title>YouTube Thumbnail & Title Preview | 1SecTools</title>
-    <meta name="description" content="Test your YouTube thumbnails and titles before publishing. See exactly how they will appear on mobile screens in Dark and Light mode.">
-    <meta name="keywords" content="youtube thumbnail preview, title tester, thumbnail checker, youtube ui simulator">
+    <title>YouTube Thumbnail & Title Preview Simulator | 1SecTools</title>
+    <meta name="description" content="Test your YouTube thumbnails and titles before uploading. Simulate how they look on Mobile and Desktop, and check if your text gets truncated.">
+    <meta name="keywords" content="youtube thumbnail preview, youtube title checker, thumbnail tester, youtube a/b test, thumbnail simulator">
     
     <!-- ✅ Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,82 +30,82 @@
     <style>
         :root {
             --bg-base: #030305; --card-bg: rgba(255, 255, 255, 0.03); --card-border: rgba(255, 255, 255, 0.08);
-            --text-title: #ffffff; --text-sub: #8b95a1; --accent-cyan: #32ade6;
-            
-            /* YouTube Simulator Colors */
-            --yt-dark-bg: #0f0f0f; --yt-dark-text: #f1f1f1; --yt-dark-sub: #aaaaaa;
-            --yt-light-bg: #ffffff; --yt-light-text: #0f0f0f; --yt-light-sub: #606060;
+            --text-title: #ffffff; --text-sub: #8b95a1; --accent-cyan: #32ade6; --yt-bg: #0f0f0f;
         }
-        
+        /* YouTube uses Roboto font globally */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Roboto', 'Noto Sans KR', sans-serif; }
         body { background-color: var(--bg-base); color: var(--text-title); min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
 
         .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
         .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 800; font-size: 18px; letter-spacing: -0.5px;}
-        .header-badge { background: rgba(50, 173, 230, 0.15); border: 1px solid rgba(50, 173, 230, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-cyan); font-weight: 700; text-transform: uppercase; }
+        .header-badge { background: rgba(50, 173, 230, 0.15); border: 1px solid rgba(50, 173, 230, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-cyan); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        .main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; width: 100%; max-width: 600px; margin: 0 auto; }
-        .title-sec { text-align: center; margin-bottom: 24px; animation: fadeInDown 0.6s ease; }
-        .title-sec h1 { font-size: clamp(24px, 5vw, 32px); font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; background: linear-gradient(135deg, #fff, #a1a1aa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; width: 100%; max-width: 800px; margin: 0 auto; }
+        
+        .title-sec { text-align: center; margin-bottom: 24px; animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .title-sec h1 { font-size: clamp(28px, 6vw, 36px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; background: linear-gradient(135deg, #fff, #a1a1aa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .title-sec p { color: var(--text-sub); font-size: 15px; line-height: 1.6; }
 
-        .ad-container { width: 100%; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .ad-container { width: 100%; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; }
 
-        /* Input Controls */
-        .controls-panel { width: 100%; background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--card-border); border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+        /* Controls Panel */
+        .editor-panel { width: 100%; background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--card-border); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 20px; margin-bottom: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
         
         .input-group { display: flex; flex-direction: column; gap: 8px; }
         .input-group label { font-size: 13px; font-weight: 700; color: var(--text-sub); }
-        .input-group input[type="text"] { width: 100%; height: 48px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 0 16px; color: #fff; font-size: 15px; outline: none; transition: all 0.3s; }
-        .input-group input[type="text"]:focus { border-color: var(--accent-cyan); box-shadow: 0 0 0 3px rgba(50, 173, 230, 0.15); }
-        
-        /* Image Upload Button */
-        .file-upload-wrapper { position: relative; width: 100%; height: 48px; }
-        .file-upload-btn { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(255,255,255,0.05); border: 1px dashed rgba(255,255,255,0.2); border-radius: 12px; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-        .file-upload-btn:hover { background: rgba(255,255,255,0.1); }
-        .file-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+        .input-group input { width: 100%; height: 50px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 0 16px; color: #fff; font-size: 16px; outline: none; transition: border 0.3s; }
+        .input-group input:focus { border-color: var(--accent-cyan); }
 
-        /* Simulator UI */
-        .sim-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .sim-title { font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 6px; }
-        
-        /* Theme Toggle */
-        .theme-toggle { display: flex; background: rgba(255,255,255,0.1); border-radius: 20px; padding: 4px; cursor: pointer; }
-        .theme-btn { padding: 4px 12px; border-radius: 16px; font-size: 12px; font-weight: 700; color: var(--text-sub); transition: all 0.3s; }
-        .theme-btn.active { background: #fff; color: #000; }
+        .file-upload-btn { position: relative; width: 100%; height: 50px; background: rgba(50, 173, 230, 0.1); border: 1px dashed var(--accent-cyan); border-radius: 12px; display: flex; justify-content: center; align-items: center; gap: 8px; color: var(--accent-cyan); font-weight: 700; cursor: pointer; transition: all 0.2s; overflow: hidden; }
+        .file-upload-btn:hover { background: rgba(50, 173, 230, 0.2); }
+        .file-upload-btn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
 
-        /* YouTube Card Design */
-        .yt-simulator { 
-            width: 100%; max-width: 400px; margin: 0 auto;
-            background: var(--yt-dark-bg); border-radius: 16px; padding-bottom: 16px;
-            overflow: hidden; transition: background 0.3s;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05);
-        }
-        
-        .yt-thumb-wrapper { position: relative; width: 100%; aspect-ratio: 16/9; background: #222; }
-        .yt-thumb-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* Time Badge overlay exactly where YT puts it */
-        .yt-time-badge { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.8); color: #fff; font-size: 12px; font-weight: 500; padding: 3px 4px; border-radius: 4px; letter-spacing: 0.5px; }
+        /* Device Switcher */
+        .device-toggle { display: flex; background: rgba(0,0,0,0.5); padding: 6px; border-radius: 14px; position: relative; border: 1px solid rgba(255,255,255,0.05); }
+        .toggle-slider { position: absolute; top: 6px; bottom: 6px; left: 6px; width: calc(50% - 6px); background: #fff; border-radius: 10px; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1; }
+        .device-toggle[data-active="mobile"] .toggle-slider { transform: translateX(0%); }
+        .device-toggle[data-active="desktop"] .toggle-slider { transform: translateX(100%); }
 
-        .yt-info-area { display: flex; gap: 12px; padding: 12px 12px 0 12px; }
-        .yt-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #32ade6, #af52de); flex-shrink: 0; }
+        .dev-btn { flex: 1; padding: 12px 0; text-align: center; font-size: 14px; font-weight: 700; color: var(--text-sub); z-index: 2; cursor: pointer; transition: color 0.3s; border: none; background: transparent; display: flex; justify-content: center; align-items: center; gap: 6px; }
+        .dev-btn.active { color: #000; }
+
+        /* --- YouTube Simulator Core --- */
+        .yt-sim-bg { width: 100%; background: var(--yt-bg); border-radius: 24px; padding: 40px 20px; border: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: center; transition: padding 0.4s ease; overflow: hidden; }
+
+        /* Card Container (Morphing) */
+        .yt-card { display: flex; flex-direction: column; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); cursor: pointer; }
         
-        .yt-text-area { display: flex; flex-direction: column; flex: 1; min-width: 0; }
-        .yt-title { 
-            color: var(--yt-dark-text); font-size: 14px; font-weight: 500; line-height: 1.4; 
-            margin-bottom: 4px; transition: color 0.3s;
-            /* Ultimate 2-line truncation (The YT standard) */
-            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;
-        }
-        .yt-meta { color: var(--yt-dark-sub); font-size: 12px; line-height: 1.3; transition: color 0.3s; }
+        /* Mobile State */
+        .is-mobile .yt-card { width: 100%; max-width: 400px; }
+        .is-mobile .yt-thumb-box { border-radius: 0; } /* Real YT mobile has no radius on edges sometimes, but let's keep it slight */
+        
+        /* Desktop State */
+        .is-desktop .yt-card { width: 100%; max-width: 320px; } /* Desktop grid size */
+        .is-desktop .yt-thumb-box { border-radius: 12px; }
 
-        /* Light Mode Classes */
-        .light-mode .yt-simulator { background: var(--yt-light-bg); border-color: rgba(0,0,0,0.1); }
-        .light-mode .yt-title { color: var(--yt-light-text); }
-        .light-mode .yt-meta { color: var(--yt-light-sub); }
+        /* Thumbnail Image Area */
+        .yt-thumb-box { position: relative; width: 100%; aspect-ratio: 16/9; background: #222; overflow: hidden; transition: border-radius 0.4s; }
+        .yt-thumb-box img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* Time Badge overlay */
+        .yt-time { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.8); color: #fff; font-size: 12px; font-weight: 500; padding: 3px 4px; border-radius: 4px; pointer-events: none; }
 
-        .footer-brand { margin-top: 40px; margin-bottom: 20px; font-size: 13px; font-weight: 600; color: #555; text-align: center; width: 100%; }
+        /* Meta Data Area */
+        .yt-meta { display: flex; gap: 12px; margin-top: 12px; padding: 0 4px; }
+        .yt-avatar { width: 36px; height: 36px; border-radius: 50%; background: #333; flex-shrink: 0; }
+        .yt-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+        
+        .yt-text-wrap { display: flex; flex-direction: column; gap: 4px; overflow: hidden; }
+        
+        /* Title Truncation Logic */
+        .yt-title { color: #f1f1f1; font-size: 16px; font-weight: 500; line-height: 1.4; word-break: break-word; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; /* YT standard */ }
+        .is-desktop .yt-title { font-size: 16px; }
+        .is-mobile .yt-title { font-size: 14px; }
+
+        .yt-channel { color: #aaaaaa; font-size: 12px; display: flex; align-items: center; gap: 4px; margin-top: 2px; }
+        .yt-stats { color: #aaaaaa; font-size: 12px; }
+
+        .footer-brand { margin-top: 50px; margin-bottom: 20px; font-size: 13px; font-weight: 600; color: #555; text-align: center; width: 100%; }
         .powered-by { font-weight: 400; color: #777; margin-top: 6px; font-size: 12px; }
         .duck-logo { color: #fff; }
 
@@ -119,13 +119,13 @@
             <svg width="24" height="24" viewBox="0 0 100 100"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>
             1SecTools
         </a>
-        <span class="header-badge">YT Preview 📺</span>
+        <span class="header-badge">Thumbnail Preview 📺</span>
     </header>
 
     <main class="main">
         <div class="title-sec">
-            <h1>YT Title & Thumb Tester</h1>
-            <p>Check if your title truncates or if your thumbnail elements get blocked by YouTube's mobile time badge.</p>
+            <h1>YouTube Preview Simulator</h1>
+            <p>Upload a thumbnail and type a title to see exactly<br>how it looks on YouTube Mobile vs Desktop.</p>
         </div>
 
         <div class="ad-container">
@@ -133,52 +133,55 @@
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
-        <!-- Controls -->
-        <div class="controls-panel">
+        <!-- Editor Panel -->
+        <div class="editor-panel">
+            <div class="device-toggle" id="devToggle" data-active="mobile">
+                <div class="toggle-slider"></div>
+                <button class="dev-btn active" onclick="setDevice('mobile')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                    Mobile UI
+                </button>
+                <button class="dev-btn" onclick="setDevice('desktop')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    Desktop UI
+                </button>
+            </div>
+
+            <div class="file-upload-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                <span id="uploadText">Upload Thumbnail Image</span>
+                <input type="file" id="thumbInput" accept="image/*">
+            </div>
+
             <div class="input-group">
-                <label>1. Upload Thumbnail Image</label>
-                <div class="file-upload-wrapper">
-                    <div class="file-upload-btn" id="uploadBtnUI">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                        <span id="fileNameText">Click to select image</span>
+                <label>Video Title</label>
+                <input type="text" id="titleInput" placeholder="Enter your clickbait title here..." value="I Survived 50 Hours In Antarctica!">
+            </div>
+            
+            <div class="input-group">
+                <label>Channel Name</label>
+                <input type="text" id="channelInput" placeholder="MrBeast" value="MrBeast">
+            </div>
+        </div>
+
+        <!-- YouTube Simulator Board -->
+        <div class="yt-sim-bg is-mobile" id="simBg">
+            <div class="yt-card">
+                <div class="yt-thumb-box">
+                    <img id="previewImg" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'><rect width='100%' height='100%' fill='%23333'/><text x='50%' y='50%' font-family='Arial' font-size='40' fill='%23666' dominant-baseline='middle' text-anchor='middle'>No Image</text></svg>" alt="Thumb">
+                    <div class="yt-time">10:05</div>
+                </div>
+                <div class="yt-meta">
+                    <div class="yt-avatar">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100' fill='%23555'/></svg>" alt="avatar">
                     </div>
-                    <input type="file" id="imageInput" class="file-input" accept="image/*">
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label>2. Enter Video Title</label>
-                <input type="text" id="titleInput" placeholder="I Spent 50 Hours Building This..." autocomplete="off">
-            </div>
-        </div>
-
-        <!-- Simulator -->
-        <div class="sim-header">
-            <div class="sim-title">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#ff0000;"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
-                Mobile App View
-            </div>
-            <div class="theme-toggle" id="themeToggle">
-                <div class="theme-btn active" data-theme="dark">Dark</div>
-                <div class="theme-btn" data-theme="light">Light</div>
-            </div>
-        </div>
-
-        <!-- The Phone Screen Wrapper -->
-        <div id="simulatorContainer">
-            <div class="yt-simulator" id="ytSim">
-                <!-- Thumbnail -->
-                <div class="yt-thumb-wrapper">
-                    <!-- Default placeholder -->
-                    <img id="simImg" src="data:image/svg+xml;charset=UTF-8,%3Csvg width='1280' height='720' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23333'/%3E%3Ctext x='50%25' y='50%25' font-family='sans-serif' font-size='40' fill='%23666' text-anchor='middle' dy='.3em'%3EThumbnail Area%3C/text%3E%3C/svg%3E" alt="Thumb">
-                    <div class="yt-time-badge">12:34</div>
-                </div>
-                <!-- Info -->
-                <div class="yt-info-area">
-                    <div class="yt-avatar"></div>
-                    <div class="yt-text-area">
-                        <div class="yt-title" id="simTitle">Your Video Title Will Appear Here and Might Get Truncated if It Is Too Long for Mobile Screens</div>
-                        <div class="yt-meta">LoserDuck Channel • 1.2M views • 2 days ago</div>
+                    <div class="yt-text-wrap">
+                        <div class="yt-title" id="previewTitle">I Survived 50 Hours In Antarctica!</div>
+                        <div class="yt-channel">
+                            <span id="previewChannel">MrBeast</span>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="#aaaaaa"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.4-1.4 3.6 3.6 7.6-7.6L19 8l-9 9z"/></svg>
+                        </div>
+                        <div class="yt-stats">1.2M views • 2 hours ago</div>
                     </div>
                 </div>
             </div>
@@ -191,49 +194,49 @@
     </main>
 
     <script>
-        const imageInput = document.getElementById('imageInput');
+        const devToggle = document.getElementById('devToggle');
+        const devBtns = document.querySelectorAll('.dev-btn');
+        const simBg = document.getElementById('simBg');
+        
+        const thumbInput = document.getElementById('thumbInput');
+        const uploadText = document.getElementById('uploadText');
+        const previewImg = document.getElementById('previewImg');
+        
         const titleInput = document.getElementById('titleInput');
-        const simImg = document.getElementById('simImg');
-        const simTitle = document.getElementById('simTitle');
-        const fileNameText = document.getElementById('fileNameText');
-        const themeBtns = document.querySelectorAll('.theme-btn');
-        const simulatorContainer = document.getElementById('simulatorContainer');
+        const previewTitle = document.getElementById('previewTitle');
+        
+        const channelInput = document.getElementById('channelInput');
+        const previewChannel = document.getElementById('previewChannel');
 
-        // Image Upload Handle
-        imageInput.addEventListener('change', function(e) {
+        // Device Switcher
+        function setDevice(type) {
+            devToggle.setAttribute('data-active', type);
+            devBtns.forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            simBg.className = `yt-sim-bg is-${type}`;
+        }
+
+        // Live Text Binding
+        titleInput.addEventListener('input', (e) => {
+            previewTitle.innerText = e.target.value || 'Video Title Here';
+        });
+
+        channelInput.addEventListener('input', (e) => {
+            previewChannel.innerText = e.target.value || 'Channel Name';
+        });
+
+        // Image Upload
+        thumbInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
-                fileNameText.innerText = "Change: " + (file.name.length > 15 ? file.name.substring(0, 15) + '...' : file.name);
                 const reader = new FileReader();
                 reader.onload = function(event) {
-                    simImg.src = event.target.result;
+                    previewImg.src = event.target.result;
+                    uploadText.innerText = "Change Thumbnail";
                 };
                 reader.readAsDataURL(file);
             }
-        });
-
-        // Title Real-time Sync
-        titleInput.addEventListener('input', function() {
-            const txt = this.value.trim();
-            if (txt === '') {
-                simTitle.innerText = "Your Video Title Will Appear Here and Might Get Truncated if It Is Too Long";
-            } else {
-                simTitle.innerText = txt;
-            }
-        });
-
-        // Theme Switcher (Dark / Light)
-        themeBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                themeBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                if (btn.dataset.theme === 'light') {
-                    simulatorContainer.classList.add('light-mode');
-                } else {
-                    simulatorContainer.classList.remove('light-mode');
-                }
-            });
         });
     </script>
 </body>
