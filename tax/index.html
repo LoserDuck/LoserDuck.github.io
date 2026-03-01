@@ -32,6 +32,7 @@
             --text-sub: #8b95a1;
             --accent-green: #34c759;
             --accent-blue: #3182f6;
+            --accent-pink: #ff2d55;
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Inter", sans-serif; }
@@ -96,34 +97,42 @@
         .result-box { 
             background: rgba(52, 199, 89, 0.05); border: 1px solid rgba(52, 199, 89, 0.2); 
             border-radius: 16px; padding: 24px; margin-top: 8px; display: flex; flex-direction: column; gap: 16px;
-            overflow: hidden; /* 영역 이탈 방지 */
+            width: 100%; box-sizing: border-box;
         }
         
-        .result-row { display: flex; justify-content: space-between; align-items: flex-start; font-size: 15px; color: var(--text-sub); gap: 12px; }
-        .result-row .label { flex-shrink: 0; white-space: nowrap; }
-        /* 긴 숫자 줄바꿈 허용 로직 */
+        /* 🚨 핵심 픽스: 영역 이탈 방지 레이아웃 */
+        .result-row { 
+            display: flex; justify-content: space-between; align-items: flex-start; 
+            font-size: 15px; color: var(--text-sub); gap: 16px; width: 100%;
+        }
+        .result-row .label { flex-shrink: 0; }
+        
+        /* 값(숫자) 영역이 부모를 뚫지 않도록 제어 */
         .result-row .value { 
             font-weight: 600; color: #fff; font-variant-numeric: tabular-nums; 
-            text-align: right; word-break: break-all; word-wrap: break-word; 
+            text-align: right; 
+            flex: 1; min-width: 0; /* Flexbox 뚫고 나가는 버그 방지 핵심코드 */
+            word-break: break-all; /* 숫자 중간이라도 얄짤없이 줄바꿈 */
         }
         .result-row.deduction .value { color: var(--accent-pink); }
         
         .divider { height: 1px; background: rgba(255,255,255,0.08); margin: 4px 0; }
         
         .result-final { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; margin-top: 8px; width: 100%; }
-        .result-final .label { font-size: 15px; font-weight: 700; color: #fff; }
+        .result-final .label { font-size: 15px; font-weight: 700; color: #fff; text-align: right; width: 100%; }
         
-        /* 최종 금액 반응형 & 삐져나옴 방지 */
+        /* 최종 금액 영역도 완벽하게 가두기 */
         .result-final .amount-wrapper {
-            width: 100%;
+            width: 100%; max-width: 100%;
             display: flex; justify-content: flex-end; align-items: baseline; gap: 6px;
-            word-break: break-all; word-wrap: break-word; text-align: right;
+            flex-wrap: wrap; /* 숫자가 길어지면 '원' 글자가 밑으로 떨어지며 방어 */
         }
         .result-final .amount { 
-            font-size: clamp(24px, 7vw, 36px); /* 숫자가 길어지면 폰트 자동 축소 */
+            font-size: clamp(24px, 6vw, 36px); 
             font-weight: 800; color: var(--accent-green); letter-spacing: -1px; 
             text-shadow: 0 0 20px rgba(52, 199, 89, 0.3); font-variant-numeric: tabular-nums; 
-            line-height: 1.2;
+            line-height: 1.2; text-align: right;
+            word-break: break-all; max-width: 100%; min-width: 0;
         }
         .result-final .unit { font-size: 20px; font-weight: 600; color: #fff; flex-shrink: 0; }
 
@@ -176,7 +185,8 @@
             <div class="input-group">
                 <label id="inputLabel">💰 계약 금액 (세전) 입력</label>
                 <div class="input-wrapper">
-                    <input type="text" id="amountInput" placeholder="0" inputmode="numeric" autocomplete="off" maxlength="20">
+                    <!-- 입력 최대 길이를 아주 길게 늘려 테스트 가능하게 함 -->
+                    <input type="text" id="amountInput" placeholder="0" inputmode="numeric" autocomplete="off" maxlength="30">
                     <span class="input-suffix">원</span>
                 </div>
             </div>
@@ -220,17 +230,14 @@
 
         let isReverseMode = false;
 
-        // 천단위 콤마 생성 함수
         const formatNumber = (num) => {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         };
 
-        // 콤마 제거 및 숫자만 추출
         const cleanNumber = (str) => {
             return parseInt(str.replace(/[^0-9]/g, ''), 10) || 0;
         };
 
-        // 모드 변경 (세전->세후 vs 세후->세전)
         function setMode(mode) {
             const btns = document.querySelectorAll('.toggle-btn');
             
@@ -254,10 +261,9 @@
                 finalLabel.innerText = '최종 실수령액 (세후)';
             }
             
-            calculate(); // 모드 변경 시 즉시 재계산
+            calculate();
         }
 
-        // 입력창 이벤트 (콤마 자동 입력 및 계산)
         input.addEventListener('input', function(e) {
             let start = this.selectionStart;
             let originalLen = this.value.length;
@@ -275,7 +281,6 @@
             calculate();
         });
 
-        // 메인 계산 로직
         function calculate() {
             let inputAmount = cleanNumber(input.value);
             
@@ -287,7 +292,7 @@
                 return;
             }
 
-            // Javascript Max Safe Integer 방어 (약 900경)
+            // 한계치 방어 (9천조 이상 입력시 강제 고정)
             if(inputAmount > 9000000000000000) {
                 inputAmount = 9000000000000000;
                 input.value = formatNumber(inputAmount);
@@ -316,12 +321,11 @@
                 }
             }
 
-            // 화면 렌더링
             if(!isReverseMode) {
                 valBefore.innerText = formatNumber(beforeTax) + " 원";
                 valFinal.innerText = formatNumber(afterTax);
             } else {
-                valBefore.innerText = formatNumber(afterTax) + " 원 (받은 돈)";
+                valBefore.innerText = formatNumber(afterTax) + " 원";
                 valFinal.innerText = formatNumber(beforeTax);
             }
             
