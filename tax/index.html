@@ -9,6 +9,11 @@
     <meta name="description" content="알바, 프리랜서, 외주 작업자를 위한 실수령액 및 3.3% 세금 자동 계산기. 세전/세후 금액을 1초 만에 확인하세요.">
     <meta name="keywords" content="프리랜서 세금, 3.3% 세금 계산기, 실수령액 계산기, 알바 세금, 외주 세금, 세전 세후 계산기">
     
+    <!-- ✅ 구글 웹 폰트 강제 주입 (글자 깨짐 완벽 방어) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <!-- ✅ Google Analytics, Search Console, AdSense -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
     <script>
@@ -35,7 +40,7 @@
             --accent-pink: #ff2d55;
         }
         
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Inter", sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif; }
         
         body { 
             background-color: var(--bg-base); color: var(--text-title); 
@@ -60,10 +65,8 @@
         .title-sec h1 { font-size: clamp(24px, 5vw, 32px); font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; background: linear-gradient(135deg, #fff, #a1a1aa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .title-sec p { color: var(--text-sub); font-size: 15px; line-height: 1.6; word-break: keep-all; }
 
-        /* --- Ad Box --- */
         .ad-container { width: 100%; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-        /* --- Calculator UI --- */
         .app-box { 
             width: 100%; background: var(--card-bg); backdrop-filter: blur(10px);
             border: 1px solid var(--card-border); border-radius: 24px; 
@@ -72,14 +75,12 @@
             animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Toggle Switch */
         .toggle-container { display: flex; background: rgba(0,0,0,0.4); border-radius: 12px; padding: 4px; position: relative; border: 1px solid rgba(255,255,255,0.05); }
         .toggle-btn { flex: 1; text-align: center; padding: 12px; font-size: 14px; font-weight: 700; color: var(--text-sub); cursor: pointer; position: relative; z-index: 2; transition: color 0.3s; }
         .toggle-btn.active { color: #fff; }
         .toggle-slider { position: absolute; top: 4px; left: 4px; width: calc(50% - 4px); height: calc(100% - 8px); background: rgba(255,255,255,0.1); border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1; }
         .mode-reverse .toggle-slider { transform: translateX(100%); }
 
-        /* Input Area */
         .input-group { display: flex; flex-direction: column; gap: 10px; }
         .input-group label { font-size: 14px; font-weight: 600; color: var(--text-sub); }
         .input-wrapper { position: relative; display: flex; align-items: center; }
@@ -93,26 +94,17 @@
         .input-wrapper input::placeholder { color: #444; font-weight: 500; }
         .input-suffix { position: absolute; right: 20px; font-size: 18px; font-weight: 600; color: var(--text-sub); pointer-events: none; }
 
-        /* Result Area */
         .result-box { 
             background: rgba(52, 199, 89, 0.05); border: 1px solid rgba(52, 199, 89, 0.2); 
             border-radius: 16px; padding: 24px; margin-top: 8px; display: flex; flex-direction: column; gap: 16px;
             width: 100%; box-sizing: border-box;
         }
         
-        /* 🚨 핵심 픽스: 영역 이탈 방지 레이아웃 */
-        .result-row { 
-            display: flex; justify-content: space-between; align-items: flex-start; 
-            font-size: 15px; color: var(--text-sub); gap: 16px; width: 100%;
-        }
+        .result-row { display: flex; justify-content: space-between; align-items: flex-start; font-size: 15px; color: var(--text-sub); gap: 16px; width: 100%; }
         .result-row .label { flex-shrink: 0; }
-        
-        /* 값(숫자) 영역이 부모를 뚫지 않도록 제어 */
         .result-row .value { 
             font-weight: 600; color: #fff; font-variant-numeric: tabular-nums; 
-            text-align: right; 
-            flex: 1; min-width: 0; /* Flexbox 뚫고 나가는 버그 방지 핵심코드 */
-            word-break: break-all; /* 숫자 중간이라도 얄짤없이 줄바꿈 */
+            text-align: right; flex: 1; min-width: 0; word-break: break-all; 
         }
         .result-row.deduction .value { color: var(--accent-pink); }
         
@@ -120,21 +112,21 @@
         
         .result-final { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; margin-top: 8px; width: 100%; }
         .result-final .label { font-size: 15px; font-weight: 700; color: #fff; text-align: right; width: 100%; }
-        
-        /* 최종 금액 영역도 완벽하게 가두기 */
         .result-final .amount-wrapper {
-            width: 100%; max-width: 100%;
-            display: flex; justify-content: flex-end; align-items: baseline; gap: 6px;
-            flex-wrap: wrap; /* 숫자가 길어지면 '원' 글자가 밑으로 떨어지며 방어 */
+            width: 100%; max-width: 100%; display: flex; justify-content: flex-end; align-items: baseline; gap: 6px; flex-wrap: wrap; 
         }
         .result-final .amount { 
             font-size: clamp(24px, 6vw, 36px); 
             font-weight: 800; color: var(--accent-green); letter-spacing: -1px; 
             text-shadow: 0 0 20px rgba(52, 199, 89, 0.3); font-variant-numeric: tabular-nums; 
-            line-height: 1.2; text-align: right;
-            word-break: break-all; max-width: 100%; min-width: 0;
+            line-height: 1.2; text-align: right; word-break: break-all; max-width: 100%; min-width: 0;
         }
         .result-final .unit { font-size: 20px; font-weight: 600; color: #fff; flex-shrink: 0; }
+
+        /* --- Footer Brand --- */
+        .footer-brand { margin-top: 40px; margin-bottom: 20px; font-size: 13px; font-weight: 600; color: #555; text-align: center; width: 100%; }
+        .powered-by { font-weight: 400; color: #777; margin-top: 6px; font-size: 12px; }
+        .duck-logo { color: #fff; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -142,13 +134,9 @@
 </head>
 <body>
 
-    <!-- ⚡ 1SecTools 공통 글로벌 헤더 -->
     <header class="header">
         <a href="../" class="header-logo">
-            <svg width="24" height="24" viewBox="0 0 100 100">
-                <defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs>
-                <path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/>
-            </svg>
+            <svg width="24" height="24" viewBox="0 0 100 100"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>
             1SecTools
         </a>
         <span class="header-badge">3.3% 프리랜서 계산기 💸</span>
@@ -160,38 +148,26 @@
             <p>프리랜서, 알바, 외주 작업자를 위한 필수 툴.<br>계약 금액을 입력하면 실수령액을 1초 만에 보여줍니다.</p>
         </div>
 
-        <!-- Google AdSense Container -->
         <div class="ad-container">
-            <ins class="adsbygoogle"
-                 style="display:block; text-align:center;"
-                 data-ad-layout="in-article"
-                 data-ad-format="fluid"
-                 data-ad-client="ca-pub-7273110716268085"
-                 data-ad-slot="YOUR_AD_SLOT_HERE"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110716268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
         <div class="app-box">
-            <!-- 계산 모드 토글 스위치 -->
             <div class="toggle-container" id="modeToggle">
                 <div class="toggle-slider"></div>
                 <div class="toggle-btn active" onclick="setMode('forward')">세전 → 세후 (실수령액)</div>
                 <div class="toggle-btn" onclick="setMode('reverse')">세후 → 세전 (계약금액)</div>
             </div>
 
-            <!-- 입력 영역 -->
             <div class="input-group">
                 <label id="inputLabel">💰 계약 금액 (세전) 입력</label>
                 <div class="input-wrapper">
-                    <!-- 입력 최대 길이를 아주 길게 늘려 테스트 가능하게 함 -->
                     <input type="text" id="amountInput" placeholder="0" inputmode="numeric" autocomplete="off" maxlength="30">
                     <span class="input-suffix">원</span>
                 </div>
             </div>
 
-            <!-- 결과 영역 -->
             <div class="result-box">
                 <div class="result-row" id="row1">
                     <span class="label">세전 금액</span>
@@ -215,6 +191,12 @@
                 </div>
             </div>
         </div>
+
+        <!-- 🦆 Footer Branding -->
+        <div class="footer-brand">
+            <div>&copy; 2026 1SecTools. All rights reserved.</div>
+            <div class="powered-by">Powered by <span class="duck-logo">🦆 LoserDuck</span></div>
+        </div>
     </main>
 
     <script>
@@ -230,78 +212,47 @@
 
         let isReverseMode = false;
 
-        const formatNumber = (num) => {
-            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        };
-
-        const cleanNumber = (str) => {
-            return parseInt(str.replace(/[^0-9]/g, ''), 10) || 0;
-        };
+        const formatNumber = (num) => { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); };
+        const cleanNumber = (str) => { return parseInt(str.replace(/[^0-9]/g, ''), 10) || 0; };
 
         function setMode(mode) {
             const btns = document.querySelectorAll('.toggle-btn');
-            
             if(mode === 'reverse') {
                 isReverseMode = true;
                 modeToggle.classList.add('mode-reverse');
-                btns[0].classList.remove('active');
-                btns[1].classList.add('active');
-                
+                btns[0].classList.remove('active'); btns[1].classList.add('active');
                 inputLabel.innerText = '💰 받은 금액 (실수령액) 입력';
                 document.getElementById('row1').querySelector('.label').innerText = '계약해야 할 세전 금액';
                 finalLabel.innerText = '원래 계약 금액 (세전)';
             } else {
                 isReverseMode = false;
                 modeToggle.classList.remove('mode-reverse');
-                btns[0].classList.add('active');
-                btns[1].classList.remove('active');
-                
+                btns[0].classList.add('active'); btns[1].classList.remove('active');
                 inputLabel.innerText = '💰 계약 금액 (세전) 입력';
                 document.getElementById('row1').querySelector('.label').innerText = '세전 금액';
                 finalLabel.innerText = '최종 실수령액 (세후)';
             }
-            
             calculate();
         }
 
         input.addEventListener('input', function(e) {
             let start = this.selectionStart;
             let originalLen = this.value.length;
-            
             let num = cleanNumber(this.value);
-            if(num === 0) {
-                this.value = '';
-            } else {
-                this.value = formatNumber(num);
-            }
-            
+            if(num === 0) { this.value = ''; } else { this.value = formatNumber(num); }
             let newLen = this.value.length;
             this.setSelectionRange(start + (newLen - originalLen), start + (newLen - originalLen));
-
             calculate();
         });
 
         function calculate() {
             let inputAmount = cleanNumber(input.value);
-            
             if (inputAmount === 0 || isNaN(inputAmount)) {
-                valBefore.innerText = "0 원";
-                valTax1.innerText = "- 0 원";
-                valTax2.innerText = "- 0 원";
-                valFinal.innerText = "0";
-                return;
+                valBefore.innerText = "0 원"; valTax1.innerText = "- 0 원"; valTax2.innerText = "- 0 원"; valFinal.innerText = "0"; return;
             }
+            if(inputAmount > 9000000000000000) { inputAmount = 9000000000000000; input.value = formatNumber(inputAmount); }
 
-            // 한계치 방어 (9천조 이상 입력시 강제 고정)
-            if(inputAmount > 9000000000000000) {
-                inputAmount = 9000000000000000;
-                input.value = formatNumber(inputAmount);
-            }
-
-            let beforeTax = 0;
-            let tax1 = 0;
-            let tax2 = 0;
-            let afterTax = 0;
+            let beforeTax = 0, tax1 = 0, tax2 = 0, afterTax = 0;
 
             if (!isReverseMode) {
                 beforeTax = inputAmount;
@@ -313,7 +264,6 @@
                 beforeTax = Math.ceil(afterTax / 0.967 / 10) * 10;
                 tax1 = Math.floor(beforeTax * 0.03 / 10) * 10; 
                 tax2 = Math.floor(beforeTax * 0.003 / 10) * 10;
-                
                 if (beforeTax - tax1 - tax2 !== afterTax) {
                     beforeTax += 10;
                     tax1 = Math.floor(beforeTax * 0.03 / 10) * 10; 
@@ -325,7 +275,7 @@
                 valBefore.innerText = formatNumber(beforeTax) + " 원";
                 valFinal.innerText = formatNumber(afterTax);
             } else {
-                valBefore.innerText = formatNumber(afterTax) + " 원";
+                valBefore.innerText = formatNumber(afterTax) + " 원 (받은 돈)";
                 valFinal.innerText = formatNumber(beforeTax);
             }
             
