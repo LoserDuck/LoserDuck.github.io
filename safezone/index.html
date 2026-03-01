@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4PG2DEJS2P');
+    </script>
+    <meta name="google-site-verification" content="KC_FGR3LD6TwJWG73cK14iJu44l-nzTBk9AvjvW4Mo8" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22%23191f28%22/><text x=%2250%22 y=%2268%22 font-size=%2260%22 text-anchor=%22middle%22>🦆</text></svg>">
+    
+    <title>Safe Zone Simulator | TikTok, Reels & Shorts Preview</title>
+    <meta name="description" content="Preview your videos before posting! Check the safe zones for TikTok, Instagram Reels, and YouTube Shorts instantly.">
+    
+    <style>
+        :root {
+            --bg-base: #050505;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-title: #ffffff;
+            --text-sub: #8b95a1;
+            --primary-color: #3182f6; 
+            
+            --danger-bg: repeating-linear-gradient(
+                -45deg,
+                rgba(255, 59, 48, 0.25),
+                rgba(255, 59, 48, 0.25) 10px,
+                rgba(255, 59, 48, 0.5) 10px,
+                rgba(255, 59, 48, 0.5) 20px
+            );
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Inter", sans-serif;
+            background-color: var(--bg-base);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(49, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 100%, rgba(255, 0, 80, 0.05) 0%, transparent 50%);
+            color: var(--text-title);
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh; padding: 40px 20px;
+        }
+
+        .header { text-align: center; margin-bottom: 30px; animation: fadeInDown 0.6s ease; }
+        .header h1 { font-size: clamp(24px, 5vw, 32px); font-weight: 800; letter-spacing: -0.8px; margin-bottom: 8px; }
+        .header p { font-size: 15px; color: var(--text-sub); font-weight: 500; }
+
+        .workspace { display: flex; flex-direction: column; gap: 40px; width: 100%; max-width: 900px; }
+        @media (min-width: 850px) { .workspace { flex-direction: row; justify-content: center; } }
+
+        /* --- Controls Panel --- */
+        .controls-panel { flex: 1; display: flex; flex-direction: column; gap: 16px; max-width: 400px; }
+        
+        .upload-box {
+            position: relative; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px;
+            padding: 40px 20px; text-align: center; cursor: pointer; transition: 0.2s;
+        }
+        .upload-box:hover { transform: translateY(-2px); border-color: rgba(49, 130, 246, 0.5); }
+        .upload-icon { font-size: 40px; margin-bottom: 12px; transition: 0.3s; }
+        .upload-box:hover .upload-icon { transform: translateY(-4px) scale(1.05); }
+        .upload-text { font-weight: 700; font-size: 17px; margin-bottom: 6px; }
+        .upload-sub { font-size: 13px; color: var(--text-sub); }
+
+        .control-group { background: var(--card-bg); padding: 20px; border-radius: 20px; border: 1px solid var(--card-border); }
+        .control-label { font-weight: 700; font-size: 14px; margin-bottom: 14px; color: #fff; display: flex; justify-content: space-between; align-items: center; }
+
+        .platform-toggles { display: flex; gap: 8px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 14px; }
+        .toggle-btn { flex: 1; padding: 10px 0; border: none; border-radius: 10px; background: transparent; color: var(--text-sub); font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .toggle-btn.active { background: #222; color: #fff; transform: scale(1.02); }
+
+        /* 🌟 [마스터 패치 2] 미디어 화면 맞춤 토글 버튼 */
+        .fit-toggle { 
+            background: rgba(255,255,255,0.1); border: none; color: #fff; padding: 4px 10px; 
+            border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.2s;
+        }
+        .fit-toggle:hover { background: rgba(255,255,255,0.2); }
+
+        input[type=range] { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; appearance: none; outline: none; }
+        input[type=range]::-webkit-slider-thumb { appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #fff; cursor: pointer; }
+
+        /* --- Preview Panel --- */
+        .preview-panel { display: flex; justify-content: center; width: 100%; max-width: 340px; margin: 0 auto; }
+        
+        .phone-mockup {
+            width: 100%; aspect-ratio: 9/16; background: #000; border-radius: clamp(30px, 8vw, 44px); position: relative;
+            box-shadow: 0 0 0 2px #333, 0 0 0 6px #111, 0 30px 60px rgba(0,0,0,0.8); overflow: hidden; isolation: isolate;
+        }
+        
+        .media-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #111; display: flex; align-items: center; justify-content: center; z-index: 1; cursor: pointer; }
+        
+        /* 🌟 [마스터 패치 2] 가로 영상 원본 비율 유지 지원 (cover ↔ contain) */
+        .media-container img, .media-container video { width: 100%; height: 100%; object-fit: cover; transition: object-fit 0.3s ease; }
+        .media-container.contain-mode img, .media-container.contain-mode video { object-fit: contain; }
+        
+        .placeholder-state { text-align: center; color: rgba(255,255,255,0.3); pointer-events: none; }
+        .placeholder-state svg { width: 40px; height: 40px; margin-bottom: 12px; opacity: 0.8; }
+
+        .play-pause-indicator {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.5);
+            width: 60px; height: 60px; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: 0.3s; z-index: 15;
+        }
+        .play-pause-indicator.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        .play-pause-indicator svg { fill: #fff; width: 24px; height: 24px; }
+
+        /* 🌟 [마스터 패치 3] 오디오(Mute) 컨트롤 버튼 */
+        .audio-btn {
+            position: absolute; top: 16px; right: 16px; z-index: 20; width: 32px; height: 32px;
+            background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); border-radius: 50%; border: none;
+            display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer;
+            opacity: 0; pointer-events: none; transition: 0.3s;
+        }
+        .audio-btn.active { opacity: 1; pointer-events: auto; }
+        .audio-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+        /* --- UI Overlay Layer --- */
+        .ui-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; }
+        
+        /* 🌟 [마스터 패치 1] 투명도 분리 구조 (빨간 배경만 분리) */
+        .danger-bg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--danger-bg); z-index: -1; transition: opacity 0.2s; opacity: 0.8; }
+
+        .ui-block-right {
+            position: absolute; right: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .btn-circle { width: 40px; height: 40px; background: rgba(255,255,255,0.9); border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .btn-small { width: 30px; height: 30px; margin-top: 5px; }
+
+        .ui-block-bottom {
+            position: absolute; bottom: 0; left: 0; width: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; gap: 12px;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        /* 다크 그라데이션 추가로 하얀 글씨 가시성 100% 보장 */
+        .bottom-gradient { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); z-index: -1; }
+        
+        .text-line { height: 12px; background: rgba(255,255,255,0.95); border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); z-index: 1; }
+        .text-line.short { width: 40%; height: 14px; }
+        .text-line.long { width: 75%; background: rgba(255,255,255,0.7); }
+
+        /* --- Platform Specs --- */
+        .tiktok-mode .ui-block-right { bottom: 18%; width: 18%; height: 45%; }
+        .tiktok-mode .ui-block-bottom { height: 22%; }
+        .reels-mode .ui-block-right { bottom: 25%; width: 16%; height: 35%; }
+        .reels-mode .ui-block-bottom { height: 28%; }
+        .shorts-mode .ui-block-right { bottom: 12%; width: 16%; height: 50%; }
+        .shorts-mode .ui-block-bottom { height: 18%; }
+
+        .footer-brand { margin-top: 50px; font-size: 13px; font-weight: 600; color: #555; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        #fileInput { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Video Safe Zone Simulator</h1>
+        <p>Ensure your captions are never blocked again.</p>
+    </div>
+
+    <div class="workspace">
+        <div class="controls-panel">
+            <div class="upload-box" id="dropZone" onclick="document.getElementById('fileInput').click()">
+                <div class="upload-icon">📱</div>
+                <div class="upload-text">Click or Drop Media Here</div>
+                <div class="upload-sub">Test your Video or Image instantly.<br><span style="color:var(--primary-color);">100% secure, offline processing.</span></div>
+                <input type="file" id="fileInput" accept="image/*,video/*">
+            </div>
+
+            <div class="control-group">
+                <div class="control-label">Select Platform</div>
+                <div class="platform-toggles">
+                    <button class="toggle-btn active" data-platform="tiktok">TikTok</button>
+                    <button class="toggle-btn" data-platform="reels">Reels</button>
+                    <button class="toggle-btn" data-platform="shorts">Shorts</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="control-label">
+                    <span>Media Scale</span>
+                    <!-- 🌟 가로 영상 크롭 방지 토글 -->
+                    <button class="fit-toggle" id="fitToggle">Cover (Fill)</button>
+                </div>
+                
+                <div class="control-label" style="margin-top:20px;">
+                    <span>Warning Opacity</span>
+                    <span id="opacityVal" style="color:var(--primary-color);">80%</span>
+                </div>
+                <div class="slider-wrapper">
+                    <input type="range" id="opacitySlider" min="0" max="100" value="80">
+                </div>
+            </div>
+        </div>
+
+        <div class="preview-panel">
+            <div class="phone-mockup">
+                
+                <!-- 🌟 [오디오 버튼] -->
+                <button class="audio-btn" id="audioBtn">
+                    <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM11 5.83V18.17l-4.83-4.83H3V10.66h3.17L11 5.83zm8 6.17c0 3.23-2.19 5.98-5 6.84v-2.06c1.61-.75 2.83-2.39 2.83-4.78s-1.22-4.03-2.83-4.78V5.16c2.81.86 5 3.61 5 6.84z"/></svg>
+                </button>
+
+                <div class="media-container" id="mediaContainer">
+                    <div class="placeholder-state">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                        <br>Upload media<br>to preview
+                    </div>
+                </div>
+
+                <div class="play-pause-indicator" id="playIndicator">
+                    <svg viewBox="0 0 24 24"><path d="M6 4h4v16H6zm8 0h4v16h-4z"/></svg>
+                </div>
+
+                <div class="ui-overlay tiktok-mode" id="uiOverlay">
+                    <!-- 우측 좋아요/공유 블록 -->
+                    <div class="ui-block-right">
+                        <div class="danger-bg-layer warning-layer"></div> <!-- 🌟 투명도 제어 전용 레이어 -->
+                        <div class="btn-circle"></div>
+                        <div class="btn-circle"></div>
+                        <div class="btn-circle"></div>
+                        <div class="btn-circle btn-small"></div>
+                    </div>
+
+                    <!-- 하단 아이디/캡션 블록 -->
+                    <div class="ui-block-bottom">
+                        <div class="danger-bg-layer warning-layer"></div> <!-- 🌟 투명도 제어 전용 레이어 -->
+                        <div class="bottom-gradient"></div>
+                        <div class="text-line short"></div>
+                        <div class="text-line long"></div>
+                        <div class="text-line long" style="width: 50%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-brand">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="16" height="16"><rect width="100" height="100" fill="#191f28" rx="20"/><text x="50" y="68" font-size="60" text-anchor="middle">🦆</text></svg>
+        Powered by LoserDuck
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const mediaContainer = document.getElementById('mediaContainer');
+        const uiOverlay = document.getElementById('uiOverlay');
+        const toggleBtns = document.querySelectorAll('.toggle-btn');
+        const opacitySlider = document.getElementById('opacitySlider');
+        const opacityVal = document.getElementById('opacityVal');
+        const playIndicator = document.getElementById('playIndicator');
+        const audioBtn = document.getElementById('audioBtn');
+        const fitToggle = document.getElementById('fitToggle');
+        
+        let currentObjectUrl = null;
+        let currentVideoElement = null;
+
+        // --- File Upload Logic ---
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eName => { dropZone.addEventListener(eName, e => { e.preventDefault(); e.stopPropagation(); }); });
+        dropZone.addEventListener('drop', (e) => handleFiles(e.dataTransfer.files));
+        fileInput.addEventListener('change', function() { handleFiles(this.files); });
+
+        function handleFiles(files) {
+            if(files.length === 0) return;
+            const file = files[0];
+            
+            if(currentObjectUrl) URL.revokeObjectURL(currentObjectUrl);
+            currentObjectUrl = URL.createObjectURL(file);
+            
+            mediaContainer.style.opacity = '0';
+            audioBtn.classList.remove('active'); // 비디오 로드 시 오디오 버튼 초기화
+            
+            setTimeout(() => {
+                mediaContainer.innerHTML = ''; 
+                if (file.type.startsWith('video/')) {
+                    const video = document.createElement('video');
+                    video.src = currentObjectUrl;
+                    video.autoplay = true; video.loop = true; video.muted = true; video.playsInline = true;
+                    currentVideoElement = video;
+                    mediaContainer.appendChild(video);
+                    audioBtn.classList.add('active'); // 비디오일 때만 오디오 버튼 활성화
+                } else if (file.type.startsWith('image/')) {
+                    const img = document.createElement('img');
+                    img.src = currentObjectUrl;
+                    currentVideoElement = null;
+                    mediaContainer.appendChild(img);
+                }
+                mediaContainer.style.transition = 'opacity 0.4s ease';
+                mediaContainer.style.opacity = '1';
+            }, 200);
+        }
+
+        // --- Video Controls ---
+        mediaContainer.addEventListener('click', () => {
+            if(!currentVideoElement) return;
+            if(currentVideoElement.paused) {
+                currentVideoElement.play();
+                showPlayIndicator('<path d="M8 5v14l11-7z"/>');
+            } else {
+                currentVideoElement.pause();
+                showPlayIndicator('<path d="M6 4h4v16H6zm8 0h4v16h-4z"/>');
+            }
+        });
+
+        function showPlayIndicator(svgPath) {
+            playIndicator.innerHTML = `<svg viewBox="0 0 24 24">${svgPath}</svg>`;
+            playIndicator.classList.add('show');
+            setTimeout(() => playIndicator.classList.remove('show'), 600);
+        }
+
+        // Mute / Unmute
+        audioBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // 클릭 이벤트가 영상 정지로 이어지지 않게 막음
+            if(!currentVideoElement) return;
+            currentVideoElement.muted = !currentVideoElement.muted;
+            if(currentVideoElement.muted) {
+                audioBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM11 5.83V18.17l-4.83-4.83H3V10.66h3.17L11 5.83zm8 6.17c0 3.23-2.19 5.98-5 6.84v-2.06c1.61-.75 2.83-2.39 2.83-4.78s-1.22-4.03-2.83-4.78V5.16c2.81.86 5 3.61 5 6.84z"/></svg>';
+            } else {
+                audioBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
+            }
+        });
+
+        // Fit / Cover Toggle
+        let isFit = false;
+        fitToggle.addEventListener('click', () => {
+            isFit = !isFit;
+            if(isFit) {
+                mediaContainer.classList.add('contain-mode');
+                fitToggle.innerText = 'Contain (Fit)';
+            } else {
+                mediaContainer.classList.remove('contain-mode');
+                fitToggle.innerText = 'Cover (Fill)';
+            }
+        });
+
+        // --- UI State Controls ---
+        toggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                toggleBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                uiOverlay.className = `ui-overlay ${btn.getAttribute('data-platform')}-mode`;
+                const colors = { 'tiktok': '#ff0050', 'reels': '#e1306c', 'shorts': '#ff0000' };
+                opacityVal.style.color = colors[btn.getAttribute('data-platform')];
+            });
+        });
+
+        // 🌟 [마스터 패치 1] 투명도 슬라이더: 오직 빨간 경고막만 제어
+        opacitySlider.addEventListener('input', function() {
+            const val = this.value;
+            opacityVal.innerText = `${val}%`;
+            document.querySelectorAll('.warning-layer').forEach(layer => {
+                layer.style.opacity = val / 100;
+            });
+        });
+    </script>
+</body>
+</html>
