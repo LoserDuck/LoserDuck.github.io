@@ -216,7 +216,9 @@
         input.addEventListener('input', () => {
             const text = input.value;
             const length = text.length;
-            const tags = text.match(/#[\w가-힣]+/g);
+            
+            // 🚨 수정된 정규식: # 뒤에 공백이나 또 다른 #이 오기 전까지를 하나의 태그로 인식
+            const tags = text.match(/#[^\s#]+/g);
             const numTags = tags ? tags.length : 0;
 
             charCount.innerText = length;
