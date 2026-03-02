@@ -3,11 +3,29 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>3.3% 프리랜서 세금 계산기 | 1SecTools</title>
+    <title>3.3% 세금 계산기 | 1SecTools</title>
     <meta name="description" content="알바, 프리랜서, 외주 작업자를 위한 실수령액 및 3.3% 세금 자동 계산기. 입력한 금액은 서버에 저장되지 않습니다.">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- 🚨 메인 페이지와 동일하게 Inter 폰트 추가 로드 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233182f6'/><stop offset='100%' stop-color='%23ff2d55'/></linearGradient></defs><rect width='100' height='100' rx='25' fill='%23191f28'/><path d='M60 20 L25 60 L45 60 L40 85 L75 45 L55 45 Z' fill='url(%23grad)'/></svg>">
     
+    <!-- ✅ Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4PG2DEJS2P');
+    </script>
+    
+    <!-- ✅ Google Search Console -->
+    <meta name="google-site-verification" content="KC_FGR3LD6TwJWG73cK14iJu44l-nzTBk9AvjvW4Mo8" />
+    
+    <!-- ✅ Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
 
     <style>
@@ -18,26 +36,31 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; }
         body { background-color: var(--bg-base); color: var(--text-title); min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
-        .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
-        .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 800; font-size: 18px; }
-        .header-badge { background: rgba(52, 199, 89, 0.15); border: 1px solid rgba(52, 199, 89, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-green); font-weight: 700; }
+        /* 🚨 하위 툴 페이지 헤더: 좌우 끝으로 밀착되도록 24px 패딩 적용 */
+        .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.7); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+        
+        /* 🚨 메인 로고 폰트(Inter) 100% 적용 */
+        .header-logo { font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 900; font-size: 20px; letter-spacing: -0.5px; }
+        .header-badge { font-family: 'Inter', 'Noto Sans KR', sans-serif; background: rgba(52, 199, 89, 0.15); border: 1px solid rgba(52, 199, 89, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-green); font-weight: 700; }
 
-        /* 🚨 핵심 스케일 랩퍼: QHD 모니터에서 비율 깨짐 없이 통째로 줌인 */
-        .scale-wrapper {
-            width: 100%; display: flex; flex-direction: column; align-items: center; flex: 1; transform-origin: top center;
-        }
-        @media (min-width: 2500px) {
-            .scale-wrapper { transform: scale(1.3); margin-bottom: 250px; }
-        }
-        @media (min-width: 3800px) {
-            .scale-wrapper { transform: scale(1.7); margin-bottom: 450px; }
-        }
+        .scale-wrapper { width: 100%; display: flex; flex-direction: column; align-items: center; flex: 1; transform-origin: top center; }
+        @media (min-width: 2500px) { .scale-wrapper { transform: scale(1.3); margin-bottom: 250px; } }
+        @media (min-width: 3800px) { .scale-wrapper { transform: scale(1.7); margin-bottom: 450px; } }
 
         .main { padding: 60px 20px 40px; width: 100%; max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
         
-        .title-sec { text-align: center; margin-bottom: 32px; animation: fadeIn 0.6s ease-out; }
-        .title-sec h1 { font-size: clamp(28px, 5vw, 36px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; }
-        .title-sec p { color: var(--text-sub); font-size: 15px; line-height: 1.6; }
+        .title-sec { text-align: center; margin-bottom: 28px; animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; align-items: center; }
+        .title-sec h1 { font-size: clamp(28px, 5vw, 36px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; line-height: 1.3; }
+        .title-sec p { color: var(--text-sub); font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
+
+        /* 🔥 상단 보안 마케팅 뱃지 */
+        .secure-badge { 
+            display: inline-flex; align-items: center; gap: 6px; 
+            background: rgba(52, 199, 89, 0.05); border: 1px solid rgba(52, 199, 89, 0.3); 
+            padding: 8px 16px; border-radius: 100px; 
+            font-size: 13px; font-weight: 700; color: var(--accent-green); 
+            box-shadow: 0 4px 15px rgba(52, 199, 89, 0.1);
+        }
 
         .ad-container { width: 100%; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
@@ -69,18 +92,25 @@
         .result-final .amount-wrapper { width: 100%; display: flex; justify-content: flex-end; align-items: baseline; gap: 6px; flex-wrap: wrap; }
         .result-final .amount { font-size: clamp(28px, 8vw, 38px); font-weight: 900; color: var(--accent-green); line-height: 1.2; text-align: right; word-break: break-all; text-shadow: 0 0 20px rgba(52, 199, 89, 0.3); letter-spacing: -1px; }
 
+        /* 하단 푸터 */
         .footer { width: 100%; border-top: 1px solid var(--card-border); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); margin-top: auto; }
-        .footer-logo { font-size: 20px; font-weight: 900; color: #555; }
-        .secure-text { font-size: 12px; font-weight: 600; color: var(--accent-green); display: flex; align-items: center; gap: 4px; }
-        .footer-copy { color: #555; font-size: 13px; font-weight: 500; text-align: center; line-height: 1.5; }
+        .footer-logo { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 900; color: #555; letter-spacing: -0.5px; }
+        .footer-copy { font-family: 'Inter', sans-serif; color: #555; font-size: 13px; font-weight: 500; text-align: center; line-height: 1.5; }
+        
+        /* 🚨 CEO님 시그니처를 위한 스타일 추가 */
+        .duck-logo { color: #888; font-weight: 700; transition: color 0.3s; }
+        .duck-logo:hover { color: #fff; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
     <header class="header">
-        <a href="../" class="header-logo"><svg width="24" height="24" viewBox="0 0 100 100"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>1SecTools</a>
-        <span class="header-badge">3.3% 계산기 💸</span>
+        <a href="../" class="header-logo">
+            <svg width="28" height="28" viewBox="0 0 100 100"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>
+            1SecTools
+        </a>
+        <span class="header-badge">3.3% 계산기</span>
     </header>
 
     <div class="scale-wrapper">
@@ -88,8 +118,14 @@
             <div class="title-sec">
                 <h1>3.3% 세금 계산기</h1>
                 <p>계약 금액을 입력하면 실수령액을 1초 만에 보여줍니다.</p>
+                <!-- 🔥 최상단 보안 마케팅 뱃지 배치 -->
+                <div class="secure-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    100% 안전: 브라우저 자체 처리 (서버 저장 X)
+                </div>
             </div>
 
+            <!-- 실제 광고 노출 영역 -->
             <div class="ad-container"><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110716268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
 
             <div class="app-box">
@@ -123,8 +159,11 @@
 
     <footer class="footer">
         <div class="footer-logo">1SecTools</div>
-        <div class="secure-text"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> 100% 안전: 데이터가 저장되지 않습니다.</div>
-        <div class="footer-copy">&copy; 2026 1SecTools. All rights reserved.</div>
+        <!-- 🚨 CEO님 시그니처 추가 -->
+        <div class="footer-copy">
+            &copy; 2026 1SecTools. All rights reserved.<br>
+            Designed & Engineered by <span class="duck-logo">🦆 LoserDuck</span>
+        </div>
     </footer>
 
     <script>
