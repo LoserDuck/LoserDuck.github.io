@@ -38,7 +38,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; }
         body { background-color: var(--bg-base); color: var(--text-title); min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
-        /* 🚨 하위 툴 페이지 헤더: 메인페이지(5%)와 다르게 24px 고정으로 주어 좌우 끝으로 바짝 밀착시킴 */
         .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.7); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
         
         .header-logo { font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 900; font-size: 20px; letter-spacing: -0.5px; }
@@ -90,7 +89,11 @@
 
         .footer { width: 100%; border-top: 1px solid var(--card-border); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); margin-top: auto; }
         .footer-logo { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 900; color: #555; letter-spacing: -0.5px; }
-        .footer-copy { font-family: 'Inter', sans-serif; color: #555; font-size: 13px; font-weight: 500; text-align: center; }
+        .footer-copy { font-family: 'Inter', sans-serif; color: #555; font-size: 13px; font-weight: 500; text-align: center; line-height: 1.5; }
+        
+        /* 🚨 CEO님 시그니처를 위한 스타일 추가 */
+        .duck-logo { color: #888; font-weight: 700; transition: color 0.3s; }
+        .duck-logo:hover { color: #fff; }
 
         .toast { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(20px); background: rgba(52, 199, 89, 0.9); backdrop-filter: blur(10px); color: #fff; padding: 14px 28px; border-radius: 100px; font-weight: 600; font-size: 15px; opacity: 0; pointer-events: none; transition: all 0.4s; z-index: 2000; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(52, 199, 89, 0.3); }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -140,7 +143,11 @@
 
     <footer class="footer">
         <div class="footer-logo">1SecTools</div>
-        <div class="footer-copy">&copy; 2026 1SecTools. All rights reserved.</div>
+        <!-- 🚨 CEO님 시그니처 추가 -->
+        <div class="footer-copy">
+            &copy; 2026 1SecTools. All rights reserved.<br>
+            Designed & Engineered by <span class="duck-logo">🦆 LoserDuck</span>
+        </div>
     </footer>
 
     <div class="toast" id="toast"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg><span>복사 완료! 인스타에 붙여넣으세요.</span></div>
