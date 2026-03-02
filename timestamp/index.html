@@ -3,64 +3,98 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
     <title>유튜브 타임스탬프 메이커 | 1SecTools</title>
     <meta name="description" content="숫자만 치면 콜론(:)이 자동 입력되며 시간순으로 정렬됩니다. 데이터는 서버에 저장되지 않고 로컬에서 처리됩니다.">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233182f6'/><stop offset='100%' stop-color='%23ff2d55'/></linearGradient></defs><rect width='100' height='100' rx='25' fill='%23191f28'/><path d='M60 20 L25 60 L45 60 L40 85 L75 45 L55 45 Z' fill='url(%23grad)'/></svg>">
     
+    <!-- ✅ Google Analytics (누락 복구됨) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4PG2DEJS2P');
+    </script>
+    
+    <!-- ✅ Google Search Console (누락 복구됨) -->
+    <meta name="google-site-verification" content="KC_FGR3LD6TwJWG73cK14iJu44l-nzTBk9AvjvW4Mo8" />
+    
+    <!-- ✅ Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
 
     <style>
-        :root { --bg-base: #030305; --card-bg: rgba(255, 255, 255, 0.03); --card-border: rgba(255, 255, 255, 0.08); --text-title: #ffffff; --text-sub: #8b95a1; --accent-purple: #af52de; --error-red: #ff3b30; --accent-green: #34c759;}
+        :root { 
+            --bg-base: #030305; --card-bg: rgba(255, 255, 255, 0.03); --card-border: rgba(255, 255, 255, 0.08); 
+            --text-title: #ffffff; --text-sub: #8b95a1; --accent-purple: #af52de; --error-red: #ff3b30; --accent-green: #34c759;
+        }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; }
-        body { background-color: var(--bg-base); color: var(--text-title); min-height: 100vh; display: flex; flex-direction: column; }
+        body { background-color: var(--bg-base); color: var(--text-title); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
         .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
         .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 800; font-size: 18px; }
         .header-badge { background: rgba(175, 82, 222, 0.15); border: 1px solid rgba(175, 82, 222, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-purple); font-weight: 700; }
 
-        .main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; width: 100%; max-width: 650px; margin: 0 auto; }
-        .title-sec { text-align: center; margin-bottom: 32px; }
-        .title-sec h1 { font-size: clamp(24px, 5vw, 32px); font-weight: 800; margin-bottom: 12px; }
+        .scale-wrapper { width: 100%; display: flex; flex-direction: column; align-items: center; flex: 1; transform-origin: top center; }
+        @media (min-width: 2500px) { .scale-wrapper { transform: scale(1.3); margin-bottom: 250px; } }
+        @media (min-width: 3800px) { .scale-wrapper { transform: scale(1.7); margin-bottom: 450px; } }
+
+        .main { padding: 60px 20px 40px; width: 100%; max-width: 650px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+        
+        .title-sec { text-align: center; margin-bottom: 32px; animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .title-sec h1 { font-size: clamp(28px, 5vw, 36px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; }
         .title-sec p { color: var(--text-sub); font-size: 15px; line-height: 1.6; }
 
         .ad-container { width: 100%; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-        .input-panel { width: 100%; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+        .input-panel { width: 100%; background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--card-border); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
         .input-row { display: flex; gap: 12px; flex-wrap: wrap; }
         .input-group { display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 120px; }
-        .input-group label { font-size: 13px; font-weight: 600; color: var(--text-sub); }
-        .input-group input { width: 100%; height: 52px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 0 16px; color: #fff; font-size: 16px; outline: none; }
-        .input-group input:focus { border-color: var(--accent-purple); }
+        .input-group label { font-size: 13px; font-weight: 700; color: var(--text-sub); }
+        .input-group input { width: 100%; height: 56px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 0 16px; color: #fff; font-size: 16px; outline: none; transition: all 0.3s; }
+        .input-group input:focus { border-color: var(--accent-purple); box-shadow: 0 0 0 4px rgba(175, 82, 222, 0.15); transform: translateY(-2px); }
         
-        .add-btn { width: 100%; height: 52px; border-radius: 12px; font-size: 16px; font-weight: 700; background: var(--accent-purple); color: #fff; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .add-btn { width: 100%; height: 56px; border-radius: 14px; font-size: 16px; font-weight: 800; background: linear-gradient(135deg, #af52de 0%, #8b2ec4 100%); color: #fff; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: 0 8px 20px rgba(175, 82, 222, 0.3); }
+        .add-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(175, 82, 222, 0.4); }
+        .add-btn:active { transform: translateY(2px) scale(0.98); box-shadow: 0 4px 10px rgba(175, 82, 222, 0.2); }
 
         .list-panel { width: 100%; border: 1px solid var(--card-border); border-radius: 20px; background: rgba(0,0,0,0.2); overflow: hidden; }
         .list-header { padding: 16px 20px; background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; }
         .list-header h3 { font-size: 15px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
-        .list-count { font-size: 13px; color: var(--text-sub); background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 10px; }
-        
-        .chapter-list { min-height: 100px; max-height: 400px; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
-        .chapter-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; }
-        .chap-time { font-weight: 700; color: var(--accent-purple); width: 64px; flex-shrink: 0; }
-        .chap-title { flex: 1; color: #fff; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .del-btn { background: none; border: none; color: #666; cursor: pointer; padding: 4px; border-radius: 6px; }
-        
-        .action-area { width: 100%; display: flex; gap: 12px; margin-top: 16px; }
-        .btn-copy { flex: 1; height: 56px; border-radius: 14px; border: none; background: #fff; color: #000; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .list-count { font-size: 13px; color: var(--text-sub); background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 100px; font-weight: 700; transition: all 0.3s; }
+        .list-count.bump { transform: scale(1.2); color: var(--accent-purple); background: rgba(175, 82, 222, 0.2); }
 
-        @media (min-width: 2500px) {
-            .main { max-width: 800px; }
-            .title-sec h1 { font-size: 44px; }
-            .input-group input { height: 64px; font-size: 20px; }
-            .add-btn, .btn-copy { height: 64px; font-size: 20px; }
-            .chap-title { font-size: 18px; }
-        }
+        .chapter-list { min-height: 120px; max-height: 400px; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; position: relative; }
+        .chapter-item { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; animation: slideInItem 0.4s cubic-bezier(0.16, 1, 0.3, 1); transition: all 0.3s; }
+        .chapter-item:hover { background: rgba(255,255,255,0.06); transform: translateX(4px); border-color: rgba(175, 82, 222, 0.3); }
+        .chapter-item.removing { animation: slideOutItem 0.3s forwards cubic-bezier(0.8, 0, 0.2, 1); background: rgba(255, 59, 48, 0.1); border-color: var(--error-red); }
+
+        .chap-time { font-weight: 800; font-size: 16px; color: var(--accent-purple); width: 64px; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+        .chap-title { flex: 1; color: #fff; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
+        
+        .del-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-sub); cursor: pointer; padding: 8px; border-radius: 10px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .del-btn:hover { background: rgba(255, 59, 48, 0.2); color: var(--error-red); border-color: rgba(255, 59, 48, 0.3); transform: rotate(90deg); }
+
+        .action-area { width: 100%; display: flex; gap: 12px; margin-top: 16px; }
+        .btn-copy { flex: 1; height: 60px; border-radius: 16px; border: none; background: #fff; color: #000; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: all 0.2s; }
+        .btn-copy:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255,255,255,0.2); }
+        .btn-copy:active { transform: scale(0.98); }
+
+        .empty-state { padding: 40px; text-align: center; color: #555; font-size: 14px; animation: fadeIn 0.5s; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+
+        .toast { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(20px); background: rgba(52, 199, 89, 0.9); backdrop-filter: blur(10px); color: #fff; padding: 14px 28px; border-radius: 100px; font-weight: 600; font-size: 15px; opacity: 0; pointer-events: none; transition: all 0.4s; z-index: 2000; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(52, 199, 89, 0.3); }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
         .footer { width: 100%; border-top: 1px solid var(--card-border); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); margin-top: auto; }
         .footer-logo { font-size: 20px; font-weight: 900; color: #555; }
         .secure-text { font-size: 12px; font-weight: 600; color: var(--accent-green); display: flex; align-items: center; gap: 4px; }
         .footer-copy { color: #555; font-size: 13px; font-weight: 500; text-align: center; }
+
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideInItem { from { opacity: 0; transform: translateY(-10px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes slideOutItem { to { opacity: 0; transform: translateX(50px); } }
     </style>
 </head>
 <body>
@@ -69,36 +103,54 @@
         <span class="header-badge">챕터 메이커 ⏱️</span>
     </header>
 
-    <main class="main">
-        <div class="title-sec">
-            <h1>초고속 챕터 생성</h1>
-            <p>순서 상관없이 숫자만 치면 시간순으로 자동 정렬됩니다.</p>
-        </div>
-
-        <div class="ad-container"><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110716268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
-
-        <div class="input-panel">
-            <div class="input-row">
-                <div class="input-group" style="flex:1;"><label>시간 (숫자만)</label><input type="text" id="timeInput" placeholder="0130"></div>
-                <div class="input-group" style="flex:3;"><label>제목</label><input type="text" id="titleInput" placeholder="장면 설명"></div>
+    <div class="scale-wrapper">
+        <main class="main">
+            <div class="title-sec">
+                <h1>초고속 챕터 메이커</h1>
+                <p>순서 상관없이 숫자만 치면 시간순으로 1초 만에 자동 정렬됩니다.</p>
             </div>
-            <button class="add-btn" onclick="addChapter()">목록에 추가 (Enter)</button>
-        </div>
 
-        <div class="list-panel">
-            <div class="list-header">
-                <h3>목록 <span style="font-size:11px;color:var(--accent-purple);background:rgba(175,82,222,0.15);padding:2px 6px;border-radius:6px;">자동정렬</span></h3>
-                <span class="list-count" id="listCount">0개</span>
-            </div>
-            <div class="chapter-list" id="chapterList">
-                <div id="emptyState" style="padding:40px;text-align:center;color:#555;font-size:14px;">추가된 챕터가 없습니다.</div>
-            </div>
-        </div>
+            <!-- ✅ 실제 광고가 노출될 영역 -->
+            <div class="ad-container"><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110716268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
 
-        <div class="action-area">
-            <button class="btn-copy" onclick="copyToClipboard()">유튜브용 복사하기</button>
-        </div>
-    </main>
+            <div class="input-panel">
+                <div class="input-row">
+                    <div class="input-group" style="flex:1;">
+                        <label>시간 (숫자만 입력)</label>
+                        <input type="text" id="timeInput" placeholder="예: 0130" autocomplete="off">
+                    </div>
+                    <div class="input-group" style="flex:2.5;">
+                        <label>챕�� 제목</label>
+                        <input type="text" id="titleInput" placeholder="어그로성 제목 입력..." autocomplete="off">
+                    </div>
+                </div>
+                <button class="add-btn" onclick="addChapter()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    목록에 추가 (Enter)
+                </button>
+            </div>
+
+            <div class="list-panel">
+                <div class="list-header">
+                    <h3>최종 목록 <span style="font-size:11px;color:var(--accent-purple);background:rgba(175,82,222,0.15);padding:2px 6px;border-radius:6px;margin-left:4px;">자동정렬 됨</span></h3>
+                    <span class="list-count" id="listCount">0개</span>
+                </div>
+                <div class="chapter-list" id="chapterList">
+                    <div class="empty-state" id="emptyState">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.5;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        아직 추가된 챕터가 없습니다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-area">
+                <button class="btn-copy" onclick="copyToClipboard()" id="copyBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    유튜브용 전체 복사하기
+                </button>
+            </div>
+        </main>
+    </div>
 
     <footer class="footer">
         <div class="footer-logo">1SecTools</div>
@@ -106,12 +158,19 @@
         <div class="footer-copy">&copy; 2026 1SecTools. All rights reserved.</div>
     </footer>
 
+    <div class="toast" id="toast">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        <span>복사 완료! 유튜브 설명란에 붙여넣으세요.</span>
+    </div>
+
     <script>
         const timeInput = document.getElementById('timeInput');
         const titleInput = document.getElementById('titleInput');
         const chapterList = document.getElementById('chapterList');
         const emptyState = document.getElementById('emptyState');
         const listCount = document.getElementById('listCount');
+        const toast = document.getElementById('toast');
+        const copyBtn = document.getElementById('copyBtn');
         let chapters = [];
 
         timeInput.addEventListener('input', function() {
@@ -128,30 +187,70 @@
 
         function addChapter() {
             const time = timeInput.value.trim(); const title = titleInput.value.trim();
-            if(!time || !title) return;
-            chapters.push({ time, title });
+            if(!time || !title) { timeInput.focus(); return; }
+            
+            chapters.push({ time, title, id: Date.now() });
             chapters.sort((a, b) => timeToSeconds(a.time) - timeToSeconds(b.time));
+            
+            listCount.innerText = `${chapters.length}개`;
+            listCount.classList.add('bump');
+            setTimeout(() => listCount.classList.remove('bump'), 300);
+
             renderList();
             timeInput.value = ''; titleInput.value = ''; timeInput.focus();
         }
 
         function renderList() {
-            if(chapters.length === 0) { emptyState.style.display = 'block'; listCount.innerText = '0개'; chapterList.innerHTML = ''; chapterList.appendChild(emptyState); return; }
-            emptyState.style.display = 'none'; listCount.innerText = `${chapters.length}개`;
+            if(chapters.length === 0) { 
+                emptyState.style.display = 'flex'; 
+                listCount.innerText = '0개'; 
+                chapterList.innerHTML = ''; 
+                chapterList.appendChild(emptyState); 
+                return; 
+            }
+            
+            emptyState.style.display = 'none';
             chapterList.innerHTML = '';
-            chapters.forEach((chap, i) => {
-                const div = document.createElement('div'); div.className = 'chapter-item';
-                div.innerHTML = `<div class="chap-time">${chap.time}</div><div class="chap-title">${chap.title}</div><button class="del-btn" onclick="chapters.splice(${i},1);renderList();">X</button>`;
+            
+            chapters.forEach((chap) => {
+                const div = document.createElement('div'); 
+                div.className = 'chapter-item';
+                div.innerHTML = `
+                    <div class="chap-time">${chap.time}</div>
+                    <div class="chap-title">${chap.title}</div>
+                    <button class="del-btn" onclick="removeChapter(this, ${chap.id})">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                `;
                 chapterList.appendChild(div);
             });
         }
 
+        function removeChapter(btnElement, id) {
+            const item = btnElement.closest('.chapter-item');
+            item.classList.add('removing');
+            
+            setTimeout(() => {
+                chapters = chapters.filter(c => c.id !== id);
+                listCount.innerText = `${chapters.length}개`;
+                renderList();
+            }, 300);
+        }
+
         function copyToClipboard() {
             if(chapters.length===0) return;
+            
+            copyBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => copyBtn.style.transform = '', 150);
+
             let res = '';
             if(timeToSeconds(chapters[0].time) !== 0) res += '00:00 도입부\n';
             chapters.forEach(c => res += `${c.time} ${c.title}\n`);
-            navigator.clipboard.writeText(res).then(() => alert('복사 완료!'));
+            
+            navigator.clipboard.writeText(res).then(() => {
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 2500);
+            });
         }
     </script>
 </body>
