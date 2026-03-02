@@ -3,18 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Shorts & TikTok Safe Zone Simulator | 1SecTools</title>
+    <meta name="description" content="Preview your short-form videos to ensure text isn't blocked by UI. 100% secure, processed locally. No data saved.">
     
-    <title>Shorts Safe Zone Simulator | 1SecTools</title>
-    <meta name="description" content="Preview your short-form videos against YouTube Shorts, Instagram Reels, and TikTok UI overlays. Never get your text blocked again.">
-    
-    <!-- 🚨 메인 페이지와 동일한 Inter 폰트 추가 로드 -->
+    <!-- 🚨 폰트 메인과 동일하게 로드 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233182f6'/><stop offset='100%' stop-color='%23ff2d55'/></linearGradient></defs><rect width='100' height='100' rx='25' fill='%23191f28'/><path d='M60 20 L25 60 L45 60 L40 85 L75 45 L55 45 Z' fill='url(%23grad)'/></svg>">
     
-    <!-- ✅ Google Analytics -->
+    <!-- ✅ Google Analytics (추가됨) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -23,38 +22,33 @@
       gtag('config', 'G-4PG2DEJS2P');
     </script>
     
-    <!-- ✅ Google Search Console -->
+    <!-- ✅ Google Search Console (추가됨) -->
     <meta name="google-site-verification" content="KC_FGR3LD6TwJWG73cK14iJu44l-nzTBk9AvjvW4Mo8" />
     
-    <!-- ✅ Google AdSense -->
+    <!-- ✅ Google AdSense (원본에 있던 것 유지) -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
 
     <style>
-        :root { 
-            --bg-base: #030305; --card-bg: rgba(255, 255, 255, 0.03); --card-border: rgba(255, 255, 255, 0.08); 
-            --text-title: #ffffff; --text-sub: #8b95a1; 
-            --accent-orange: #ff9500; --accent-green: #34c759; --error-red: #ff3b30;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Noto Sans KR', sans-serif; }
+        :root { --bg-base: #030305; --card-bg: rgba(255, 255, 255, 0.03); --card-border: rgba(255, 255, 255, 0.08); --text-title: #ffffff; --text-sub: #8b95a1; --accent-cyan: #32ade6; --accent-green: #34c759; --danger: rgba(255, 59, 48, 0.4); --danger-border: rgba(255, 59, 48, 0.8); }
         
-        /* 🚨 안티앨리어싱 강제 적용 (메인 페이지와 폰트 렌더링 동기화) */
+        /* 🚨 안티앨리어싱 추가 (메인 폰트 렌더링 동기화) */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-base); color: var(--text-title); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
-        /* 🚨 헤더: 양 끝 밀착 (padding: 16px 24px;) */
-        .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+        /* 🚨 헤더: 메인 페이지와 완벽히 동일한 padding: 16px 5%; 로 맞춤 */
+        .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 5%; display: flex; align-items: center; justify-content: space-between; }
+        
+        /* 🚨 로고 크기/자간 메인과 완벽히 동기화 */
         .header-logo { font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 900; font-size: 20px; letter-spacing: -0.5px; }
-        .header-badge { font-family: 'Inter', sans-serif; background: rgba(255, 149, 0, 0.15); border: 1px solid rgba(255, 149, 0, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-orange); font-weight: 700; }
+        .header-badge { font-family: 'Inter', sans-serif; background: rgba(50, 173, 230, 0.15); border: 1px solid rgba(50, 173, 230, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-cyan); font-weight: 700; text-transform: uppercase; }
 
-        .scale-wrapper { width: 100%; display: flex; flex-direction: column; align-items: center; flex: 1; transform-origin: top center; }
-        @media (min-width: 2500px) { .scale-wrapper { transform: scale(1.3); margin-bottom: 250px; } }
-        @media (min-width: 3800px) { .scale-wrapper { transform: scale(1.7); margin-bottom: 450px; } }
-
-        .main { padding: 60px 20px 40px; width: 100%; max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+        .main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; width: 100%; max-width: 650px; margin: 0 auto; }
         
-        .title-sec { text-align: center; margin-bottom: 32px; animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; align-items: center; }
-        .title-sec h1 { font-family: 'Inter', sans-serif; font-size: clamp(28px, 5vw, 36px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; line-height: 1.3; }
+        /* 🚨 타이틀 정렬 및 보안 뱃지 상단 이동 처리 */
+        .title-sec { text-align: center; margin-bottom: 24px; animation: fadeInDown 0.6s ease; display: flex; flex-direction: column; align-items: center; }
+        .title-sec h1 { font-family: 'Inter', sans-serif; font-size: clamp(28px, 6vw, 36px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; line-height: 1.3; }
         
-        /* 🔥 최상단 보안 마케팅 뱃지 (영문 버전) */
+        /* 🔥 최상단 보안 뱃지 */
         .top-secure-badge {
             display: inline-flex; align-items: center; gap: 6px;
             background: rgba(52, 199, 89, 0.1); border: 1px solid rgba(52, 199, 89, 0.3);
@@ -65,61 +59,80 @@
         
         .title-sec p { color: var(--text-sub); font-size: 15px; line-height: 1.6; }
 
-        .ad-container { width: 100%; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .ad-container { width: 100%; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; }
 
-        .app-grid { display: grid; grid-template-columns: 1fr; gap: 24px; width: 100%; animation: fadeInDown 0.8s 0.1s both cubic-bezier(0.16, 1, 0.3, 1); }
-        @media (min-width: 800px) { .app-grid { grid-template-columns: 350px 1fr; } }
+        /* Floating Controls (원본 그대로) */
+        .controls-wrapper { position: relative; z-index: 50; width: 100%; max-width: 380px; margin-bottom: 24px; }
+        .controls { display: flex; background: rgba(255,255,255,0.05); backdrop-filter: blur(15px); padding: 6px; border-radius: 20px; border: 1px solid var(--card-border); position: relative; }
+        .active-bg { position: absolute; top: 6px; bottom: 6px; width: calc(33.333% - 4px); background: #fff; border-radius: 14px; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1; }
+        .controls[data-active="0"] .active-bg { transform: translateX(0%); }
+        .controls[data-active="1"] .active-bg { transform: translateX(100%); }
+        .controls[data-active="2"] .active-bg { transform: translateX(200%); }
+        .platform-btn { flex: 1; position: relative; z-index: 2; padding: 14px 0; border: none; background: transparent; color: var(--text-sub); font-weight: 700; font-size: 14px; cursor: pointer; transition: color 0.3s; }
+        .platform-btn.active { color: #000; }
 
-        .control-panel { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--card-border); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 24px; height: fit-content; }
-        
-        .control-group { display: flex; flex-direction: column; gap: 12px; }
-        .control-group label { font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 6px; }
+        /* Phone Preview Simulator (원본 그대로) */
+        .simulator-wrapper { position: relative; width: 100%; max-width: 320px; aspect-ratio: 9/16; background: #111; border-radius: 40px; border: 10px solid #222; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.6); transition: transform 0.3s; }
+        .simulator-wrapper::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 30px; background: #222; border-bottom-left-radius: 18px; border-bottom-right-radius: 18px; z-index: 40; }
 
-        .platform-tabs { display: flex; background: rgba(0,0,0,0.4); border-radius: 12px; padding: 4px; position: relative; border: 1px solid rgba(255,255,255,0.05); }
-        .platform-btn { flex: 1; text-align: center; padding: 12px 8px; font-size: 13px; font-weight: 700; color: var(--text-sub); cursor: pointer; position: relative; z-index: 2; transition: color 0.3s; }
-        .platform-btn.active { color: #fff; }
-        .platform-slider { position: absolute; top: 4px; left: 4px; width: calc(33.33% - 2.66px); height: calc(100% - 8px); background: rgba(255,255,255,0.1); border-radius: 8px; transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1; }
-        .platform-tabs[data-active="0"] .platform-slider { transform: translateX(0); }
-        .platform-tabs[data-active="1"] .platform-slider { transform: translateX(100%); }
-        .platform-tabs[data-active="2"] .platform-slider { transform: translateX(200%); }
+        .upload-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; cursor: pointer; background: rgba(50, 173, 230, 0.05); transition: all 0.3s; }
+        .upload-overlay:hover { background: rgba(50, 173, 230, 0.1); }
+        .pulse-ring { position: absolute; width: 80px; height: 80px; border-radius: 50%; background: var(--accent-cyan); opacity: 0; animation: pulse 2s infinite; }
+        .upload-icon, .upload-text, .upload-subtext { position: relative; z-index: 2; }
+        .upload-icon { color: var(--accent-cyan); margin-bottom: 16px; }
+        .upload-text { color: #fff; font-weight: 700; font-size: 16px; }
+        .upload-subtext { color: var(--text-sub); font-size: 12px; margin-top: 6px; }
+        .hidden-file { display: none; }
 
-        .upload-area { border: 2px dashed rgba(255,255,255,0.2); border-radius: 16px; padding: 32px 20px; text-align: center; cursor: pointer; transition: all 0.2s; background: rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center; gap: 12px; }
-        .upload-area:hover, .upload-area.dragover { border-color: var(--accent-orange); background: rgba(255, 149, 0, 0.05); }
-        .upload-area svg { color: var(--text-sub); transition: color 0.2s; }
-        .upload-area:hover svg { color: var(--accent-orange); }
-        .upload-text { font-size: 14px; font-weight: 600; color: #fff; }
-        .upload-sub { font-size: 12px; color: var(--text-sub); }
-        #fileInput { display: none; }
+        .preview-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s ease; z-index: 5; }
 
-        .range-wrap { display: flex; align-items: center; gap: 12px; }
-        .range-wrap input[type=range] { flex: 1; -webkit-appearance: none; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; outline: none; }
-        .range-wrap input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--accent-orange); cursor: pointer; border: 3px solid #000; box-shadow: 0 0 10px rgba(255, 149, 0, 0.5); }
+        /* Danger Zones (원본 그대로) */
+        .zone-container { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
+        .danger-zone { position: absolute; background: var(--danger); border: 2px dashed var(--danger-border); background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,59,48,0.2) 10px, rgba(255,59,48,0.2) 20px); background-size: 28px 28px; animation: stripeSlide 1s linear infinite; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); display: flex; align-items: center; justify-content: center; overflow: hidden; backdrop-filter: blur(2px); }
+        .danger-zone span { color: #fff; font-weight: 900; font-size: 11px; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); background: rgba(0,0,0,0.4); padding: 4px 8px; border-radius: 6px; }
+        .zone-right span { transform: rotate(-90deg); white-space: nowrap; }
 
-        .simulator-panel { display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 20px; padding: 20px; }
-        
-        .phone-frame { width: 100%; max-width: 340px; aspect-ratio: 9/16; background: #000; border-radius: 32px; border: 8px solid #222; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        
-        .media-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-        
-        .ui-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; transition: opacity 0.2s; pointer-events: none; }
-        .ui-overlay img { width: 100%; height: 100%; display: none; object-fit: cover; }
-        .ui-overlay img.active { display: block; }
+        /* Default (Shorts) (원본 그대로) */
+        .zone-right { right: 0; bottom: 80px; width: 65px; height: 260px; border-left: 2px dashed var(--danger-border); }
+        .zone-bottom { left: 0; bottom: 0; width: 100%; height: 160px; border-top: 2px dashed var(--danger-border); }
+        .zone-top { left: 0; top: 0; width: 100%; height: 80px; border-bottom: 2px dashed var(--danger-border); }
 
-        .empty-phone-state { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: rgba(255,255,255,0.3); gap: 12px; z-index: 0; }
+        /* State Morphing (원본 그대로) */
+        .is-tiktok .zone-right { height: 320px; bottom: 20px; }
+        .is-tiktok .zone-bottom { height: 140px; width: 85%; }
+        .is-tiktok .zone-top { height: 0; opacity: 0; border: none; }
+        .is-reels .zone-right { height: 280px; bottom: 40px; width: 60px; }
+        .is-reels .zone-bottom { height: 130px; width: 100%; }
+        .is-reels .zone-top { height: 0; opacity: 0; border: none; }
 
-        /* 하단 푸터 */
+        /* QHD Scaling (원본 그대로) */
+        @media (min-width: 2500px) {
+            .main { max-width: 800px; padding-bottom: 120px; }
+            .title-sec h1 { font-size: 52px; }
+            .title-sec p { font-size: 20px; }
+            .controls-wrapper { max-width: 500px; }
+            .platform-btn { font-size: 20px; padding: 20px 0; }
+            .simulator-wrapper { max-width: 480px; border-width: 16px; border-radius: 60px; }
+            .simulator-wrapper::before { width: 180px; height: 40px; }
+            .danger-zone span { font-size: 16px; padding: 8px 12px; }
+        }
+
+        /* Footer (원본에서 보안 문구 빼고, 시그니처 추가) */
         .footer { width: 100%; border-top: 1px solid var(--card-border); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); margin-top: auto; }
         .footer-logo { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 900; color: #555; letter-spacing: -0.5px; }
         .footer-copy { font-family: 'Inter', sans-serif; color: #555; font-size: 13px; font-weight: 500; text-align: center; line-height: 1.5; }
         
-        /* 🚨 CEO님 시그니처 추가 */
+        /* 🚨 CEO님 시그니처 스타일 */
         .duck-logo { color: #888; font-weight: 700; transition: color 0.3s; }
         .duck-logo:hover { color: #fff; }
 
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0% { transform: scale(0.5); opacity: 0; } 50% { opacity: 0.2; } 100% { transform: scale(1.5); opacity: 0; } }
+        @keyframes stripeSlide { 0% { background-position: 0 0; } 100% { background-position: 28px 0; } }
     </style>
 </head>
 <body>
+
     <header class="header">
         <a href="../" class="header-logo">
             <svg width="28" height="28" viewBox="0 0 100 100"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>
@@ -128,77 +141,49 @@
         <span class="header-badge">Safe Zone 📱</span>
     </header>
 
-    <div class="scale-wrapper">
-        <main class="main">
-            <div class="title-sec">
-                <!-- 🔥 보안 뱃지 (영문) -->
-                <div class="top-secure-badge">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                    100% Secure: No Data Saved
-                </div>
-                
-                <h1>Shorts Safe Zone Simulator</h1>
-                <p>Preview your video against YouTube Shorts, Instagram Reels, and TikTok UI elements.</p>
+    <main class="main">
+        <div class="title-sec">
+            <!-- 🔥 보안 뱃지 상단 이동 (영문 버전) -->
+            <div class="top-secure-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                100% Secure: No Data Saved
             </div>
+            
+            <h1>Safe Zone Simulator</h1>
+            <p>Ensure your text isn't blocked by UI elements.</p>
+        </div>
 
-            <div class="ad-container"><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110716268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+        <div class="ad-container"><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110716268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
 
-            <div class="app-grid">
-                <!-- 컨트롤 패널 -->
-                <div class="control-panel">
-                    <div class="control-group">
-                        <label>1. Select Platform Overlay</label>
-                        <div class="platform-tabs" data-active="0" id="platformTabs">
-                            <div class="platform-slider"></div>
-                            <div class="platform-btn active" onclick="setPlatform(0, 'shorts')">Shorts</div>
-                            <div class="platform-btn" onclick="setPlatform(1, 'reels')">Reels</div>
-                            <div class="platform-btn" onclick="setPlatform(2, 'tiktok')">TikTok</div>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label>2. Upload Media (Video/Image)</label>
-                        <div class="upload-area" id="dropZone" onclick="document.getElementById('fileInput').click()">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                            <span class="upload-text">Click or Drag & Drop</span>
-                            <span class="upload-sub">MP4, MOV, JPG, PNG</span>
-                        </div>
-                        <input type="file" id="fileInput" accept="video/mp4,video/quicktime,image/jpeg,image/png">
-                    </div>
-
-                    <div class="control-group">
-                        <label>3. Overlay Opacity</label>
-                        <div class="range-wrap">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--text-sub)"><circle cx="12" cy="12" r="10"></circle></svg>
-                            <input type="range" id="opacitySlider" min="0" max="100" value="70">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color:#fff"><circle cx="12" cy="12" r="10"></circle></svg>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 폰 시뮬레이터 뷰 -->
-                <div class="simulator-panel">
-                    <div class="phone-frame">
-                        <div class="empty-phone-state" id="emptyState">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-                            <span style="font-size: 13px; font-weight: 600;">Media Preview</span>
-                        </div>
-                        
-                        <video class="media-layer" id="videoPreview" autoplay loop muted playsinline style="display:none;"></video>
-                        <img class="media-layer" id="imagePreview" style="display:none;">
-
-                        <div class="ui-overlay" id="uiOverlay" style="opacity: 0.7;">
-                            <!-- 🔥 실제 구현 시 src에 각 플랫폼별 투명 PNG 오버레이 이미지를 넣어야 합니다. -->
-                            <!-- 임시 더미 이미지로 대체 -->
-                            <img id="overlay-shorts" class="active" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1080' height='1920'><rect x='0' y='0' width='1080' height='1920' fill='none' stroke='red' stroke-width='40'/><rect x='850' y='900' width='200' height='900' fill='rgba(255,0,0,0.5)'/><rect x='50' y='1400' width='800' height='400' fill='rgba(255,0,0,0.5)'/></svg>">
-                            <img id="overlay-reels" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1080' height='1920'><rect x='0' y='0' width='1080' height='1920' fill='none' stroke='blue' stroke-width='40'/><rect x='850' y='1000' width='200' height='800' fill='rgba(0,0,255,0.5)'/><rect x='50' y='1500' width='800' height='300' fill='rgba(0,0,255,0.5)'/></svg>">
-                            <img id="overlay-tiktok" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1080' height='1920'><rect x='0' y='0' width='1080' height='1920' fill='none' stroke='green' stroke-width='40'/><rect x='850' y='800' width='200' height='1000' fill='rgba(0,255,0,0.5)'/><rect x='50' y='1300' width='800' height='500' fill='rgba(0,255,0,0.5)'/></svg>">
-                        </div>
-                    </div>
-                </div>
+        <!-- 👇 아래부터는 원본 UI 완벽 보존 구간 👇 -->
+        <div class="controls-wrapper">
+            <div class="controls" id="platformControls" data-active="0">
+                <div class="active-bg"></div>
+                <button class="platform-btn active" onclick="setPlatform(0, 'shorts')">Shorts</button>
+                <button class="platform-btn" onclick="setPlatform(1, 'tiktok')">TikTok</button>
+                <button class="platform-btn" onclick="setPlatform(2, 'reels')">Reels</button>
             </div>
-        </main>
-    </div>
+        </div>
+
+        <div class="simulator-wrapper" id="simWrapper">
+            <img id="previewImg" class="preview-img" src="" alt="preview">
+            
+            <label class="upload-overlay" id="uploadLabel">
+                <div class="pulse-ring"></div>
+                <svg class="upload-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                <span class="upload-text">Upload Video Frame</span>
+                <span class="upload-subtext">Tap to select image</span>
+                <input type="file" id="fileInput" class="hidden-file" accept="image/*">
+            </label>
+
+            <div class="zone-container">
+                <div class="danger-zone zone-right"><span>UI OVERLAY</span></div>
+                <div class="danger-zone zone-bottom"><span>TITLE / CAPTION</span></div>
+                <div class="danger-zone zone-top"><span>TOP BAR</span></div>
+            </div>
+        </div>
+        <!-- 👆 원본 UI 구간 끝 👆 -->
+    </main>
 
     <footer class="footer">
         <div class="footer-logo">1SecTools</div>
@@ -210,67 +195,41 @@
     </footer>
 
     <script>
-        function setPlatform(index, platformName) {
-            const tabs = document.getElementById('platformTabs');
-            tabs.setAttribute('data-active', index);
-            
-            const btns = tabs.querySelectorAll('.platform-btn');
+        /* 🚨 원본 자바스크립트 완벽 보존 */
+        const fileInput = document.getElementById('fileInput');
+        const previewImg = document.getElementById('previewImg');
+        const uploadLabel = document.getElementById('uploadLabel');
+        const btns = document.querySelectorAll('.platform-btn');
+        const controls = document.getElementById('platformControls');
+        const simWrapper = document.getElementById('simWrapper');
+
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    previewImg.src = event.target.result;
+                    previewImg.style.opacity = '1';
+                    uploadLabel.style.background = 'transparent';
+                    uploadLabel.innerHTML = '<div style="position:absolute; top:40px; background:rgba(0,0,0,0.7); backdrop-filter:blur(10px); padding:8px 16px; border-radius:20px; font-size:12px; color:#fff; font-weight:700; border:1px solid rgba(255,255,255,0.2);">Change Image</div><input type="file" id="fileInput2" class="hidden-file" accept="image/*">';
+                    document.getElementById('fileInput2').addEventListener('change', (e) => { fileInput.files = e.target.files; fileInput.dispatchEvent(new Event('change')); });
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function setPlatform(index, platform) {
+            controls.setAttribute('data-active', index);
             btns.forEach(btn => btn.classList.remove('active'));
             btns[index].classList.add('active');
 
-            const overlays = document.querySelectorAll('.ui-overlay img');
-            overlays.forEach(img => img.classList.remove('active'));
-            document.getElementById('overlay-' + platformName).classList.add('active');
+            simWrapper.style.transform = 'scale(0.98)';
+            setTimeout(() => { simWrapper.style.transform = 'scale(1)'; }, 150);
+
+            simWrapper.classList.remove('is-tiktok', 'is-reels');
+            if (platform === 'tiktok') simWrapper.classList.add('is-tiktok');
+            else if (platform === 'reels') simWrapper.classList.add('is-reels');
         }
-
-        const opacitySlider = document.getElementById('opacitySlider');
-        const uiOverlay = document.getElementById('uiOverlay');
-        opacitySlider.addEventListener('input', (e) => {
-            uiOverlay.style.opacity = e.target.value / 100;
-        });
-
-        const fileInput = document.getElementById('fileInput');
-        const dropZone = document.getElementById('dropZone');
-        const videoPreview = document.getElementById('videoPreview');
-        const imagePreview = document.getElementById('imagePreview');
-        const emptyState = document.getElementById('emptyState');
-
-        function handleFile(file) {
-            if(!file) return;
-            const url = URL.createObjectURL(file);
-            emptyState.style.display = 'none';
-
-            if(file.type.startsWith('video/')) {
-                imagePreview.style.display = 'none';
-                videoPreview.style.display = 'block';
-                videoPreview.src = url;
-            } else if(file.type.startsWith('image/')) {
-                videoPreview.style.display = 'none';
-                imagePreview.style.display = 'block';
-                imagePreview.src = url;
-            }
-        }
-
-        fileInput.addEventListener('change', (e) => {
-            handleFile(e.target.files[0]);
-        });
-
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.classList.add('dragover');
-        });
-
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('dragover');
-        });
-
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('dragover');
-            if(e.dataTransfer.files.length > 0) {
-                handleFile(e.dataTransfer.files[0]);
-            }
-        });
     </script>
 </body>
 </html>
