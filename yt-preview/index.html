@@ -3,148 +3,114 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <!-- ✅ SEO Optimization -->
-    <title>YouTube Thumbnail & Title Preview Simulator | 1SecTools</title>
-    <meta name="description" content="Test your YouTube thumbnails and titles before uploading. Simulate how they look on Mobile and Desktop, and check if your text gets truncated.">
-    <meta name="keywords" content="youtube thumbnail preview, youtube title checker, thumbnail tester, youtube a/b test, thumbnail simulator">
-    
-    <!-- ✅ Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- ✅ Google Analytics, Search Console, AdSense -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4PG2DEJS2P');
-    </script>
-    <meta name="google-site-verification" content="KC_FGR3LD6TwJWG73cK14iJu44l-nzTBk9AvjvW4Mo8" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
-
+    <title>YouTube Thumbnail Preview Simulator | 1SecTools</title>
+    <meta name="description" content="Test your YouTube thumbnails and titles before uploading. Check text truncation on Mobile vs Desktop. 100% secure, no data saved.">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233182f6'/><stop offset='100%' stop-color='%23ff2d55'/></linearGradient></defs><rect width='100' height='100' rx='25' fill='%23191f28'/><path d='M60 20 L25 60 L45 60 L40 85 L75 45 L55 45 Z' fill='url(%23grad)'/></svg>">
     
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
+
     <style>
-        :root {
-            --bg-base: #030305; --card-bg: rgba(255, 255, 255, 0.03); --card-border: rgba(255, 255, 255, 0.08);
-            --text-title: #ffffff; --text-sub: #8b95a1; --accent-cyan: #32ade6; --yt-bg: #0f0f0f;
-        }
-        /* YouTube uses Roboto font globally */
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Roboto', 'Noto Sans KR', sans-serif; }
-        body { background-color: var(--bg-base); color: var(--text-title); min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
+        :root { --bg-base: #030305; --card-bg: rgba(255, 255, 255, 0.03); --card-border: rgba(255, 255, 255, 0.08); --text-title: #ffffff; --text-sub: #8b95a1; --accent-cyan: #32ade6; --accent-green: #34c759; --yt-bg: #0f0f0f; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Roboto', sans-serif; }
+        h1, h2, p, button, input { font-family: 'Inter', 'Roboto', sans-serif; } /* Non-YT simulator UI uses Inter */
+        body { background-color: var(--bg-base); color: var(--text-title); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
         .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
-        .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 800; font-size: 18px; letter-spacing: -0.5px;}
-        .header-badge { background: rgba(50, 173, 230, 0.15); border: 1px solid rgba(50, 173, 230, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-cyan); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 800; font-size: 18px; }
+        .header-badge { background: rgba(50, 173, 230, 0.15); border: 1px solid rgba(50, 173, 230, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-cyan); font-weight: 700; text-transform: uppercase; }
 
         .main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; width: 100%; max-width: 800px; margin: 0 auto; }
-        
-        .title-sec { text-align: center; margin-bottom: 24px; animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        .title-sec h1 { font-size: clamp(28px, 6vw, 36px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; background: linear-gradient(135deg, #fff, #a1a1aa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .title-sec { text-align: center; margin-bottom: 24px; }
+        .title-sec h1 { font-size: clamp(28px, 6vw, 36px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; }
         .title-sec p { color: var(--text-sub); font-size: 15px; line-height: 1.6; }
 
         .ad-container { width: 100%; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; }
 
-        /* Controls Panel */
         .editor-panel { width: 100%; background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--card-border); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 20px; margin-bottom: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
         
+        .device-toggle { display: flex; background: rgba(0,0,0,0.5); padding: 6px; border-radius: 14px; position: relative; border: 1px solid rgba(255,255,255,0.05); }
+        .toggle-slider { position: absolute; top: 6px; bottom: 6px; left: 6px; width: calc(50% - 6px); background: #fff; border-radius: 10px; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1; }
+        .device-toggle[data-active="mobile"] .toggle-slider { transform: translateX(0%); }
+        .device-toggle[data-active="desktop"] .toggle-slider { transform: translateX(100%); }
+        .dev-btn { flex: 1; padding: 12px 0; text-align: center; font-size: 14px; font-weight: 700; color: var(--text-sub); z-index: 2; cursor: pointer; transition: color 0.3s; border: none; background: transparent; }
+        .dev-btn.active { color: #000; }
+
+        .file-upload-btn { position: relative; width: 100%; height: 50px; background: rgba(50, 173, 230, 0.1); border: 1px dashed var(--accent-cyan); border-radius: 12px; display: flex; justify-content: center; align-items: center; gap: 8px; color: var(--accent-cyan); font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .file-upload-btn:hover { background: rgba(50, 173, 230, 0.2); }
+        .file-upload-btn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+
         .input-group { display: flex; flex-direction: column; gap: 8px; }
         .input-group label { font-size: 13px; font-weight: 700; color: var(--text-sub); }
         .input-group input { width: 100%; height: 50px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 0 16px; color: #fff; font-size: 16px; outline: none; transition: border 0.3s; }
         .input-group input:focus { border-color: var(--accent-cyan); }
 
-        .file-upload-btn { position: relative; width: 100%; height: 50px; background: rgba(50, 173, 230, 0.1); border: 1px dashed var(--accent-cyan); border-radius: 12px; display: flex; justify-content: center; align-items: center; gap: 8px; color: var(--accent-cyan); font-weight: 700; cursor: pointer; transition: all 0.2s; overflow: hidden; }
-        .file-upload-btn:hover { background: rgba(50, 173, 230, 0.2); }
-        .file-upload-btn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-
-        /* Device Switcher */
-        .device-toggle { display: flex; background: rgba(0,0,0,0.5); padding: 6px; border-radius: 14px; position: relative; border: 1px solid rgba(255,255,255,0.05); }
-        .toggle-slider { position: absolute; top: 6px; bottom: 6px; left: 6px; width: calc(50% - 6px); background: #fff; border-radius: 10px; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1; }
-        .device-toggle[data-active="mobile"] .toggle-slider { transform: translateX(0%); }
-        .device-toggle[data-active="desktop"] .toggle-slider { transform: translateX(100%); }
-
-        .dev-btn { flex: 1; padding: 12px 0; text-align: center; font-size: 14px; font-weight: 700; color: var(--text-sub); z-index: 2; cursor: pointer; transition: color 0.3s; border: none; background: transparent; display: flex; justify-content: center; align-items: center; gap: 6px; }
-        .dev-btn.active { color: #000; }
-
-        /* --- YouTube Simulator Core --- */
-        .yt-sim-bg { width: 100%; background: var(--yt-bg); border-radius: 24px; padding: 40px 20px; border: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: center; transition: padding 0.4s ease; overflow: hidden; }
-
-        /* Card Container (Morphing) */
-        .yt-card { display: flex; flex-direction: column; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); cursor: pointer; }
+        /* YT Simulator UI */
+        .yt-sim-bg { width: 100%; background: var(--yt-bg); border-radius: 24px; padding: 40px 20px; border: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: center; transition: padding 0.4s ease; }
+        .yt-card { display: flex; flex-direction: column; transition: all 0.4s; }
         
-        /* Mobile State */
+        /* Device Morphing */
         .is-mobile .yt-card { width: 100%; max-width: 400px; }
-        .is-mobile .yt-thumb-box { border-radius: 0; } /* Real YT mobile has no radius on edges sometimes, but let's keep it slight */
-        
-        /* Desktop State */
-        .is-desktop .yt-card { width: 100%; max-width: 320px; } /* Desktop grid size */
+        .is-desktop .yt-card { width: 100%; max-width: 320px; }
         .is-desktop .yt-thumb-box { border-radius: 12px; }
 
-        /* Thumbnail Image Area */
         .yt-thumb-box { position: relative; width: 100%; aspect-ratio: 16/9; background: #222; overflow: hidden; transition: border-radius 0.4s; }
         .yt-thumb-box img { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* Time Badge overlay */
-        .yt-time { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.8); color: #fff; font-size: 12px; font-weight: 500; padding: 3px 4px; border-radius: 4px; pointer-events: none; }
+        .yt-time { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.8); color: #fff; font-size: 12px; font-weight: 500; padding: 3px 4px; border-radius: 4px; }
 
-        /* Meta Data Area */
         .yt-meta { display: flex; gap: 12px; margin-top: 12px; padding: 0 4px; }
-        .yt-avatar { width: 36px; height: 36px; border-radius: 50%; background: #333; flex-shrink: 0; }
-        .yt-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+        .yt-avatar { width: 36px; height: 36px; border-radius: 50%; background: #333; flex-shrink: 0; overflow: hidden; }
         
         .yt-text-wrap { display: flex; flex-direction: column; gap: 4px; overflow: hidden; }
-        
-        /* Title Truncation Logic */
-        .yt-title { color: #f1f1f1; font-size: 16px; font-weight: 500; line-height: 1.4; word-break: break-word; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; /* YT standard */ }
-        .is-desktop .yt-title { font-size: 16px; }
+        .yt-title { font-family: 'Roboto', sans-serif; color: #f1f1f1; font-size: 16px; font-weight: 500; line-height: 1.4; word-break: break-word; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
         .is-mobile .yt-title { font-size: 14px; }
+        
+        .yt-channel, .yt-stats { font-family: 'Roboto', sans-serif; color: #aaaaaa; font-size: 12px; }
 
-        .yt-channel { color: #aaaaaa; font-size: 12px; display: flex; align-items: center; gap: 4px; margin-top: 2px; }
-        .yt-stats { color: #aaaaaa; font-size: 12px; }
+        /* QHD Scaling */
+        @media (min-width: 2500px) {
+            .main { max-width: 1200px; padding-bottom: 120px; }
+            .title-sec h1 { font-size: 52px; }
+            .title-sec p { font-size: 20px; }
+            .editor-panel { padding: 40px; gap: 32px; }
+            .input-group input { height: 70px; font-size: 20px; }
+            .file-upload-btn, .dev-btn { height: 70px; font-size: 20px; }
+            
+            /* Scale up simulator for QHD */
+            .is-mobile .yt-card { max-width: 600px; }
+            .is-desktop .yt-card { max-width: 480px; }
+            .yt-avatar { width: 60px; height: 60px; }
+            .is-mobile .yt-title { font-size: 22px; }
+            .is-desktop .yt-title { font-size: 26px; }
+            .yt-channel, .yt-stats, .yt-time { font-size: 18px; }
+        }
 
-        .footer-brand { margin-top: 50px; margin-bottom: 20px; font-size: 13px; font-weight: 600; color: #555; text-align: center; width: 100%; }
-        .powered-by { font-weight: 400; color: #777; margin-top: 6px; font-size: 12px; }
-        .duck-logo { color: #fff; }
-
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        .footer { width: 100%; border-top: 1px solid var(--card-border); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); margin-top: auto; }
+        .footer-logo { font-size: 20px; font-weight: 900; color: #555; }
+        .secure-text { font-size: 12px; font-weight: 600; color: var(--accent-green); display: flex; align-items: center; gap: 4px; }
+        .footer-copy { color: #555; font-size: 13px; font-weight: 500; text-align: center; line-height: 1.5; }
     </style>
 </head>
 <body>
 
     <header class="header">
-        <a href="../" class="header-logo">
-            <svg width="24" height="24" viewBox="0 0 100 100"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>
-            1SecTools
-        </a>
-        <span class="header-badge">Thumbnail Preview 📺</span>
+        <a href="../" class="header-logo"><svg width="24" height="24" viewBox="0 0 100 100"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>1SecTools</a>
+        <span class="header-badge">Preview 📺</span>
     </header>
 
     <main class="main">
         <div class="title-sec">
             <h1>YouTube Preview Simulator</h1>
-            <p>Upload a thumbnail and type a title to see exactly<br>how it looks on YouTube Mobile vs Desktop.</p>
+            <p>Check if your title truncates or your thumbnail gets blocked.</p>
         </div>
 
-        <div class="ad-container">
-            <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110716268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
+        <div class="ad-container"><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110716268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
 
-        <!-- Editor Panel -->
         <div class="editor-panel">
             <div class="device-toggle" id="devToggle" data-active="mobile">
                 <div class="toggle-slider"></div>
-                <button class="dev-btn active" onclick="setDevice('mobile')">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-                    Mobile UI
-                </button>
-                <button class="dev-btn" onclick="setDevice('desktop')">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                    Desktop UI
-                </button>
+                <button class="dev-btn active" onclick="setDevice('mobile')">Mobile View</button>
+                <button class="dev-btn" onclick="setDevice('desktop')">Desktop View</button>
             </div>
 
             <div class="file-upload-btn">
@@ -155,78 +121,61 @@
 
             <div class="input-group">
                 <label>Video Title</label>
-                <input type="text" id="titleInput" placeholder="Enter your clickbait title here..." value="I Survived 50 Hours In Antarctica!">
+                <input type="text" id="titleInput" placeholder="Enter your clickbait title..." value="I Survived 50 Hours In Antarctica!">
             </div>
             
             <div class="input-group">
                 <label>Channel Name</label>
-                <input type="text" id="channelInput" placeholder="MrBeast" value="MrBeast">
+                <input type="text" id="channelInput" placeholder="Channel Name" value="MrBeast">
             </div>
         </div>
 
-        <!-- YouTube Simulator Board -->
         <div class="yt-sim-bg is-mobile" id="simBg">
             <div class="yt-card">
                 <div class="yt-thumb-box">
-                    <img id="previewImg" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'><rect width='100%' height='100%' fill='%23333'/><text x='50%' y='50%' font-family='Arial' font-size='40' fill='%23666' dominant-baseline='middle' text-anchor='middle'>No Image</text></svg>" alt="Thumb">
+                    <img id="previewImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'%3E%3Crect width='100%25' height='100%25' fill='%23333'/%3E%3Ctext x='50%25' y='50%25' font-family='sans-serif' font-size='40' fill='%23666' dominant-baseline='middle' text-anchor='middle'%3E1280 x 720%3C/text%3E%3C/svg%3E" alt="Thumb">
                     <div class="yt-time">10:05</div>
                 </div>
                 <div class="yt-meta">
-                    <div class="yt-avatar">
-                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100' fill='%23555'/></svg>" alt="avatar">
-                    </div>
+                    <div class="yt-avatar"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100%25' height='100%25' fill='%23555'/%3E%3C/svg%3E" alt="avatar"></div>
                     <div class="yt-text-wrap">
                         <div class="yt-title" id="previewTitle">I Survived 50 Hours In Antarctica!</div>
-                        <div class="yt-channel">
-                            <span id="previewChannel">MrBeast</span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="#aaaaaa"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.4-1.4 3.6 3.6 7.6-7.6L19 8l-9 9z"/></svg>
-                        </div>
+                        <div class="yt-channel" id="previewChannel">MrBeast</div>
                         <div class="yt-stats">1.2M views • 2 hours ago</div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="footer-brand">
-            <div>&copy; 2026 1SecTools. All rights reserved.</div>
-            <div class="powered-by">Powered by <span class="duck-logo">🦆 LoserDuck</span></div>
-        </div>
     </main>
+
+    <footer class="footer">
+        <div class="footer-logo">1SecTools</div>
+        <div class="secure-text"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> 100% Secure: No Data Saved</div>
+        <div class="footer-copy">Images are processed locally.<br>&copy; 2026 1SecTools. All rights reserved.</div>
+    </footer>
 
     <script>
         const devToggle = document.getElementById('devToggle');
         const devBtns = document.querySelectorAll('.dev-btn');
         const simBg = document.getElementById('simBg');
-        
         const thumbInput = document.getElementById('thumbInput');
         const uploadText = document.getElementById('uploadText');
         const previewImg = document.getElementById('previewImg');
-        
         const titleInput = document.getElementById('titleInput');
         const previewTitle = document.getElementById('previewTitle');
-        
         const channelInput = document.getElementById('channelInput');
         const previewChannel = document.getElementById('previewChannel');
 
-        // Device Switcher
         function setDevice(type) {
             devToggle.setAttribute('data-active', type);
             devBtns.forEach(btn => btn.classList.remove('active'));
             event.currentTarget.classList.add('active');
-
             simBg.className = `yt-sim-bg is-${type}`;
         }
 
-        // Live Text Binding
-        titleInput.addEventListener('input', (e) => {
-            previewTitle.innerText = e.target.value || 'Video Title Here';
-        });
+        titleInput.addEventListener('input', (e) => { previewTitle.innerText = e.target.value || 'Video Title Here'; });
+        channelInput.addEventListener('input', (e) => { previewChannel.innerText = e.target.value || 'Channel Name'; });
 
-        channelInput.addEventListener('input', (e) => {
-            previewChannel.innerText = e.target.value || 'Channel Name';
-        });
-
-        // Image Upload
         thumbInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
