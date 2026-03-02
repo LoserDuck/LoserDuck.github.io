@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Shorts & TikTok Safe Zone Simulator | 1SecTools</title>
-    <meta name="description" content="Preview your short-form videos to ensure text isn't blocked by UI. 100% secure, processed locally. No data saved.">
+    <meta name="description" content="Preview your short-form videos to ensure essential text isn't blocked by UI elements. Accurate templates for YouTube Shorts, TikTok, and IG Reels.">
+    <meta name="keywords" content="youtube shorts safe zone, tiktok safe zone, instagram reels ui template, short form video editor, text overlay preview">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +32,6 @@
         :root { 
             --bg-base: #030305; --card-bg: rgba(255, 255, 255, 0.03); --card-border: rgba(255, 255, 255, 0.08); 
             --text-title: #ffffff; --text-sub: #8b95a1; 
-            /* 🚨 메인페이지 5호점 아이콘 색상(Orange 그라데��션 톤) 반영 */
             --accent-orange: #ff9500;
             --grad-orange: linear-gradient(135deg, #ff9500 0%, #e65c00 100%);
             --accent-green: #34c759; --danger: rgba(255, 59, 48, 0.4); --danger-border: rgba(255, 59, 48, 0.8); 
@@ -39,7 +39,6 @@
         
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
         
-        /* 🚨 핵심 변경점: 메인 페이지와 100% 동일한 고급 오로라 배경 (다크테마) 적용 */
         body { 
             background-color: var(--bg-base); 
             color: var(--text-title); 
@@ -49,8 +48,6 @@
             overflow-x: hidden; 
             -webkit-font-smoothing: antialiased; 
             -moz-osx-font-smoothing: grayscale; 
-            
-            /* 좌측 상단 옅은 파랑, 우측 하단 옅은 보라빛 (8% 투명도) 방사형 그라데이션 */
             background-image: 
                 radial-gradient(circle at 10% 0%, rgba(49, 130, 246, 0.08) 0%, transparent 45%),
                 radial-gradient(circle at 90% 100%, rgba(175, 82, 222, 0.08) 0%, transparent 50%);
@@ -58,13 +55,10 @@
         }
 
         .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
-        
         .header-logo { font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 900; font-size: 20px; letter-spacing: -0.5px; }
-        
-        /* 🚨 뱃지에 메인페이지 오렌지 색상 적용 (이모지 제거됨) */
         .header-badge { font-family: 'Inter', sans-serif; background: rgba(255, 149, 0, 0.15); border: 1px solid rgba(255, 149, 0, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-orange); font-weight: 700; text-transform: uppercase; }
 
-        .main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; width: 100%; max-width: 650px; margin: 0 auto; }
+        .main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px 80px; width: 100%; max-width: 700px; margin: 0 auto; }
         
         .title-sec { text-align: center; margin-bottom: 24px; animation: fadeInDown 0.6s ease; display: flex; flex-direction: column; align-items: center; }
         .title-sec h1 { font-family: 'Inter', sans-serif; font-size: clamp(28px, 6vw, 36px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; line-height: 1.3; }
@@ -90,10 +84,9 @@
         .platform-btn { flex: 1; position: relative; z-index: 2; padding: 14px 0; border: none; background: transparent; color: var(--text-sub); font-weight: 700; font-size: 14px; cursor: pointer; transition: color 0.3s; }
         .platform-btn.active { color: #000; }
 
-        .simulator-wrapper { position: relative; width: 100%; max-width: 320px; aspect-ratio: 9/16; background: #111; border-radius: 40px; border: 10px solid #222; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.6); transition: transform 0.3s; }
+        .simulator-wrapper { position: relative; width: 100%; max-width: 320px; aspect-ratio: 9/16; background: #111; border-radius: 40px; border: 10px solid #222; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.6); transition: transform 0.3s; margin-bottom: 40px; }
         .simulator-wrapper::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 30px; background: #222; border-bottom-left-radius: 18px; border-bottom-right-radius: 18px; z-index: 40; }
 
-        /* 🚨 업로드 영역 색상을 5호점 메인 오렌지 컬러로 변경 */
         .upload-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; cursor: pointer; background: rgba(255, 149, 0, 0.05); transition: all 0.3s; }
         .upload-overlay:hover { background: rgba(255, 149, 0, 0.1); }
         .pulse-ring { position: absolute; width: 80px; height: 80px; border-radius: 50%; background: var(--accent-orange); opacity: 0; animation: pulse 2s infinite; }
@@ -121,6 +114,21 @@
         .is-reels .zone-bottom { height: 130px; width: 100%; }
         .is-reels .zone-top { height: 0; opacity: 0; border: none; }
 
+        /* 🚨 SEO Text Content Area */
+        .seo-content { width: 100%; display: flex; flex-direction: column; gap: 24px; animation: slideUp 0.8s 0.2s both; text-align: left; }
+        .seo-box { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 20px; padding: 32px; }
+        .seo-box h2 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 16px; letter-spacing: -0.5px; }
+        .seo-box h3 { font-size: 16px; font-weight: 700; color: var(--accent-orange); margin: 20px 0 10px; }
+        .seo-box p { color: var(--text-sub); font-size: 15px; line-height: 1.7; margin-bottom: 16px; }
+        .seo-box ul { padding-left: 20px; color: var(--text-sub); font-size: 15px; line-height: 1.7; }
+        .seo-box li { margin-bottom: 8px; }
+        
+        .faq-item { border-bottom: 1px solid var(--card-border); padding: 16px 0; }
+        .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .faq-q { font-weight: 700; color: #fff; font-size: 15px; margin-bottom: 8px; display: flex; gap: 8px; }
+        .faq-q::before { content: 'Q.'; color: var(--accent-orange); }
+        .faq-a { color: var(--text-sub); font-size: 14px; line-height: 1.6; padding-left: 24px; }
+
         @media (min-width: 2500px) {
             .main { max-width: 800px; padding-bottom: 120px; }
             .title-sec h1 { font-size: 52px; }
@@ -133,15 +141,18 @@
         }
 
         .footer { width: 100%; border-top: 1px solid var(--card-border); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); margin-top: auto; }
-        .footer-logo { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 900; color: #555; letter-spacing: -0.5px; }
+        .footer-logo { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 900; color: #555; }
+        .footer-links { display: flex; gap: 16px; margin: 4px 0; font-family: 'Inter', sans-serif; }
+        .footer-links a { color: #8b95a1; text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+        .footer-links a:hover { color: #fff; }
         .footer-copy { font-family: 'Inter', sans-serif; color: #555; font-size: 13px; font-weight: 500; text-align: center; line-height: 1.5; }
-        
         .duck-logo { color: #888; font-weight: 700; transition: color 0.3s; }
         .duck-logo:hover { color: #fff; }
 
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse { 0% { transform: scale(0.5); opacity: 0; } 50% { opacity: 0.2; } 100% { transform: scale(1.5); opacity: 0; } }
         @keyframes stripeSlide { 0% { background-position: 0 0; } 100% { background-position: 28px 0; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -193,10 +204,54 @@
                 <div class="danger-zone zone-top"><span>TOP BAR</span></div>
             </div>
         </div>
+
+        <!-- 🚨 SEO Optimized Content Area -->
+        <div class="seo-content">
+            <div class="seo-box">
+                <h2>What is a Video Safe Zone?</h2>
+                <p>When you upload vertical short-form videos to platforms like YouTube Shorts, TikTok, or Instagram Reels, the platform automatically overlays UI elements on top of your video. This includes the like button, comment icon, share button, and your video caption/title.</p>
+                <p>A <strong>"Safe Zone"</strong> is the central area of your screen where you can place text, subtitles, or important visual elements without them being covered by these UI buttons. The 1SecTools Safe Zone Simulator allows you to upload a screenshot of your video edit to instantly verify if your text will be blocked.</p>
+                
+                <h3>Why do you need to test your UI overlay?</h3>
+                <ul>
+                    <li><strong>Prevent Viewer Frustration:</strong> If your punchline or crucial subtitle is hidden behind the TikTok 'Like' heart or YouTube 'Subscribe' button, viewers get frustrated and scroll away.</li>
+                    <li><strong>Increase Retention Rate:</strong> Videos with clearly readable text perform statistically better in algorithms.</li>
+                    <li><strong>All-in-One Testing:</strong> Instead of relying on static PNG templates in Premiere Pro or CapCut, our interactive simulator lets you switch between Shorts, Reels, and TikTok layouts with one click.</li>
+                </ul>
+            </div>
+
+            <div class="seo-box">
+                <h2>Frequently Asked Questions (FAQ)</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-q">Are the safe zone boundaries 100% accurate?</div>
+                    <div class="faq-a">Our UI overlay templates are meticulously designed to match the current 2024-2025 interface updates of YouTube Shorts, TikTok, and IG Reels on standard 9:16 aspect ratio smartphone screens. However, slight variations may occur depending on the specific device model (e.g., iPhone vs Galaxy).</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-q">Will my uploaded image be saved to your servers?</div>
+                    <div class="faq-a">No! This tool processes your image entirely locally within your browser using JavaScript. No image data is ever uploaded or transmitted to our servers, ensuring your unreleased content remains strictly confidential.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-q">What is the recommended video resolution?</div>
+                    <div class="faq-a">For the best results on all short-form platforms, export your videos in 1080 x 1920 pixels (9:16 aspect ratio). If you take a screenshot of this frame in your editing software and upload it here, it will perfectly match our simulator layout.</div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <footer class="footer">
         <div class="footer-logo">1SecTools</div>
+        <!-- 🚨 Footer Policy Links -->
+        <div class="footer-links">
+            <a href="../privacy.html">Privacy Policy</a>
+            <span style="color: rgba(255,255,255,0.1);">|</span>
+            <a href="../terms.html">Terms of Service</a>
+            <span style="color: rgba(255,255,255,0.1);">|</span>
+            <a href="../contact.html">Contact Us</a>
+        </div>
         <div class="footer-copy">
             &copy; 2026 1SecTools. All rights reserved.<br>
             Designed & Engineered by <span class="duck-logo">🦆 LoserDuck</span>
