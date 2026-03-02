@@ -3,152 +3,110 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <!-- ✅ SEO Optimization -->
     <title>Shorts & TikTok Safe Zone Simulator | 1SecTools</title>
-    <meta name="description" content="Preview your short-form videos to ensure text isn't blocked by TikTok, Reels, or Shorts UI. Instantly check the safe zones.">
-    <meta name="keywords" content="tiktok safe zone, youtube shorts safe zone, instagram reels safe zone, video preview, safe zone template">
-    
-    <!-- ✅ Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="description" content="Preview your short-form videos to ensure text isn't blocked by UI. 100% secure, processed locally. No data saved.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- ✅ Google Analytics, Search Console, AdSense -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4PG2DEJS2P');
-    </script>
-    <meta name="google-site-verification" content="KC_FGR3LD6TwJWG73cK14iJu44l-nzTBk9AvjvW4Mo8" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
-
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233182f6'/><stop offset='100%' stop-color='%23ff2d55'/></linearGradient></defs><rect width='100' height='100' rx='25' fill='%23191f28'/><path d='M60 20 L25 60 L45 60 L40 85 L75 45 L55 45 Z' fill='url(%23grad)'/></svg>">
     
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
+
     <style>
-        :root {
-            --bg-base: #030305; --card-bg: rgba(255, 255, 255, 0.03); --card-border: rgba(255, 255, 255, 0.08);
-            --text-title: #ffffff; --text-sub: #8b95a1; --accent-cyan: #32ade6; 
-            --danger: rgba(255, 59, 48, 0.4); --danger-border: rgba(255, 59, 48, 0.8);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, sans-serif; }
-        body { background-color: var(--bg-base); color: var(--text-title); min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        :root { --bg-base: #030305; --card-bg: rgba(255, 255, 255, 0.03); --card-border: rgba(255, 255, 255, 0.08); --text-title: #ffffff; --text-sub: #8b95a1; --accent-cyan: #32ade6; --accent-green: #34c759; --danger: rgba(255, 59, 48, 0.4); --danger-border: rgba(255, 59, 48, 0.8); }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-base); color: var(--text-title); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
         .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
-        .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 800; font-size: 18px; letter-spacing: -0.5px;}
-        .header-badge { background: rgba(50, 173, 230, 0.15); border: 1px solid rgba(50, 173, 230, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-cyan); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 800; font-size: 18px; }
+        .header-badge { background: rgba(50, 173, 230, 0.15); border: 1px solid rgba(50, 173, 230, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-cyan); font-weight: 700; text-transform: uppercase; }
 
         .main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; width: 100%; max-width: 650px; margin: 0 auto; }
-        .title-sec { text-align: center; margin-bottom: 24px; animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        .title-sec h1 { font-size: clamp(28px, 6vw, 36px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; background: linear-gradient(135deg, #fff, #a1a1aa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .title-sec { text-align: center; margin-bottom: 24px; animation: fadeInDown 0.6s ease; }
+        .title-sec h1 { font-size: clamp(28px, 6vw, 36px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; }
         .title-sec p { color: var(--text-sub); font-size: 15px; line-height: 1.6; }
 
         .ad-container { width: 100%; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; }
 
         /* Floating Controls */
-        .controls-wrapper { position: relative; z-index: 50; width: 100%; max-width: 380px; margin-bottom: 24px; animation: fadeInUp 0.6s 0.1s both; }
+        .controls-wrapper { position: relative; z-index: 50; width: 100%; max-width: 380px; margin-bottom: 24px; }
         .controls { display: flex; background: rgba(255,255,255,0.05); backdrop-filter: blur(15px); padding: 6px; border-radius: 20px; border: 1px solid var(--card-border); position: relative; }
-        
-        /* Sliding active background indicator */
-        .active-bg { position: absolute; top: 6px; bottom: 6px; width: calc(33.333% - 4px); background: #fff; border-radius: 14px; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1; box-shadow: 0 4px 15px rgba(255,255,255,0.2); }
+        .active-bg { position: absolute; top: 6px; bottom: 6px; width: calc(33.333% - 4px); background: #fff; border-radius: 14px; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1; }
         .controls[data-active="0"] .active-bg { transform: translateX(0%); }
         .controls[data-active="1"] .active-bg { transform: translateX(100%); }
         .controls[data-active="2"] .active-bg { transform: translateX(200%); }
-
         .platform-btn { flex: 1; position: relative; z-index: 2; padding: 14px 0; border: none; background: transparent; color: var(--text-sub); font-weight: 700; font-size: 14px; cursor: pointer; transition: color 0.3s; }
         .platform-btn.active { color: #000; }
 
-        /* 3D Phone Preview Simulator */
-        .simulator-wrapper { 
-            position: relative; width: 100%; max-width: 320px; aspect-ratio: 9/16; 
-            background: #111; border-radius: 40px; border: 10px solid #222; 
-            overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 20px rgba(0,0,0,0.5); 
-            animation: scaleIn 0.7s 0.2s both cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        
-        /* Notch / Dynamic Island decoration */
-        .simulator-wrapper::before {
-            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 120px; height: 30px; background: #222; border-bottom-left-radius: 18px; border-bottom-right-radius: 18px; z-index: 40;
-        }
+        /* Phone Preview Simulator */
+        .simulator-wrapper { position: relative; width: 100%; max-width: 320px; aspect-ratio: 9/16; background: #111; border-radius: 40px; border: 10px solid #222; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.6); transition: transform 0.3s; }
+        .simulator-wrapper::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 30px; background: #222; border-bottom-left-radius: 18px; border-bottom-right-radius: 18px; z-index: 40; }
 
         .upload-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; cursor: pointer; background: rgba(50, 173, 230, 0.05); transition: all 0.3s; }
         .upload-overlay:hover { background: rgba(50, 173, 230, 0.1); }
         .pulse-ring { position: absolute; width: 80px; height: 80px; border-radius: 50%; background: var(--accent-cyan); opacity: 0; animation: pulse 2s infinite; }
-        .upload-icon { color: var(--accent-cyan); margin-bottom: 16px; position: relative; z-index: 2; filter: drop-shadow(0 0 10px rgba(50, 173, 230, 0.5)); }
-        .upload-text { color: #fff; font-weight: 700; font-size: 16px; position: relative; z-index: 2; letter-spacing: 0.5px; }
-        .upload-subtext { color: var(--text-sub); font-size: 12px; margin-top: 6px; position: relative; z-index: 2; }
+        .upload-icon, .upload-text, .upload-subtext { position: relative; z-index: 2; }
+        .upload-icon { color: var(--accent-cyan); margin-bottom: 16px; }
+        .upload-text { color: #fff; font-weight: 700; font-size: 16px; }
+        .upload-subtext { color: var(--text-sub); font-size: 12px; margin-top: 6px; }
         .hidden-file { display: none; }
 
         .preview-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s ease; z-index: 5; }
 
-        /* Danger Zones (Animated Morphing) */
+        /* Danger Zones */
         .zone-container { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
-        
-        .danger-zone { 
-            position: absolute; background: var(--danger); border: 2px dashed var(--danger-border);
-            /* Striped animated background */
-            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,59,48,0.2) 10px, rgba(255,59,48,0.2) 20px);
-            background-size: 28px 28px; animation: stripeSlide 1s linear infinite;
-            /* Smooth Morphing Transition */
-            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-            display: flex; align-items: center; justify-content: center; overflow: hidden;
-            backdrop-filter: blur(2px);
-        }
-        
+        .danger-zone { position: absolute; background: var(--danger); border: 2px dashed var(--danger-border); background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,59,48,0.2) 10px, rgba(255,59,48,0.2) 20px); background-size: 28px 28px; animation: stripeSlide 1s linear infinite; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); display: flex; align-items: center; justify-content: center; overflow: hidden; backdrop-filter: blur(2px); }
         .danger-zone span { color: #fff; font-weight: 900; font-size: 11px; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); background: rgba(0,0,0,0.4); padding: 4px 8px; border-radius: 6px; }
         .zone-right span { transform: rotate(-90deg); white-space: nowrap; }
 
-        /* Initial Setup (Shorts by default) */
-        .zone-right { right: 0; bottom: 80px; width: 65px; height: 260px; border-top-left-radius: 12px; border-bottom-left-radius: 12px; border-right: none; }
-        .zone-bottom { left: 0; bottom: 0; width: 100%; height: 160px; border-top-left-radius: 12px; border-top-right-radius: 12px; border-bottom: none; }
-        .zone-top { left: 0; top: 0; width: 100%; height: 80px; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; border-top: none; }
+        /* Default (Shorts) */
+        .zone-right { right: 0; bottom: 80px; width: 65px; height: 260px; border-left: 2px dashed var(--danger-border); }
+        .zone-bottom { left: 0; bottom: 0; width: 100%; height: 160px; border-top: 2px dashed var(--danger-border); }
+        .zone-top { left: 0; top: 0; width: 100%; height: 80px; border-bottom: 2px dashed var(--danger-border); }
 
-        /* State Classes for Morphing */
-        /* Tiktok */
+        /* State Morphing */
         .is-tiktok .zone-right { height: 320px; bottom: 20px; }
         .is-tiktok .zone-bottom { height: 140px; width: 85%; }
-        .is-tiktok .zone-top { height: 0; border: none; opacity: 0; }
-        
-        /* Reels */
+        .is-tiktok .zone-top { height: 0; opacity: 0; border: none; }
         .is-reels .zone-right { height: 280px; bottom: 40px; width: 60px; }
         .is-reels .zone-bottom { height: 130px; width: 100%; }
-        .is-reels .zone-top { height: 0; border: none; opacity: 0; }
+        .is-reels .zone-top { height: 0; opacity: 0; border: none; }
 
-        .footer-brand { margin-top: 50px; margin-bottom: 20px; font-size: 13px; font-weight: 600; color: #555; text-align: center; width: 100%; }
-        .powered-by { font-weight: 400; color: #777; margin-top: 6px; font-size: 12px; }
-        .duck-logo { color: #fff; }
+        /* QHD Scaling */
+        @media (min-width: 2500px) {
+            .main { max-width: 800px; padding-bottom: 120px; }
+            .title-sec h1 { font-size: 52px; }
+            .title-sec p { font-size: 20px; }
+            .controls-wrapper { max-width: 500px; }
+            .platform-btn { font-size: 20px; padding: 20px 0; }
+            .simulator-wrapper { max-width: 480px; border-width: 16px; border-radius: 60px; }
+            .simulator-wrapper::before { width: 180px; height: 40px; }
+            .danger-zone span { font-size: 16px; padding: 8px 12px; }
+        }
+
+        /* Footer */
+        .footer { width: 100%; border-top: 1px solid var(--card-border); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); margin-top: auto; }
+        .footer-logo { font-size: 20px; font-weight: 900; color: #555; }
+        .secure-text { font-size: 12px; font-weight: 600; color: var(--accent-green); display: flex; align-items: center; gap: 4px; }
+        .footer-copy { color: #555; font-size: 13px; font-weight: 500; text-align: center; }
 
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         @keyframes pulse { 0% { transform: scale(0.5); opacity: 0; } 50% { opacity: 0.2; } 100% { transform: scale(1.5); opacity: 0; } }
         @keyframes stripeSlide { 0% { background-position: 0 0; } 100% { background-position: 28px 0; } }
-
     </style>
 </head>
 <body>
 
     <header class="header">
-        <a href="../" class="header-logo">
-            <svg width="24" height="24" viewBox="0 0 100 100"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>
-            1SecTools
-        </a>
+        <a href="../" class="header-logo"><svg width="24" height="24" viewBox="0 0 100 100"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>1SecTools</a>
         <span class="header-badge">Safe Zone 📱</span>
     </header>
 
     <main class="main">
         <div class="title-sec">
             <h1>Safe Zone Simulator</h1>
-            <p>Ensure your video text isn't blocked by UI.<br>Instantly preview across all major short-form platforms.</p>
+            <p>Ensure your text isn't blocked by UI elements.</p>
         </div>
 
-        <div class="ad-container">
-            <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110716268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
+        <div class="ad-container"><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110716268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
 
         <div class="controls-wrapper">
             <div class="controls" id="platformControls" data-active="0">
@@ -160,10 +118,8 @@
         </div>
 
         <div class="simulator-wrapper" id="simWrapper">
-            <!-- User Uploaded Image -->
             <img id="previewImg" class="preview-img" src="" alt="preview">
             
-            <!-- Upload Overlay -->
             <label class="upload-overlay" id="uploadLabel">
                 <div class="pulse-ring"></div>
                 <svg class="upload-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
@@ -172,19 +128,19 @@
                 <input type="file" id="fileInput" class="hidden-file" accept="image/*">
             </label>
 
-            <!-- Danger Zones Morphing Container -->
             <div class="zone-container">
                 <div class="danger-zone zone-right"><span>UI OVERLAY</span></div>
-                <div class="danger-zone zone-bottom"><span>TITLE & CAPTION</span></div>
+                <div class="danger-zone zone-bottom"><span>TITLE / CAPTION</span></div>
                 <div class="danger-zone zone-top"><span>TOP BAR</span></div>
             </div>
         </div>
-
-        <div class="footer-brand">
-            <div>&copy; 2026 1SecTools. All rights reserved.</div>
-            <div class="powered-by">Powered by <span class="duck-logo">🦆 LoserDuck</span></div>
-        </div>
     </main>
+
+    <footer class="footer">
+        <div class="footer-logo">1SecTools</div>
+        <div class="secure-text"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> 100% Secure: No Data Saved</div>
+        <div class="footer-copy">Images are processed locally.<br>&copy; 2026 1SecTools. All rights reserved.</div>
+    </footer>
 
     <script>
         const fileInput = document.getElementById('fileInput');
@@ -194,7 +150,6 @@
         const controls = document.getElementById('platformControls');
         const simWrapper = document.getElementById('simWrapper');
 
-        // File Upload Logic
         fileInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
@@ -202,36 +157,25 @@
                 reader.onload = function(event) {
                     previewImg.src = event.target.result;
                     previewImg.style.opacity = '1';
-                    
-                    // Collapse upload UI into a small floating button
                     uploadLabel.style.background = 'transparent';
-                    uploadLabel.innerHTML = '<div style="position:absolute; top:40px; background:rgba(0,0,0,0.7); backdrop-filter:blur(10px); padding:8px 16px; border-radius:20px; font-size:12px; color:#fff; font-weight:700; border:1px solid rgba(255,255,255,0.2); box-shadow:0 10px 20px rgba(0,0,0,0.5); transition:transform 0.2s;" onmousedown="this.style.transform=\'scale(0.95)\'" onmouseup="this.style.transform=\'scale(1)\'">Change Image</div><input type="file" id="fileInput2" class="hidden-file" accept="image/*">';
-                    
-                    document.getElementById('fileInput2').addEventListener('change', (e) => {
-                        fileInput.files = e.target.files;
-                        fileInput.dispatchEvent(new Event('change'));
-                    });
+                    uploadLabel.innerHTML = '<div style="position:absolute; top:40px; background:rgba(0,0,0,0.7); backdrop-filter:blur(10px); padding:8px 16px; border-radius:20px; font-size:12px; color:#fff; font-weight:700; border:1px solid rgba(255,255,255,0.2);">Change Image</div><input type="file" id="fileInput2" class="hidden-file" accept="image/*">';
+                    document.getElementById('fileInput2').addEventListener('change', (e) => { fileInput.files = e.target.files; fileInput.dispatchEvent(new Event('change')); });
                 };
                 reader.readAsDataURL(file);
             }
         });
 
-        // Platform Switch Logic (Triggers CSS Morphing Animation)
         function setPlatform(index, platform) {
-            // Update Toggle UI
             controls.setAttribute('data-active', index);
             btns.forEach(btn => btn.classList.remove('active'));
             btns[index].classList.add('active');
 
-            // Haptic/Bump effect on simulator
             simWrapper.style.transform = 'scale(0.98)';
             setTimeout(() => { simWrapper.style.transform = 'scale(1)'; }, 150);
 
-            // Change State Classes to trigger CSS morphing
             simWrapper.classList.remove('is-tiktok', 'is-reels');
             if (platform === 'tiktok') simWrapper.classList.add('is-tiktok');
             else if (platform === 'reels') simWrapper.classList.add('is-reels');
-            // shorts is default (no class needed)
         }
     </script>
 </body>
