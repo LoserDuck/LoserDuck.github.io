@@ -3,230 +3,146 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <!-- ✅ SEO 최적화 -->
     <title>3.3% 프리랜서 세금 계산기 | 1SecTools</title>
-    <meta name="description" content="알바, 프리랜서, 외주 작업자를 위한 실수령액 및 3.3% 세금 자동 계산기. 세전/세후 금액을 1초 만에 확인하세요.">
-    <meta name="keywords" content="프리랜서 세금, 3.3% 세금 계산기, 실수령액 계산기, 알바 세금, 외주 세금, 세전 세후 계산기">
-    
-    <!-- ✅ 구글 웹 폰트 강제 주입 (글자 깨짐 완벽 방어) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="description" content="알바, 프리랜서, 외주 작업자를 위한 실수령액 및 3.3% 세금 자동 계산기. 입력한 금액은 서버에 저장되지 않습니다.">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- ✅ Google Analytics, Search Console, AdSense -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4PG2DEJS2P');
-    </script>
-    <meta name="google-site-verification" content="KC_FGR3LD6TwJWG73cK14iJu44l-nzTBk9AvjvW4Mo8" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
-
-    <!-- 1SecTools Custom Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233182f6'/><stop offset='100%' stop-color='%23ff2d55'/></linearGradient></defs><rect width='100' height='100' rx='25' fill='%23191f28'/><path d='M60 20 L25 60 L45 60 L40 85 L75 45 L55 45 Z' fill='url(%23grad)'/></svg>">
     
-    <style>
-        :root {
-            --bg-base: #030305;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --text-title: #ffffff;
-            --text-sub: #8b95a1;
-            --accent-green: #34c759;
-            --accent-blue: #3182f6;
-            --accent-pink: #ff2d55;
-        }
-        
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif; }
-        
-        body { 
-            background-color: var(--bg-base); color: var(--text-title); 
-            min-height: 100vh; display: flex; flex-direction: column;
-            -webkit-font-smoothing: antialiased;
-        }
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
 
-        /* --- Global Header --- */
-        .header { 
-            position: sticky; top: 0; z-index: 1000; 
-            background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(20px); 
-            border-bottom: 1px solid var(--card-border); 
-            padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; 
-        }
-        .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 800; font-size: 18px; letter-spacing: -0.5px;}
+    <style>
+        :root { --bg-base: #030305; --card-bg: rgba(255, 255, 255, 0.03); --card-border: rgba(255, 255, 255, 0.08); --text-title: #ffffff; --text-sub: #8b95a1; --accent-green: #34c759; --accent-pink: #ff2d55; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; }
+        body { background-color: var(--bg-base); color: var(--text-title); min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
+
+        .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 800; font-size: 18px; }
         .header-badge { background: rgba(52, 199, 89, 0.15); border: 1px solid rgba(52, 199, 89, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-green); font-weight: 700; }
 
-        /* --- Main Content --- */
         .main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; width: 100%; max-width: 500px; margin: 0 auto; }
-        
         .title-sec { text-align: center; margin-bottom: 32px; animation: fadeIn 0.6s ease-out; }
-        .title-sec h1 { font-size: clamp(24px, 5vw, 32px); font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; background: linear-gradient(135deg, #fff, #a1a1aa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .title-sec p { color: var(--text-sub); font-size: 15px; line-height: 1.6; word-break: keep-all; }
+        .title-sec h1 { font-size: clamp(24px, 5vw, 32px); font-weight: 800; margin-bottom: 12px; }
+        .title-sec p { color: var(--text-sub); font-size: 15px; line-height: 1.6; }
 
         .ad-container { width: 100%; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-        .app-box { 
-            width: 100%; background: var(--card-bg); backdrop-filter: blur(10px);
-            border: 1px solid var(--card-border); border-radius: 24px; 
-            padding: 32px 24px; display: flex; flex-direction: column; gap: 24px; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .app-box { width: 100%; background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--card-border); border-radius: 24px; padding: 32px 24px; display: flex; flex-direction: column; gap: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
 
         .toggle-container { display: flex; background: rgba(0,0,0,0.4); border-radius: 12px; padding: 4px; position: relative; border: 1px solid rgba(255,255,255,0.05); }
         .toggle-btn { flex: 1; text-align: center; padding: 12px; font-size: 14px; font-weight: 700; color: var(--text-sub); cursor: pointer; position: relative; z-index: 2; transition: color 0.3s; }
         .toggle-btn.active { color: #fff; }
-        .toggle-slider { position: absolute; top: 4px; left: 4px; width: calc(50% - 4px); height: calc(100% - 8px); background: rgba(255,255,255,0.1); border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1; }
+        .toggle-slider { position: absolute; top: 4px; left: 4px; width: calc(50% - 4px); height: calc(100% - 8px); background: rgba(255,255,255,0.1); border-radius: 8px; transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1; }
         .mode-reverse .toggle-slider { transform: translateX(100%); }
 
         .input-group { display: flex; flex-direction: column; gap: 10px; }
         .input-group label { font-size: 14px; font-weight: 600; color: var(--text-sub); }
         .input-wrapper { position: relative; display: flex; align-items: center; }
-        .input-wrapper input { 
-            width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); 
-            border-radius: 16px; padding: 20px; padding-right: 45px;
-            color: #fff; font-size: 24px; font-weight: 800; letter-spacing: 1px;
-            outline: none; transition: all 0.3s; text-align: right;
-        }
-        .input-wrapper input:focus { border-color: var(--accent-green); box-shadow: 0 0 0 4px rgba(52, 199, 89, 0.1); }
-        .input-wrapper input::placeholder { color: #444; font-weight: 500; }
+        .input-wrapper input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px 45px 20px 20px; color: #fff; font-size: 24px; font-weight: 800; text-align: right; outline: none; }
+        .input-wrapper input:focus { border-color: var(--accent-green); }
         .input-suffix { position: absolute; right: 20px; font-size: 18px; font-weight: 600; color: var(--text-sub); pointer-events: none; }
 
-        .result-box { 
-            background: rgba(52, 199, 89, 0.05); border: 1px solid rgba(52, 199, 89, 0.2); 
-            border-radius: 16px; padding: 24px; margin-top: 8px; display: flex; flex-direction: column; gap: 16px;
-            width: 100%; box-sizing: border-box;
-        }
-        
+        .result-box { background: rgba(52, 199, 89, 0.05); border: 1px solid rgba(52, 199, 89, 0.2); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
         .result-row { display: flex; justify-content: space-between; align-items: flex-start; font-size: 15px; color: var(--text-sub); gap: 16px; width: 100%; }
         .result-row .label { flex-shrink: 0; }
-        .result-row .value { 
-            font-weight: 600; color: #fff; font-variant-numeric: tabular-nums; 
-            text-align: right; flex: 1; min-width: 0; word-break: break-all; 
-        }
+        .result-row .value { font-weight: 600; color: #fff; text-align: right; flex: 1; min-width: 0; word-break: break-all; }
         .result-row.deduction .value { color: var(--accent-pink); }
         
-        .divider { height: 1px; background: rgba(255,255,255,0.08); margin: 4px 0; }
+        .divider { height: 1px; background: rgba(255,255,255,0.08); }
         
-        .result-final { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; margin-top: 8px; width: 100%; }
-        .result-final .label { font-size: 15px; font-weight: 700; color: #fff; text-align: right; width: 100%; }
-        .result-final .amount-wrapper {
-            width: 100%; max-width: 100%; display: flex; justify-content: flex-end; align-items: baseline; gap: 6px; flex-wrap: wrap; 
-        }
-        .result-final .amount { 
-            font-size: clamp(24px, 6vw, 36px); 
-            font-weight: 800; color: var(--accent-green); letter-spacing: -1px; 
-            text-shadow: 0 0 20px rgba(52, 199, 89, 0.3); font-variant-numeric: tabular-nums; 
-            line-height: 1.2; text-align: right; word-break: break-all; max-width: 100%; min-width: 0;
-        }
-        .result-final .unit { font-size: 20px; font-weight: 600; color: #fff; flex-shrink: 0; }
+        .result-final { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; width: 100%; }
+        .result-final .label { font-size: 15px; font-weight: 700; color: #fff; }
+        .result-final .amount-wrapper { width: 100%; display: flex; justify-content: flex-end; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+        .result-final .amount { font-size: clamp(24px, 6vw, 36px); font-weight: 800; color: var(--accent-green); line-height: 1.2; text-align: right; word-break: break-all; }
 
-        /* --- Footer Brand --- */
-        .footer-brand { margin-top: 40px; margin-bottom: 20px; font-size: 13px; font-weight: 600; color: #555; text-align: center; width: 100%; }
-        .powered-by { font-weight: 400; color: #777; margin-top: 6px; font-size: 12px; }
-        .duck-logo { color: #fff; }
+        @media (min-width: 2500px) {
+            .main { max-width: 650px; }
+            .title-sec h1 { font-size: 44px; }
+            .input-wrapper input { font-size: 32px; padding: 28px; }
+            .result-box { padding: 32px; gap: 20px; }
+            .result-row { font-size: 20px; }
+            .result-final .amount { font-size: 48px; }
+        }
+
+        .footer { width: 100%; border-top: 1px solid var(--card-border); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); margin-top: auto; }
+        .footer-logo { font-size: 20px; font-weight: 900; color: #555; }
+        .secure-text { font-size: 12px; font-weight: 600; color: var(--accent-green); display: flex; align-items: center; gap: 4px; }
+        .footer-copy { color: #555; font-size: 13px; font-weight: 500; text-align: center; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-
     <header class="header">
-        <a href="../" class="header-logo">
-            <svg width="24" height="24" viewBox="0 0 100 100"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>
-            1SecTools
-        </a>
-        <span class="header-badge">3.3% 프리랜서 계산기 💸</span>
+        <a href="../" class="header-logo"><svg width="24" height="24" viewBox="0 0 100 100"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>1SecTools</a>
+        <span class="header-badge">3.3% 계산기 💸</span>
     </header>
 
     <main class="main">
         <div class="title-sec">
             <h1>3.3% 세금 계산기</h1>
-            <p>프리랜서, 알바, 외주 작업자를 위한 필수 툴.<br>계약 금액을 입력하면 실수령액을 1초 만에 보여줍니다.</p>
+            <p>계약 금액을 입력하면 실수령액을 1초 만에 보여줍니다.</p>
         </div>
 
-        <div class="ad-container">
-            <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110716268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
+        <div class="ad-container"><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110716268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
 
         <div class="app-box">
             <div class="toggle-container" id="modeToggle">
                 <div class="toggle-slider"></div>
-                <div class="toggle-btn active" onclick="setMode('forward')">세전 → 세후 (실수령액)</div>
-                <div class="toggle-btn" onclick="setMode('reverse')">세후 → 세전 (계약금액)</div>
+                <div class="toggle-btn active" onclick="setMode('forward')">세전 → 세후</div>
+                <div class="toggle-btn" onclick="setMode('reverse')">세후 → 세전</div>
             </div>
 
             <div class="input-group">
                 <label id="inputLabel">💰 계약 금액 (세전) 입력</label>
                 <div class="input-wrapper">
-                    <input type="text" id="amountInput" placeholder="0" inputmode="numeric" autocomplete="off" maxlength="30">
+                    <input type="text" id="amountInput" placeholder="0" inputmode="numeric" maxlength="20">
                     <span class="input-suffix">원</span>
                 </div>
             </div>
 
             <div class="result-box">
-                <div class="result-row" id="row1">
-                    <span class="label">세전 금액</span>
-                    <span class="value" id="valBefore">0 원</span>
-                </div>
-                <div class="result-row deduction">
-                    <span class="label">소득세 (3.0%)</span>
-                    <span class="value" id="valTax1">- 0 원</span>
-                </div>
-                <div class="result-row deduction">
-                    <span class="label">지방소득세 (0.3%)</span>
-                    <span class="value" id="valTax2">- 0 원</span>
-                </div>
+                <div class="result-row" id="row1"><span class="label">세전 금액</span><span class="value" id="valBefore">0 원</span></div>
+                <div class="result-row deduction"><span class="label">소득세 (3.0%)</span><span class="value" id="valTax1">- 0 원</span></div>
+                <div class="result-row deduction"><span class="label">지방소득세 (0.3%)</span><span class="value" id="valTax2">- 0 원</span></div>
                 <div class="divider"></div>
                 <div class="result-final">
                     <div class="label" id="finalLabel">최종 실수령액 (세후)</div>
-                    <div class="amount-wrapper">
-                        <span class="amount" id="valFinal">0</span> 
-                        <span class="unit">원</span>
-                    </div>
+                    <div class="amount-wrapper"><span class="amount" id="valFinal">0</span> <span class="unit" style="color:#fff;font-weight:600;">원</span></div>
                 </div>
             </div>
         </div>
-
-        <!-- 🦆 Footer Branding -->
-        <div class="footer-brand">
-            <div>&copy; 2026 1SecTools. All rights reserved.</div>
-            <div class="powered-by">Powered by <span class="duck-logo">🦆 LoserDuck</span></div>
-        </div>
     </main>
+
+    <footer class="footer">
+        <div class="footer-logo">1SecTools</div>
+        <div class="secure-text"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> 100% 안전: 데이터가 저장되지 않습니다.</div>
+        <div class="footer-copy">&copy; 2026 1SecTools. All rights reserved.</div>
+    </footer>
 
     <script>
         const input = document.getElementById('amountInput');
         const modeToggle = document.getElementById('modeToggle');
         const inputLabel = document.getElementById('inputLabel');
         const finalLabel = document.getElementById('finalLabel');
-        
         const valBefore = document.getElementById('valBefore');
         const valTax1 = document.getElementById('valTax1');
         const valTax2 = document.getElementById('valTax2');
         const valFinal = document.getElementById('valFinal');
-
         let isReverseMode = false;
 
-        const formatNumber = (num) => { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); };
-        const cleanNumber = (str) => { return parseInt(str.replace(/[^0-9]/g, ''), 10) || 0; };
+        const formatNumber = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        const cleanNumber = (str) => parseInt(str.replace(/[^0-9]/g, ''), 10) || 0;
 
         function setMode(mode) {
             const btns = document.querySelectorAll('.toggle-btn');
             if(mode === 'reverse') {
-                isReverseMode = true;
-                modeToggle.classList.add('mode-reverse');
+                isReverseMode = true; modeToggle.classList.add('mode-reverse');
                 btns[0].classList.remove('active'); btns[1].classList.add('active');
                 inputLabel.innerText = '💰 받은 금액 (실수령액) 입력';
-                document.getElementById('row1').querySelector('.label').innerText = '계약해야 할 세전 금액';
+                document.getElementById('row1').querySelector('.label').innerText = '계약해야 할 금액';
                 finalLabel.innerText = '원래 계약 금액 (세전)';
             } else {
-                isReverseMode = false;
-                modeToggle.classList.remove('mode-reverse');
+                isReverseMode = false; modeToggle.classList.remove('mode-reverse');
                 btns[0].classList.add('active'); btns[1].classList.remove('active');
                 inputLabel.innerText = '💰 계약 금액 (세전) 입력';
                 document.getElementById('row1').querySelector('.label').innerText = '세전 금액';
@@ -235,52 +151,32 @@
             calculate();
         }
 
-        input.addEventListener('input', function(e) {
-            let start = this.selectionStart;
-            let originalLen = this.value.length;
+        input.addEventListener('input', function() {
+            let start = this.selectionStart; let originalLen = this.value.length;
             let num = cleanNumber(this.value);
-            if(num === 0) { this.value = ''; } else { this.value = formatNumber(num); }
+            this.value = num === 0 ? '' : formatNumber(num);
             let newLen = this.value.length;
             this.setSelectionRange(start + (newLen - originalLen), start + (newLen - originalLen));
             calculate();
         });
 
         function calculate() {
-            let inputAmount = cleanNumber(input.value);
-            if (inputAmount === 0 || isNaN(inputAmount)) {
-                valBefore.innerText = "0 원"; valTax1.innerText = "- 0 원"; valTax2.innerText = "- 0 원"; valFinal.innerText = "0"; return;
-            }
-            if(inputAmount > 9000000000000000) { inputAmount = 9000000000000000; input.value = formatNumber(inputAmount); }
+            let amt = cleanNumber(input.value);
+            if (amt === 0) { valBefore.innerText="0 원"; valTax1.innerText="- 0 원"; valTax2.innerText="- 0 원"; valFinal.innerText="0"; return; }
+            if(amt > 9000000000000000) { amt = 9000000000000000; input.value = formatNumber(amt); }
 
-            let beforeTax = 0, tax1 = 0, tax2 = 0, afterTax = 0;
-
+            let bef=0, t1=0, t2=0, aft=0;
             if (!isReverseMode) {
-                beforeTax = inputAmount;
-                tax1 = Math.floor(beforeTax * 0.03 / 10) * 10; 
-                tax2 = Math.floor(beforeTax * 0.003 / 10) * 10;
-                afterTax = beforeTax - tax1 - tax2;
+                bef = amt; t1 = Math.floor(bef * 0.03 / 10) * 10; t2 = Math.floor(bef * 0.003 / 10) * 10; aft = bef - t1 - t2;
             } else {
-                afterTax = inputAmount;
-                beforeTax = Math.ceil(afterTax / 0.967 / 10) * 10;
-                tax1 = Math.floor(beforeTax * 0.03 / 10) * 10; 
-                tax2 = Math.floor(beforeTax * 0.003 / 10) * 10;
-                if (beforeTax - tax1 - tax2 !== afterTax) {
-                    beforeTax += 10;
-                    tax1 = Math.floor(beforeTax * 0.03 / 10) * 10; 
-                    tax2 = Math.floor(beforeTax * 0.003 / 10) * 10;
-                }
+                aft = amt; bef = Math.ceil(aft / 0.967 / 10) * 10;
+                t1 = Math.floor(bef * 0.03 / 10) * 10; t2 = Math.floor(bef * 0.003 / 10) * 10;
+                if (bef - t1 - t2 !== aft) { bef += 10; t1 = Math.floor(bef * 0.03 / 10) * 10; t2 = Math.floor(bef * 0.003 / 10) * 10; }
             }
 
-            if(!isReverseMode) {
-                valBefore.innerText = formatNumber(beforeTax) + " 원";
-                valFinal.innerText = formatNumber(afterTax);
-            } else {
-                valBefore.innerText = formatNumber(afterTax) + " 원 (받은 돈)";
-                valFinal.innerText = formatNumber(beforeTax);
-            }
-            
-            valTax1.innerText = "- " + formatNumber(tax1) + " 원";
-            valTax2.innerText = "- " + formatNumber(tax2) + " 원";
+            if(!isReverseMode) { valBefore.innerText=formatNumber(bef)+" 원"; valFinal.innerText=formatNumber(aft); }
+            else { valBefore.innerText=formatNumber(aft)+" 원 (받은 돈)"; valFinal.innerText=formatNumber(bef); }
+            valTax1.innerText = "- " + formatNumber(t1) + " 원"; valTax2.innerText = "- " + formatNumber(t2) + " 원";
         }
     </script>
 </body>
