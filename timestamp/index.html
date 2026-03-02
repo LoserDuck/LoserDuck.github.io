@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>유튜브 타임스탬프 생성기 | 1SecTools</title>
-    <meta name="description" content="숫자만 치면 콜론(:)이 자동 입력되며 시간순으로 정렬됩니다. 데이터는 서버에 저장되지 않고 로컬에서 처리됩니다.">
+    <title>유튜브 타임스탬프 생성기 | 1초 자동 정렬 챕터 메이커</title>
+    <meta name="description" content="숫자만 치면 콜론(:)이 자동 입력되며, 시간순으로 자동 정렬되는 유튜브 타임스탬프 생성기입니다. 유튜브 챕터 SEO 최적화를 위한 필수 도구.">
+    <meta name="keywords" content="유튜브 타임스탬프, 유튜브 챕터, 유튜브 시간 링크, 타임스탬프 생성기, 유튜브 SEO, 1SecTools">
     
-    <!-- 🚨 메인 페이지와 동일한 폰트 로드 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -36,7 +36,6 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Noto Sans KR', sans-serif; }
         
-        /* 🚨 핵심 변경점: 메인 페이지와 100% 동일한 고급 오로라 배경 (다크테마) 적용 */
         body { 
             background-color: var(--bg-base); 
             color: var(--text-title); 
@@ -46,8 +45,6 @@
             overflow-x: hidden; 
             -webkit-font-smoothing: antialiased; 
             -moz-osx-font-smoothing: grayscale; 
-            
-            /* 좌측 상단 옅은 파랑, 우측 하단 옅은 보라빛 (8% 투명도) 방사형 그라데이션 */
             background-image: 
                 radial-gradient(circle at 10% 0%, rgba(49, 130, 246, 0.08) 0%, transparent 45%),
                 radial-gradient(circle at 90% 100%, rgba(175, 82, 222, 0.08) 0%, transparent 50%);
@@ -55,21 +52,15 @@
         }
 
         .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
-        
-        /* 🚨 로고 부분 폰트 강제 적용 및 크기/자간 동기화 */
         .header-logo { font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 900; font-size: 20px; letter-spacing: -0.5px; }
-        
         .header-badge { font-family: 'Inter', 'Noto Sans KR', sans-serif; background: rgba(175, 82, 222, 0.15); border: 1px solid rgba(175, 82, 222, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-purple); font-weight: 700; }
 
         .scale-wrapper { width: 100%; display: flex; flex-direction: column; align-items: center; flex: 1; transform-origin: top center; }
         @media (min-width: 2500px) { .scale-wrapper { transform: scale(1.3); margin-bottom: 250px; } }
-        @media (min-width: 3800px) { .scale-wrapper { transform: scale(1.7); margin-bottom: 450px; } }
 
-        .main { padding: 60px 20px 40px; width: 100%; max-width: 650px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+        .main { padding: 60px 20px 80px; width: 100%; max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
         
         .title-sec { text-align: center; margin-bottom: 28px; animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; align-items: center; }
-        
-        /* 🚨 줄바꿈 방지 및 자동 단어단위 처리 유지 */
         .title-sec h1 { font-size: clamp(28px, 5vw, 36px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; line-height: 1.3; word-break: keep-all; overflow-wrap: break-word; }
         
         .top-secure-badge {
@@ -93,9 +84,8 @@
         
         .add-btn { width: 100%; height: 56px; border-radius: 14px; font-size: 16px; font-weight: 800; background: linear-gradient(135deg, #af52de 0%, #8b2ec4 100%); color: #fff; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: 0 8px 20px rgba(175, 82, 222, 0.3); }
         .add-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(175, 82, 222, 0.4); }
-        .add-btn:active { transform: translateY(2px) scale(0.98); box-shadow: 0 4px 10px rgba(175, 82, 222, 0.2); }
-
-        .list-panel { width: 100%; border: 1px solid var(--card-border); border-radius: 20px; background: rgba(0,0,0,0.2); overflow: hidden; }
+        
+        .list-panel { width: 100%; border: 1px solid var(--card-border); border-radius: 20px; background: rgba(0,0,0,0.2); overflow: hidden; margin-bottom: 16px; }
         .list-header { padding: 16px 20px; background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; }
         .list-header-left { display: flex; align-items: center; gap: 8px; }
         .list-header h3 { font-size: 15px; font-weight: 700; color: #fff; margin: 0; display: flex; align-items: center; gap: 8px; }
@@ -106,33 +96,46 @@
         
         .clear-all-btn { background: transparent; border: 1px solid rgba(255, 59, 48, 0.3); color: var(--error-red); padding: 4px 10px; border-radius: 100px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: none; }
         .clear-all-btn.show { display: block; }
-        .clear-all-btn:hover { background: rgba(255, 59, 48, 0.1); border-color: var(--error-red); }
 
         .chapter-list { min-height: 120px; max-height: 400px; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; position: relative; }
         .chapter-item { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; animation: slideInItem 0.4s cubic-bezier(0.16, 1, 0.3, 1); transition: all 0.3s; }
-        .chapter-item:hover { background: rgba(255,255,255,0.06); transform: translateX(4px); border-color: rgba(175, 82, 222, 0.3); }
-        .chapter-item.removing { animation: slideOutItem 0.3s forwards cubic-bezier(0.8, 0, 0.2, 1); background: rgba(255, 59, 48, 0.1); border-color: var(--error-red); }
+        .chapter-item.removing { animation: slideOutItem 0.3s forwards cubic-bezier(0.8, 0, 0.2, 1); }
 
         .chap-time { font-weight: 800; font-size: 16px; color: var(--accent-purple); width: 64px; flex-shrink: 0; font-variant-numeric: tabular-nums; }
         .chap-title { flex: 1; color: #fff; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
         
         .del-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-sub); cursor: pointer; padding: 8px; border-radius: 10px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
-        .del-btn:hover { background: rgba(255, 59, 48, 0.2); color: var(--error-red); border-color: rgba(255, 59, 48, 0.3); transform: rotate(90deg); }
 
-        .action-area { width: 100%; display: flex; gap: 12px; margin-top: 16px; }
+        .action-area { width: 100%; display: flex; gap: 12px; margin-bottom: 40px; }
         .btn-copy { flex: 1; height: 60px; border-radius: 16px; border: none; background: #fff; color: #000; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: all 0.2s; }
         .btn-copy:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255,255,255,0.2); }
-        .btn-copy:active { transform: scale(0.98); }
 
         .empty-state { padding: 40px; text-align: center; color: #555; font-size: 14px; animation: fadeIn 0.5s; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+
+        /* 🚨 SEO 텍스트 콘텐츠 영역 (애드센스 승인 핵심 파트) */
+        .seo-content { width: 100%; display: flex; flex-direction: column; gap: 24px; animation: slideUp 0.8s 0.2s both; }
+        .seo-box { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 20px; padding: 32px; }
+        .seo-box h2 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 16px; letter-spacing: -0.5px; }
+        .seo-box h3 { font-size: 16px; font-weight: 700; color: var(--accent-purple); margin: 20px 0 10px; }
+        .seo-box p { color: var(--text-sub); font-size: 15px; line-height: 1.7; margin-bottom: 16px; word-break: keep-all; }
+        .seo-box ul { padding-left: 20px; color: var(--text-sub); font-size: 15px; line-height: 1.7; }
+        .seo-box li { margin-bottom: 8px; }
+        
+        .faq-item { border-bottom: 1px solid var(--card-border); padding: 16px 0; }
+        .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .faq-q { font-weight: 700; color: #fff; font-size: 15px; margin-bottom: 8px; display: flex; gap: 8px; }
+        .faq-q::before { content: 'Q.'; color: var(--accent-purple); }
+        .faq-a { color: var(--text-sub); font-size: 14px; line-height: 1.6; padding-left: 24px; }
 
         .toast { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(20px); background: rgba(52, 199, 89, 0.9); backdrop-filter: blur(10px); color: #fff; padding: 14px 28px; border-radius: 100px; font-weight: 600; font-size: 15px; opacity: 0; pointer-events: none; transition: all 0.4s; z-index: 2000; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(52, 199, 89, 0.3); }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
         .footer { width: 100%; border-top: 1px solid var(--card-border); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); margin-top: auto; }
         .footer-logo { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 900; color: #555; letter-spacing: -0.5px; }
+        .footer-links { display: flex; gap: 16px; margin: 4px 0; font-family: 'Inter', sans-serif; }
+        .footer-links a { color: #8b95a1; text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+        .footer-links a:hover { color: #fff; }
         .footer-copy { font-family: 'Inter', sans-serif; color: #555; font-size: 13px; font-weight: 500; text-align: center; line-height: 1.5; }
-        
         .duck-logo { color: #888; font-weight: 700; transition: color 0.3s; }
         .duck-logo:hover { color: #fff; }
 
@@ -140,6 +143,7 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideInItem { from { opacity: 0; transform: translateY(-10px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
         @keyframes slideOutItem { to { opacity: 0; transform: translateX(50px); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -148,7 +152,7 @@
             <svg width="28" height="28" viewBox="0 0 100 100"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>
             1SecTools
         </a>
-        <span class="header-badge">유튜브 타임스태프 생성기</span>
+        <span class="header-badge">타임스탬프 생성기</span>
     </header>
 
     <div class="scale-wrapper">
@@ -206,11 +210,54 @@
                     유튜브용 전체 복사하기
                 </button>
             </div>
+
+            <!-- 🚨 구글 애드센스 승인을 위한 SEO 최적화 텍스트 덩어리 -->
+            <div class="seo-content">
+                <div class="seo-box">
+                    <h2>유튜브 타임스탬프(챕터)란?</h2>
+                    <p>타임스탬프(Timestamp)는 긴 유튜브 영상을 주제나 구간별로 나누어 시청자가 원하는 부분을 쉽게 찾을 수 있도록 돕는 <strong>'영상 목차(Chapter)'</strong> 기능입니다. 영상 설명란(더보기)이나 고정 댓글에 <code>00:00 오프닝</code> 형식으로 시간을 적으면 해당 시간으로 바로 이동할 수 있는 파란색 링크가 생성됩니다.</p>
+                    
+                    <h3>타임스탬프가 유튜브 SEO에 미치는 영향</h3>
+                    <p>유튜브 알고리즘은 시청자의 <strong>'만족도'</strong>를 가장 중요하게 평가합니다. 챕터를 나누어 두면 시청자가 지루한 구간을 이탈하지 않고 필요한 정보만 쏙쏙 찾아볼 수 있어 <strong>시청 지속 시간</strong>과 <strong>재방문율</strong>이 크게 향상됩니다.</p>
+                    <ul>
+                        <li><strong>구글 검색 노출 우대:</strong> 구글 검색창에 정보를 검색했을 때, 타임스탬프가 적용된 유튜브 영상은 검색 결과 상단에 챕터별로 나뉘어 노출될 확률이 훨씬 높습니다.</li>
+                        <li><strong>시청자 편의성 극대화:</strong> 긴 브이로그, 강의 영상, 팟캐스트 등에서 시청자가 원하는 구간으로 바로 이동할 수 있습니다.</li>
+                    </ul>
+                </div>
+
+                <div class="seo-box">
+                    <h2>자주 묻는 질문 (FAQ)</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-q">1SecTools 타임스탬프 생성기만의 장점은 무엇인가요?</div>
+                        <div class="faq-a">기존에는 메모장에 콜론(:)을 일일이 타이핑하고 시간순으로 머리를 써가며 정리해야 했습니다. 하지만 본 도구는 "130" 처럼 숫자만 입력해도 "01:30"으로 자동 변환되며, 무작위로 입력해도 최종 복사 시 <strong>시간순으로 1초 만에 자동 정렬</strong>해 줍니다.</div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-q">유튜브에 적용했는데 챕터 바가 생성되지 않아요.</div>
+                        <div class="faq-a">유튜브 공식 가이드에 따르면 챕터가 정상적으로 작동하려면 3가지 조건이 필요합니다. 1) 첫 번째 타임스탬프는 반드시 <strong>00:00</strong>으로 시작해야 합니다 (본 도구는 복사 시 00:00이 없으면 자동으로 추가해 줍니다). 2) 챕터가 최소 3개 이상이어야 합니다. 3) 각 챕터의 길이는 최소 10초 이상이어야 합니다.</div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-q">모바일이나 숏폼(Shorts)에서도 쓸 수 있나요?</div>
+                        <div class="faq-a">네, 이 도구는 PC와 모바일 브라우저 모두에서 완벽하게 작동합니다. 다만 유튜브 쇼츠(Shorts)의 경우 유튜브 정책상 재생 바(Progress bar)에 챕터가 나뉘어 보이지는 않지만, 댓글란에 타임라인 링크로는 정상 작동합니다.</div>
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 
     <footer class="footer">
         <div class="footer-logo">1SecTools</div>
+        <!-- 🚨 푸터 필수 법적 페이지 링크 -->
+        <div class="footer-links">
+            <a href="../privacy.html">Privacy Policy</a>
+            <span style="color: rgba(255,255,255,0.1);">|</span>
+            <a href="../terms.html">Terms of Service</a>
+            <span style="color: rgba(255,255,255,0.1);">|</span>
+            <a href="../contact.html">Contact Us</a>
+        </div>
         <div class="footer-copy">
             &copy; 2026 1SecTools. All rights reserved.<br>
             Designed & Engineered by <span class="duck-logo">🦆 LoserDuck</span>
