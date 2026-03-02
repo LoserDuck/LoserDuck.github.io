@@ -31,14 +31,31 @@
         :root { 
             --bg-base: #030305; --card-bg: rgba(255, 255, 255, 0.03); --card-border: rgba(255, 255, 255, 0.08); 
             --text-title: #ffffff; --text-sub: #8b95a1; 
-            /* 🚨 메인페이지 5호점 아이콘 색상(Orange 그라데이션 톤) 반영 */
+            /* 🚨 메인페이지 5호점 아이콘 색상(Orange 그라데��션 톤) 반영 */
             --accent-orange: #ff9500;
             --grad-orange: linear-gradient(135deg, #ff9500 0%, #e65c00 100%);
             --accent-green: #34c759; --danger: rgba(255, 59, 48, 0.4); --danger-border: rgba(255, 59, 48, 0.8); 
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-base); color: var(--text-title); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        
+        /* 🚨 핵심 변경점: 메인 페이지와 100% 동일한 고급 오로라 배경 (다크테마) 적용 */
+        body { 
+            background-color: var(--bg-base); 
+            color: var(--text-title); 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            overflow-x: hidden; 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale; 
+            
+            /* 좌측 상단 옅은 파랑, 우측 하단 옅은 보라빛 (8% 투명도) 방사형 그라데이션 */
+            background-image: 
+                radial-gradient(circle at 10% 0%, rgba(49, 130, 246, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 90% 100%, rgba(175, 82, 222, 0.08) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
 
         .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
         
