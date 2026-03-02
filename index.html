@@ -4,6 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
+    <!-- ✅ SEO 최적화 -->
+    <title>1SecTools | 1초 만에 끝나는 초간편 웹 툴 모음</title>
+    <meta name="description" content="인스타 공백 변환, 프리랜서 세금 계산기, 유튜브 썸네일/타임스탬프 추출 등. 로그인이나 다운로드 없이 브라우저에서 1초 만에 해결하세요.">
+    <meta name="keywords" content="1초툴, 인스타공백, 세금계산기, 유튜브썸네일, 타임스탬프, 무료웹툴">
+    <meta name="author" content="LoserDuck">
+    
+    <!-- ✅ 구글 웹 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
     <!-- ✅ Google Analytics, Search Console, AdSense -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
     <script>
@@ -15,281 +26,287 @@
     <meta name="google-site-verification" content="KC_FGR3LD6TwJWG73cK14iJu44l-nzTBk9AvjvW4Mo8" />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
 
-    <!-- 1SecTools Custom SVG Favicon -->
+    <!-- 1SecTools Custom Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233182f6'/><stop offset='100%' stop-color='%23ff2d55'/></linearGradient></defs><rect width='100' height='100' rx='25' fill='%23191f28'/><path d='M60 20 L25 60 L45 60 L40 85 L75 45 L55 45 Z' fill='url(%23grad)'/></svg>">
-    
-    <title>1SecTools | Lightning Fast Web Tools</title>
-    <meta name="description" content="1-second solutions for creators and freelancers. No signups, no friction. Just get it done.">
     
     <style>
         :root {
             --bg-base: #030305;
-            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-bg: rgba(255, 255, 255, 0.03);
             --card-border: rgba(255, 255, 255, 0.08);
+            --card-hover: rgba(255, 255, 255, 0.06);
             --text-title: #ffffff;
             --text-sub: #8b95a1;
-            --accent-blue: #3182f6;
-            --accent-pink: #ff2d55;
-            --accent-green: #34c759;
-            --accent-purple: #af52de;
-            --accent-orange: #ff9500;
-            --accent-cyan: #32ade6;
+            
+            /* 그라데이션 브랜드 컬러 */
+            --grad-blue: linear-gradient(135deg, #3182f6 0%, #1e62c9 100%);
+            --grad-pink: linear-gradient(135deg, #ff2d55 0%, #e01b41 100%);
+            --grad-purple: linear-gradient(135deg, #af52de 0%, #8b2ec4 100%);
+            --grad-green: linear-gradient(135deg, #34c759 0%, #248a3d 100%);
+            --grad-orange: linear-gradient(135deg, #ff9500 0%, #d17a00 100%);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans KR', -apple-system, sans-serif; }
+        
+        body { 
+            background-color: var(--bg-base); 
+            color: var(--text-title); 
+            min-height: 100vh; 
+            display: flex; flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(49, 130, 246, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(255, 45, 85, 0.05) 0%, transparent 25%);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Inter", sans-serif;
-            background-color: var(--bg-base);
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(49, 130, 246, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 85% 30%, rgba(255, 45, 85, 0.05) 0%, transparent 50%);
-            color: var(--text-title);
-            min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center;
-            padding: 80px 20px 60px;
-            -webkit-font-smoothing: antialiased;
+        /* --- Global Header --- */
+        .header { 
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000; 
+            background: rgba(3, 3, 5, 0.7); backdrop-filter: blur(20px); 
+            border-bottom: 1px solid var(--card-border); 
+            padding: 16px 5%; display: flex; align-items: center; justify-content: space-between; 
+        }
+        .header-logo { 
+            display: flex; align-items: center; gap: 10px; text-decoration: none; 
+            color: #fff; font-weight: 900; font-size: 20px; letter-spacing: -0.5px;
         }
 
         /* --- Hero Section --- */
-        .hero { text-align: center; margin-bottom: 60px; animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .hero-logo { 
-            margin-bottom: 16px; display: inline-block;
-            animation: float 6s ease-in-out infinite;
+        .hero { 
+            margin-top: 100px; padding: 60px 20px 40px; text-align: center; 
+            display: flex; flex-direction: column; align-items: center; gap: 16px;
+            animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hero-badge {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 16px; border-radius: 100px; font-size: 13px; font-weight: 700; color: #fff;
+            margin-bottom: 12px; backdrop-filter: blur(10px);
         }
         .hero h1 { 
-            font-size: clamp(36px, 6vw, 48px); font-weight: 800; letter-spacing: -1px; margin-bottom: 16px;
-            background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+            font-size: clamp(36px, 8vw, 64px); /* 🚨 모니터가 크면 64px까지 거대해짐 */
+            font-weight: 900; line-height: 1.2; letter-spacing: -1.5px; 
+        }
+        .hero h1 span {
+            background: linear-gradient(to right, #3182f6, #ff2d55);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .hero p { font-size: clamp(16px, 3vw, 18px); color: var(--text-sub); font-weight: 500; max-width: 500px; margin: 0 auto; line-height: 1.5; }
-
-        /* --- Grid Layout --- */
-        .tools-grid {
-            display: grid; grid-template-columns: repeat(1, 1fr); gap: 24px;
-            width: 100%; max-width: 1000px;
+        .hero p { 
+            color: var(--text-sub); 
+            font-size: clamp(16px, 2vw, 20px); /* 🚨 서브 텍스트도 스케일업 */
+            line-height: 1.6; max-width: 600px; 
         }
-        @media (min-width: 650px) { .tools-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 1000px) { .tools-grid { grid-template-columns: repeat(3, 1fr); } }
 
-        /* --- Tool Cards --- */
-        .tool-card {
-            position: relative; overflow: hidden; text-decoration: none;
-            background: var(--card-bg); backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border); border-radius: 28px;
-            padding: 32px 28px; transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s;
-            display: flex; flex-direction: column; height: 100%;
-            --mouse-x: 50%; --mouse-y: 50%;
-            opacity: 0; transform: translateY(20px); animation: fadeInUp 0.6s forwards;
+        /* --- Main Content Grid --- */
+        .main { 
+            flex: 1; padding: 0 5% 80px; width: 100%; 
+            max-width: 1400px; /* 🚨 기존 1000px에서 1400px로 대폭 확대 (QHD 대응) */
+            margin: 0 auto; 
+        }
+
+        .tools-grid { 
+            display: grid; gap: 24px;
+            /* 반응형 3단 그리드 */
+            grid-template-columns: repeat(1, 1fr); 
+            animation: fadeInUp 0.8s 0.2s both cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* 🚨 QHD / 4K 모니터용 미디어 쿼리 (핵심) */
+        @media (min-width: 768px) { 
+            .tools-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; } 
+        }
+        @media (min-width: 1100px) { 
+            .tools-grid { grid-template-columns: repeat(3, 1fr); gap: 40px; }
+            .hero { padding: 100px 20px 60px; } /* 영웅 섹션 여백 증가 */
+        }
+        /* 🚨 QHD 초광활 모니터에서는 4열로 펼침 */
+        @media (min-width: 1600px) {
+            .main { max-width: 1800px; }
+            .tools-grid { grid-template-columns: repeat(4, 1fr); }
+            .hero h1 { font-size: 72px; }
+        }
+
+        /* --- Card Design --- */
+        .tool-card { 
+            background: var(--card-bg); border: 1px solid var(--card-border); 
+            border-radius: 24px; padding: 32px; text-decoration: none; color: #fff; 
+            display: flex; flex-direction: column; gap: 20px; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative; overflow: hidden;
+            /* QHD 대응: 카드가 너무 커졌을 때 안쪽 여백도 넓혀줌 */
         }
         
         .tool-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle 250px at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 80%);
-            opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 0;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+            opacity: 0; transition: opacity 0.3s; pointer-events: none;
+        }
+
+        .tool-card:hover { 
+            transform: translateY(-8px); background: var(--card-hover);
+            border-color: rgba(255,255,255,0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.4); 
         }
         .tool-card:hover::before { opacity: 1; }
-        .tool-card:hover { 
-            transform: translateY(-4px); border-color: rgba(255,255,255,0.2); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+
+        .icon-box { 
+            width: 64px; height: 64px; border-radius: 20px; 
+            display: flex; align-items: center; justify-content: center; color: #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2); transition: transform 0.3s;
+        }
+        .tool-card:hover .icon-box { transform: scale(1.1) rotate(-5deg); }
+
+        .card-content { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+        .card-content h2 { 
+            font-size: clamp(20px, 1.5vw, 24px); /* 🚨 폰트 반��형 확대 */
+            font-weight: 800; letter-spacing: -0.5px; 
+        }
+        .card-content p { 
+            color: var(--text-sub); 
+            font-size: clamp(14px, 1vw, 16px); 
+            line-height: 1.5; 
         }
 
-        .card-content { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; }
-        
-        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
-        .card-icon { 
-            width: 56px; height: 56px; border-radius: 18px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .badges { display: flex; gap: 6px; }
-        .badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-        .badge.lang-kr { background: rgba(49, 130, 246, 0.15); color: var(--accent-blue); }
-        .badge.lang-en { background: rgba(255, 45, 85, 0.15); color: var(--accent-pink); }
-        
-        .card-title { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; letter-spacing: -0.3px; }
-        .card-desc { font-size: 14px; color: var(--text-sub); line-height: 1.6; flex-grow: 1; }
-        
-        .card-footer { margin-top: 24px; display: flex; align-items: center; color: var(--accent-blue); font-size: 13px; font-weight: 600; opacity: 0; transition: opacity 0.3s, transform 0.3s; transform: translateX(-10px); }
-        .tool-card:hover .card-footer { opacity: 1; transform: translateX(0); }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .tag { font-size: 12px; font-weight: 700; color: #666; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 8px; text-transform: uppercase; }
+        .arrow { color: #555; transition: all 0.3s; }
+        .tool-card:hover .arrow { color: #fff; transform: translateX(4px); }
 
-        /* Card Icon Specific Colors */
-        .card-1 .card-icon { color: #fff; }
-        .card-2 .card-icon { color: var(--accent-green); }
-        .card-3 .card-icon { color: var(--accent-purple); }
-        .card-4 .card-icon { color: var(--accent-pink); }
-        .card-5 .card-icon { color: var(--accent-blue); }
-        .card-6 .card-icon { color: var(--accent-cyan); }
+        /* Icon Colors */
+        .ic-insta { background: var(--grad-pink); }
+        .ic-tax { background: var(--grad-green); }
+        .ic-time { background: var(--grad-purple); }
+        .ic-thumb { background: var(--grad-blue); }
+        .ic-safe { background: var(--grad-orange); }
+        .ic-preview { background: linear-gradient(135deg, #ff2d55 0%, #ff9500 100%); }
 
-        /* Footer Branding */
-        .footer-brand { margin-top: 80px; font-size: 14px; font-weight: 600; color: #555; text-align: center; }
-        .powered-by { font-weight: 400; color: #777; margin-top: 6px; font-size: 12px; }
-        .duck-logo { color: #fff; }
+        /* Footer */
+        .footer { width: 100%; border-top: 1px solid var(--card-border); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); }
+        .footer-logo { font-size: 20px; font-weight: 900; color: #555; }
+        .footer-copy { color: #555; font-size: 13px; font-weight: 500; text-align: center; }
+        .duck-logo { color: #888; font-weight: 700; transition: color 0.3s; }
+        .duck-logo:hover { color: #fff; }
 
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
+    <header class="header">
+        <a href="./" class="header-logo">
+            <svg width="28" height="28" viewBox="0 0 100 100"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>
+            1SecTools
+        </a>
+    </header>
+
     <div class="hero">
-        <!-- 커스텀 메인 로고 (그라데이션 번개) -->
-        <div class="hero-logo" style="width: 80px; height: 80px;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style="width: 100%; height: 100%; filter: drop-shadow(0 0 20px rgba(49,130,246,0.4));">
-                <defs>
-                    <linearGradient id="main-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#3182f6"/>
-                        <stop offset="100%" stop-color="#ff2d55"/>
-                    </linearGradient>
-                </defs>
-                <path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#main-grad)"/>
-            </svg>
+        <div class="hero-badge">⚡ 로그인 X · 다운로드 X · 평생 무료</div>
+        <h1>복잡한 작업,<br><span>1초 만에</span> 끝내세요</h1>
+        <p>인스타 공백부터 3.3% 세금 계산, 유튜브 최적화까지.<br>크리에이터와 프리랜서를 위한 필수 웹 툴 모음.</p>
+    </div>
+
+    <main class="main">
+        <div class="tools-grid">
+            
+            <!-- 1호점 -->
+            <a href="./insta/" class="tool-card">
+                <div class="icon-box ic-insta">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </div>
+                <div class="card-content">
+                    <h2>인스타 공백 변환기</h2>
+                    <p>인스타그램 줄바꿈이 뭉개지지 않도록 투명 공백으로 완벽하게 변환해 줍니다.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag">SNS 최적화</span>
+                    <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <!-- 2호점 -->
+            <a href="./tax/" class="tool-card">
+                <div class="icon-box ic-tax">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                </div>
+                <div class="card-content">
+                    <h2>3.3% 세금 계산기</h2>
+                    <p>프리랜서, 알바생 필수! 계약 금액의 세전/세후 실수령액을 1초 만에 계산합니다.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag">프리랜서</span>
+                    <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <!-- 3호점 -->
+            <a href="./timestamp/" class="tool-card">
+                <div class="icon-box ic-time">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <div class="card-content">
+                    <h2>유튜브 챕터 메이커</h2>
+                    <p>숫자만 쳐도 콜론(:)이 자동 삽입되며, 시간순으로 자동 정렬되는 타임라인 생성기.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag">유튜버 전용</span>
+                    <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <!-- 4호점 -->
+            <a href="./yt-thumbnail/" class="tool-card">
+                <div class="icon-box ic-thumb">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                </div>
+                <div class="card-content">
+                    <h2>HD 썸네일 다운로드</h2>
+                    <p>유튜브 링크만 넣으면 영상의 4K/HD 최고 화질 원본 썸네일을 뚫어냅니다.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag">유튜버 전용</span>
+                    <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <!-- 5호점 -->
+            <a href="./safezone/" class="tool-card">
+                <div class="icon-box ic-safe">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                </div>
+                <div class="card-content">
+                    <h2>숏폼 세이프존 시뮬레이터</h2>
+                    <p>틱톡, 릴스, 쇼츠 UI에 내 영상 텍스트가 가려지지 않는지 미리 확인하세요.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag">EN / Global</span>
+                    <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <!-- 6호점 -->
+            <a href="./yt-preview/" class="tool-card">
+                <div class="icon-box ic-preview">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                </div>
+                <div class="card-content">
+                    <h2>유튜브 썸네일 테스터</h2>
+                    <p>모바일과 데스크톱 화면에서 썸네일과 제목이 어떻게 잘리는지 A/B 테스트 하세요.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag">EN / Global</span>
+                    <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
         </div>
-        <h1>1SecTools</h1>
-        <p>1-second solutions for creators and freelancers.<br>No signups, no friction. Just get it done.</p>
-    </div>
+    </main>
 
-    <div class="tools-grid">
+    <footer class="footer">
+        <div class="footer-logo">1SecTools</div>
+        <div class="footer-copy">
+            &copy; 2026 1SecTools. All rights reserved.<br>
+            Designed & Engineered by <span class="duck-logo">🦆 LoserDuck</span>
+        </div>
+    </footer>
 
-        <!-- 1호점: 인스타 공백 변환기 -->
-        <a href="./insta/" class="tool-card card-1" style="animation-delay: 0.1s;">
-            <div class="card-content">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                            <line x1="9" y1="10" x2="15" y2="10"></line>
-                        </svg>
-                    </div>
-                    <div class="badges"><span class="badge lang-kr">KR</span></div>
-                </div>
-                <h2 class="card-title">인스타 공백 변환기</h2>
-                <p class="card-desc">인스타그램 줄바꿈 오류를 1초 만에 해결하세요. 완벽한 피드 정리를 위한 필수 툴입니다.</p>
-                <div class="card-footer">Open Tool →</div>
-            </div>
-        </a>
-
-        <!-- 2호점: 세금 계산기 -->
-        <a href="./tax/" class="tool-card card-2" style="animation-delay: 0.2s;">
-            <div class="card-content">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-                            <line x1="8" y1="6" x2="16" y2="6"></line>
-                            <line x1="16" y1="14" x2="16" y2="14.01"></line>
-                            <line x1="12" y1="14" x2="12" y2="14.01"></line>
-                            <line x1="8" y1="14" x2="8" y2="14.01"></line>
-                            <line x1="16" y1="18" x2="16" y2="18.01"></line>
-                            <line x1="12" y1="18" x2="12" y2="18.01"></line>
-                            <line x1="8" y1="18" x2="8" y2="18.01"></line>
-                        </svg>
-                    </div>
-                    <div class="badges"><span class="badge lang-kr">KR</span></div>
-                </div>
-                <h2 class="card-title">3.3% 프리랜서 계산기</h2>
-                <p class="card-desc">알바, 프리랜서, 외주 작업자를 위한 실수령액 및 시급 자동 계산기입니다.</p>
-                <div class="card-footer" style="color:var(--accent-green);">Open Tool →</div>
-            </div>
-        </a>
-
-        <!-- 3호점: 타임스탬프 -->
-        <a href="./timestamp/" class="tool-card card-3" style="animation-delay: 0.3s;">
-            <div class="card-content">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="13" r="8"></circle>
-                            <polyline points="12 9 12 13 14 15"></polyline>
-                            <path d="M10 2h4"></path>
-                            <path d="M5 3.5l1.5 1.5"></path>
-                        </svg>
-                    </div>
-                    <div class="badges"><span class="badge lang-kr">KR</span></div>
-                </div>
-                <h2 class="card-title">유튜브 타임스탬프</h2>
-                <p class="card-desc">유튜브 영상 챕터를 가장 빠르고 쉽게 작성하고 복사할 수 있는 편집자용 도구입니다.</p>
-                <div class="card-footer" style="color:var(--accent-purple);">Open Tool →</div>
-            </div>
-        </a>
-
-        <!-- 4호점: 썸네일 HD -->
-        <a href="./yt-thumbnail/" class="tool-card card-4" style="animation-delay: 0.4s;">
-            <div class="card-content">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                            <polyline points="21 15 16 10 5 21"></polyline>
-                        </svg>
-                    </div>
-                    <div class="badges"><span class="badge lang-en">EN / Global</span></div>
-                </div>
-                <h2 class="card-title">YT Thumbnail HD</h2>
-                <p class="card-desc">Extract and download 4K/HD YouTube thumbnails instantly. No signup required.</p>
-                <div class="card-footer" style="color:var(--accent-pink);">Open Tool →</div>
-            </div>
-        </a>
-
-        <!-- 5호점: 세이프 존 시뮬레이터 -->
-        <a href="./safezone/" class="tool-card card-5" style="animation-delay: 0.5s;">
-            <div class="card-content">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-                            <path d="M5 6h14"></path>
-                            <path d="M5 18h14"></path>
-                        </svg>
-                    </div>
-                    <div class="badges"><span class="badge lang-en">EN / Global</span></div>
-                </div>
-                <h2 class="card-title">Safe Zone Simulator</h2>
-                <p class="card-desc">Preview TikTok, Reels, & Shorts UI overlays on your video to prevent text blocking.</p>
-                <div class="card-footer">Open Tool →</div>
-            </div>
-        </a>
-
-        <!-- 6호점: 유튜브 썸네일/제목 미리보기 -->
-        <a href="./yt-preview/" class="tool-card card-6" style="animation-delay: 0.6s;">
-            <div class="card-content">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="3" width="20" height="12" rx="2" ry="2"></rect>
-                            <circle cx="5" cy="19" r="2"></circle>
-                            <line x1="9" y1="18" x2="22" y2="18"></line>
-                            <line x1="9" y1="21" x2="16" y2="21"></line>
-                        </svg>
-                    </div>
-                    <div class="badges"><span class="badge lang-en">EN / Global</span></div>
-                </div>
-                <h2 class="card-title">YT Thumbnail Preview</h2>
-                <p class="card-desc">Test your thumbnails and titles exactly as they appear on YouTube. Check text truncation instantly.</p>
-                <div class="card-footer" style="color:var(--accent-cyan);">Open Tool →</div>
-            </div>
-        </a>
-
-    </div>
-
-    <div class="footer-brand">
-        <div>&copy; 2026 1SecTools. All rights reserved.</div>
-        <div class="powered-by">Powered by <span class="duck-logo">🦆 LoserDuck</span></div>
-    </div>
-
-    <script>
-        // 마우스 호버 시 카드에 빛이 따라다니는 최상위 글래스모피즘 효과
-        document.querySelectorAll('.tool-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
-    </script>
 </body>
 </html>
