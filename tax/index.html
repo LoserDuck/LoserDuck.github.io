@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>3.3% 세금 계산기 | 1SecTools</title>
-    <meta name="description" content="알바, 프리랜서, 외주 작업자를 위한 실수령액 및 3.3% 세금 자동 계산기. 입력한 금액은 서버에 저장되지 않습니다.">
+    <title>3.3% 세금 계산기 | 프리랜서 알바 실수령액 1초 확인</title>
+    <meta name="description" content="알바, 프리랜서, 외주 작업자를 위한 3.3% 세금 자동 계산기. 계약 금액의 세전/세후 실수령액을 역계산 기능과 함께 1초 만에 확인하세요.">
+    <meta name="keywords" content="3.3% 세금 계산기, 프리랜서 세금, 알바 실수령액, 원천징수 계산기, 세후 계산기, 외주 세금, 사업소득세">
     
-    <!-- 🚨 메인 페이지와 동일하게 Inter 폰트 추가 로드 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -35,7 +35,6 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; }
         
-        /* 🚨 핵심 변경점: 메인 페이지와 100% 동일한 고급 오로라 배경 (다크테마) 적용 */
         body { 
             background-color: var(--bg-base); 
             color: var(--text-title); 
@@ -44,32 +43,25 @@
             flex-direction: column; 
             -webkit-font-smoothing: antialiased; 
             overflow-x: hidden; 
-            
-            /* 좌측 상단 옅은 파랑, 우측 하단 옅은 보라빛 (8% 투명도) 방사형 그라데이션 */
             background-image: 
                 radial-gradient(circle at 10% 0%, rgba(49, 130, 246, 0.08) 0%, transparent 45%),
                 radial-gradient(circle at 90% 100%, rgba(175, 82, 222, 0.08) 0%, transparent 50%);
             background-attachment: fixed;
         }
 
-        /* 🚨 하위 툴 페이지 헤더: 좌우 끝으로 밀착되도록 24px 패딩 적용 */
         .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.7); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
-        
-        /* 🚨 메인 로고 폰트(Inter) 100% 적용 */
         .header-logo { font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 900; font-size: 20px; letter-spacing: -0.5px; }
         .header-badge { font-family: 'Inter', 'Noto Sans KR', sans-serif; background: rgba(52, 199, 89, 0.15); border: 1px solid rgba(52, 199, 89, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-green); font-weight: 700; }
 
         .scale-wrapper { width: 100%; display: flex; flex-direction: column; align-items: center; flex: 1; transform-origin: top center; }
         @media (min-width: 2500px) { .scale-wrapper { transform: scale(1.3); margin-bottom: 250px; } }
-        @media (min-width: 3800px) { .scale-wrapper { transform: scale(1.7); margin-bottom: 450px; } }
 
-        .main { padding: 60px 20px 40px; width: 100%; max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+        .main { padding: 60px 20px 80px; width: 100%; max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
         
         .title-sec { text-align: center; margin-bottom: 28px; animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; align-items: center; }
         .title-sec h1 { font-size: clamp(28px, 5vw, 36px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; line-height: 1.3; }
         .title-sec p { color: var(--text-sub); font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
 
-        /* 🔥 상단 보안 마케팅 뱃지 */
         .secure-badge { 
             display: inline-flex; align-items: center; gap: 6px; 
             background: rgba(52, 199, 89, 0.05); border: 1px solid rgba(52, 199, 89, 0.3); 
@@ -80,7 +72,7 @@
 
         .ad-container { width: 100%; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-        .app-box { width: 100%; background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--card-border); border-radius: 24px; padding: 32px 24px; display: flex; flex-direction: column; gap: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .app-box { width: 100%; background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--card-border); border-radius: 24px; padding: 32px 24px; display: flex; flex-direction: column; gap: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); margin-bottom: 40px; }
 
         .toggle-container { display: flex; background: rgba(0,0,0,0.4); border-radius: 12px; padding: 4px; position: relative; border: 1px solid rgba(255,255,255,0.05); }
         .toggle-btn { flex: 1; text-align: center; padding: 12px; font-size: 14px; font-weight: 700; color: var(--text-sub); cursor: pointer; position: relative; z-index: 2; transition: color 0.3s; }
@@ -108,16 +100,32 @@
         .result-final .amount-wrapper { width: 100%; display: flex; justify-content: flex-end; align-items: baseline; gap: 6px; flex-wrap: wrap; }
         .result-final .amount { font-size: clamp(28px, 8vw, 38px); font-weight: 900; color: var(--accent-green); line-height: 1.2; text-align: right; word-break: break-all; text-shadow: 0 0 20px rgba(52, 199, 89, 0.3); letter-spacing: -1px; }
 
-        /* 하단 푸터 */
-        .footer { width: 100%; border-top: 1px solid var(--card-border); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); margin-top: auto; }
-        .footer-logo { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 900; color: #555; letter-spacing: -0.5px; }
-        .footer-copy { font-family: 'Inter', sans-serif; color: #555; font-size: 13px; font-weight: 500; text-align: center; line-height: 1.5; }
+        /* 🚨 SEO 텍스트 콘텐츠 영역 (애드센스 승인 핵심 파트) */
+        .seo-content { width: 100%; display: flex; flex-direction: column; gap: 24px; animation: slideUp 0.8s 0.2s both; }
+        .seo-box { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 20px; padding: 32px; }
+        .seo-box h2 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 16px; letter-spacing: -0.5px; }
+        .seo-box h3 { font-size: 16px; font-weight: 700; color: var(--accent-green); margin: 20px 0 10px; }
+        .seo-box p { color: var(--text-sub); font-size: 15px; line-height: 1.7; margin-bottom: 16px; word-break: keep-all; }
+        .seo-box ul { padding-left: 20px; color: var(--text-sub); font-size: 15px; line-height: 1.7; }
+        .seo-box li { margin-bottom: 8px; }
         
-        /* 🚨 CEO님 시그니처를 위한 스타일 추가 */
+        .faq-item { border-bottom: 1px solid var(--card-border); padding: 16px 0; }
+        .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .faq-q { font-weight: 700; color: #fff; font-size: 15px; margin-bottom: 8px; display: flex; gap: 8px; }
+        .faq-q::before { content: 'Q.'; color: var(--accent-green); }
+        .faq-a { color: var(--text-sub); font-size: 14px; line-height: 1.6; padding-left: 24px; }
+
+        .footer { width: 100%; border-top: 1px solid var(--card-border); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); margin-top: auto; }
+        .footer-logo { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 900; color: #555; }
+        .footer-links { display: flex; gap: 16px; margin: 4px 0; font-family: 'Inter', sans-serif; }
+        .footer-links a { color: #8b95a1; text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+        .footer-links a:hover { color: #fff; }
+        .footer-copy { font-family: 'Inter', sans-serif; color: #555; font-size: 13px; font-weight: 500; text-align: center; line-height: 1.5; }
         .duck-logo { color: #888; font-weight: 700; transition: color 0.3s; }
         .duck-logo:hover { color: #fff; }
 
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -134,14 +142,12 @@
             <div class="title-sec">
                 <h1>3.3% 세금 계산기</h1>
                 <p>계약 금액을 입력하면 실수령액을 1초 만에 보여줍니다.</p>
-                <!-- 🔥 최상단 보안 마케팅 뱃지 배치 -->
                 <div class="secure-badge">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                     100% 안전: 브라우저 자체 처리 (서버 저장 X)
                 </div>
             </div>
 
-            <!-- 실제 광고 노출 영역 -->
             <div class="ad-container"><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110716268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
 
             <div class="app-box">
@@ -170,12 +176,56 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 🚨 구글 애드센스 승인을 위한 SEO 최적화 텍스트 덩어리 -->
+            <div class="seo-content">
+                <div class="seo-box">
+                    <h2>3.3% 세금 계산기란?</h2>
+                    <p>프리랜서, 크리에이터, 아르바이트생, 일용직 근로자 등 고용보험에 가입되지 않고 사업소득을 지급받는 분들을 위한 빠르고 정확한 <strong>'원천징수 계산 도구'</strong>입니다. 사업주와 구두로 계약한 금액(세전)에서 원천징수 세금 3.3%를 제하고 통장에 실제로 찍히는 돈(세후 실수령액)을 1초 만에 계산해 줍니다.</p>
+                    
+                    <h3>왜 3.3%를 떼고 받나요?</h3>
+                    <p>대한민국 세법에 따라, 4대 보험에 가입되지 않은 독립적 형태의 사업소득자(프리랜서 등)에게 급여를 지급할 때 회사는 급여의 일부를 미리 떼어 국가에 납부해야 합니다. 이를 <strong>원천징수</strong>라고 합니다.</p>
+                    <ul>
+                        <li><strong>국세 (사업소득세):</strong> 지급 금액의 3.0%</li>
+                        <li><strong>지방세 (지방소득세):</strong> 국세의 10% 인 0.3%</li>
+                        <li><strong>합계:</strong> 총 3.3%를 공제 후 지급받게 됩니다.</li>
+                    </ul>
+                    <p>이때 미리 떼인 세금은 다음 해 5월 <strong>'종합소득세 신고 기간'</strong>에 본인의 실제 소득과 지출을 증빙하여 환급(세금 돌려받기)을 받을 수도 있습니다.</p>
+                </div>
+
+                <div class="seo-box">
+                    <h2>자주 묻는 질문 (FAQ)</h2>
+                    
+                    <div class="faq-item">
+                        <div class="faq-q">'세후 → 세전' 역계산 기능은 무엇인가요?</div>
+                        <div class="faq-a">클라이언트와 계약할 때 "내 통장에 정확히 100만 원(세후)이 꽂히게 해주세요"라고 요청하는 경우가 있습니다. 이때 회사가 회계처리를 위해 올려잡아야 하는 '원래 계약 금액(세전)'이 얼마인지 거꾸로 계산해 주는 유용한 기능입니다.</div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-q">계산 결과가 실제 입금액과 1~10원 정도 차이가 나요.</div>
+                        <div class="faq-a">세금을 계산할 때 '원 단위 절사(원 단위는 버림)' 등 회사 소속 세무대리인의 회계 소프트웨어 설정 기준에 따라 10원 미만의 미세한 차이가 발생할 수 있습니다. 본 계산기의 결과는 가장 보편적인 세법 절사 기준을 따르고 있습니다.</div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-q">제가 입력한 계약 금액 정보가 서버에 저장되나요?</div>
+                        <div class="faq-a">절대 저장되지 않습니다. 1SecTools의 모든 계산기는 여러분의 스마트폰 또는 PC의 브라우저에서 로컬 스크립트로만 연산됩니다. 안심하고 사용하세요.</div>
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 
     <footer class="footer">
         <div class="footer-logo">1SecTools</div>
-        <!-- 🚨 CEO님 시그니처 추가 -->
+        <!-- 🚨 푸터 필수 법적 페이지 링크 추가 -->
+        <div class="footer-links">
+            <a href="../privacy.html">Privacy Policy</a>
+            <span style="color: rgba(255,255,255,0.1);">|</span>
+            <a href="../terms.html">Terms of Service</a>
+            <span style="color: rgba(255,255,255,0.1);">|</span>
+            <a href="../contact.html">Contact Us</a>
+        </div>
         <div class="footer-copy">
             &copy; 2026 1SecTools. All rights reserved.<br>
             Designed & Engineered by <span class="duck-logo">🦆 LoserDuck</span>
