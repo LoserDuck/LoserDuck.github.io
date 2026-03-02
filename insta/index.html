@@ -36,7 +36,23 @@
             --error-red: #ff3b30; --accent-green: #34c759; 
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; }
-        body { background-color: var(--bg-base); color: var(--text-title); min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        
+        /* 🚨 핵심 변경점: 메인 페이지와 100% 동일한 고급 오로라 배경 (다크테마) 적용 */
+        body { 
+            background-color: var(--bg-base); 
+            color: var(--text-title); 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            -webkit-font-smoothing: antialiased; 
+            overflow-x: hidden; 
+            
+            /* 좌측 상단 옅은 파랑, 우측 하단 옅은 보라빛 (8% 투명도) 방사형 그라데이션 */
+            background-image: 
+                radial-gradient(circle at 10% 0%, rgba(49, 130, 246, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 90% 100%, rgba(175, 82, 222, 0.08) 0%, transparent 50%);
+            background-attachment: fixed; /* 스크롤 시 배경 질감 고정 */
+        }
 
         .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.7); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
         
@@ -91,7 +107,6 @@
         .footer-logo { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 900; color: #555; letter-spacing: -0.5px; }
         .footer-copy { font-family: 'Inter', sans-serif; color: #555; font-size: 13px; font-weight: 500; text-align: center; line-height: 1.5; }
         
-        /* 🚨 CEO님 시그니처를 위한 스타일 추가 */
         .duck-logo { color: #888; font-weight: 700; transition: color 0.3s; }
         .duck-logo:hover { color: #fff; }
 
@@ -143,7 +158,6 @@
 
     <footer class="footer">
         <div class="footer-logo">1SecTools</div>
-        <!-- 🚨 CEO님 시그니처 추가 -->
         <div class="footer-copy">
             &copy; 2026 1SecTools. All rights reserved.<br>
             Designed & Engineered by <span class="duck-logo">🦆 LoserDuck</span>
