@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- ✅ Google Analytics, Search Console, AdSense -->
+    <!-- ✅ Google Analytics, Search Console (AdSense removed for clean UI) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -24,7 +24,6 @@
       gtag('config', 'G-4PG2DEJS2P');
     </script>
     <meta name="google-site-verification" content="KC_FGR3LD6TwJWG73cK14iJu44l-nzTBk9AvjvW4Mo8" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233182f6'/><stop offset='100%' stop-color='%23ff2d55'/></linearGradient></defs><rect width='100' height='100' rx='25' fill='%23191f28'/><path d='M60 20 L25 60 L45 60 L40 85 L75 45 L55 45 Z' fill='url(%23grad)'/></svg>">
     
@@ -46,11 +45,11 @@
             --grad-purple: linear-gradient(135deg, #af52de 0%, #8b2ec4 100%);
             --grad-green: linear-gradient(135deg, #34c759 0%, #248a3d 100%);
             --grad-orange: linear-gradient(135deg, #ff9500 0%, #d17a00 100%);
+            --grad-cyan: linear-gradient(135deg, #64d2ff 0%, #0a84ff 100%);
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Noto Sans KR', sans-serif; }
         
-        /* 🚨 수정된 부분: 은은한 딥 스페이스 오로라 배경 (다크 테마 최적화) */
         body { 
             background-color: var(--bg-base); 
             color: var(--text-title); 
@@ -60,11 +59,10 @@
             -webkit-font-smoothing: antialiased; 
             overflow-x: hidden;
             
-            /* 좌측 상단에는 아주 옅은 파랑, 우측 하단에는 아주 옅은 보라빛 오로라 (8% 불투명도) */
             background-image: 
                 radial-gradient(circle at 10% 0%, rgba(49, 130, 246, 0.08) 0%, transparent 45%),
                 radial-gradient(circle at 90% 100%, rgba(175, 82, 222, 0.08) 0%, transparent 50%);
-            background-attachment: fixed; /* 스크롤해도 배경색이 고정되어 고급스러움 유지 */
+            background-attachment: fixed;
         }
 
         .header { 
@@ -152,6 +150,7 @@
         .ic-thumb { background: var(--grad-blue); }
         .ic-safe { background: var(--grad-orange); }
         .ic-preview { background: linear-gradient(135deg, #ff2d55 0%, #ff9500 100%); }
+        .ic-script { background: var(--grad-cyan); }
 
         .scale-wrapper { width: 100%; display: flex; flex-direction: column; align-items: center; flex: 1; transform-origin: top center; }
         @media (min-width: 2500px) {
@@ -296,17 +295,31 @@
                 </div>
             </a>
 
+            <!-- 7호점 -->
+            <a href="./script-timer/" class="tool-card">
+                <div class="icon-box ic-script">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <div class="card-content">
+                    <h2>쇼츠 대본 시간 계산기</h2>
+                    <p>대본의 글자 수를 분석하여 읽는 데 걸리는 시간을 초 단위로 즉시 계산해 줍니다.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag ko">KR Only</span>
+                    <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
         </div>
     </main>
 
-        <footer class="footer">
+    <footer class="footer">
         <div class="footer-logo">1SecTools</div>
         <div class="secure-text">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
             We don't save your data.
         </div>
         
-        <!-- 🚨 새롭게 추가된 정책 링크 영역 -->
         <div class="footer-links" style="display: flex; gap: 16px; margin: 8px 0; font-family: 'Inter', sans-serif;">
             <a href="./privacy.html" style="color: var(--text-sub); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s;">Privacy Policy</a>
             <span style="color: rgba(255,255,255,0.1);">|</span>
