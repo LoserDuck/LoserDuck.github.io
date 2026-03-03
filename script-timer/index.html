@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>쇼츠 대본 시간 계산기 | 1SecTools</title>
+    <meta name="description" content="유튜브 쇼츠, 릴스, 틱톡 대본을 입력하면 읽는 속도(빠름/보통/느림)에 따른 영상 길이를 1초 만에 자동 계산해 줍니다. 60초 초과 여부를 실시간으로 확인하세요.">
+    <meta name="keywords" content="대본 시간 계산기, 유튜브 쇼츠 대본, 릴스 대본, 글자수 시간 계산, 유튜브 스크립트, 대본 읽는 시간">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233182f6'/><stop offset='100%' stop-color='%23ff2d55'/></linearGradient></defs><rect width='100' height='100' rx='25' fill='%23191f28'/><path d='M60 20 L25 60 L45 60 L40 85 L75 45 L55 45 Z' fill='url(%23grad)'/></svg>">
+    
+    <!-- ✅ Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4PG2DEJS2P');
+    </script>
+    
+    <!-- ✅ Google Search Console -->
+    <meta name="google-site-verification" content="KC_FGR3LD6TwJWG73cK14iJu44l-nzTBk9AvjvW4Mo8" />
+    
+    <!-- ✅ Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110716268085" crossorigin="anonymous"></script>
+
+    <style>
+        :root { 
+            --bg-base: #030305; --card-bg: rgba(255, 255, 255, 0.03); --card-border: rgba(255, 255, 255, 0.08); 
+            --text-title: #ffffff; --text-sub: #8b95a1; 
+            /* 🚨 7호점 전용 시안/블루 퓨처리스틱 테마 */
+            --accent-cyan: #32ade6;
+            --grad-cyan: linear-gradient(135deg, #64d2ff 0%, #0a84ff 100%);
+            --accent-green: #34c759; --error-red: #ff3b30; --warning-yellow: #ffcc00;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; }
+        
+        /* 🚨 다른 호점들과 동일한 딥 스페이스 오로라 배경 적용 */
+        body { 
+            background-color: var(--bg-base); color: var(--text-title); min-height: 100vh; display: flex; flex-direction: column; 
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
+            background-image: 
+                radial-gradient(circle at 10% 0%, rgba(49, 130, 246, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 90% 100%, rgba(175, 82, 222, 0.08) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .header { position: sticky; top: 0; z-index: 1000; background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .header-logo { font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 900; font-size: 20px; letter-spacing: -0.5px; }
+        .header-badge { font-family: 'Inter', 'Noto Sans KR', sans-serif; background: rgba(50, 173, 230, 0.15); border: 1px solid rgba(50, 173, 230, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-cyan); font-weight: 700; }
+
+        .scale-wrapper { width: 100%; display: flex; flex-direction: column; align-items: center; flex: 1; transform-origin: top center; }
+        @media (min-width: 2500px) { .scale-wrapper { transform: scale(1.3); margin-bottom: 250px; } }
+
+        .main { padding: 60px 20px 80px; width: 100%; max-width: 750px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+        
+        .title-sec { text-align: center; margin-bottom: 28px; animation: fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; align-items: center; }
+        .title-sec h1 { font-size: clamp(28px, 5vw, 36px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; line-height: 1.3; word-break: keep-all; }
+        
+        .top-secure-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(52, 199, 89, 0.1); border: 1px solid rgba(52, 199, 89, 0.3);
+            color: var(--accent-green); padding: 6px 14px; border-radius: 100px;
+            font-size: 13px; font-weight: 700; margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(52, 199, 89, 0.1);
+        }
+        
+        .title-sec p { color: var(--text-sub); font-size: 15px; line-height: 1.6; }
+
+        .ad-container { width: 100%; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+
+        .app-box { width: 100%; background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--card-border); border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); margin-bottom: 40px; }
+        
+        .textarea-wrapper { position: relative; width: 100%; }
+        textarea { width: 100%; height: 220px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px 20px 50px 20px; color: #fff; font-size: 16px; line-height: 1.7; resize: none; outline: none; transition: all 0.3s; }
+        textarea:focus { border-color: var(--accent-cyan); box-shadow: 0 0 0 4px rgba(50, 173, 230, 0.15); }
+        
+        .char-count { position: absolute; bottom: 16px; right: 20px; font-size: 13px; font-weight: 600; color: var(--text-sub); background: rgba(0,0,0,0.6); padding: 6px 12px; border-radius: 10px; backdrop-filter: blur(5px); pointer-events: none; border: 1px solid rgba(255,255,255,0.05); }
+
+        .dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        @media (max-width: 500px) { .dashboard { grid-template-columns: 1fr; } }
+        
+        .dash-card { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); position: relative; overflow: hidden; }
+        .dash-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.04); }
+        
+        .dash-card.highlight { border-color: rgba(50, 173, 230, 0.4); background: rgba(50, 173, 230, 0.05); }
+        .dash-card.highlight::before { content: 'Shorts 최적화'; position: absolute; top: 0; left: 0; right: 0; background: var(--grad-cyan); color: #fff; font-size: 11px; font-weight: 800; padding: 4px 0; letter-spacing: 0.5px; transition: background 0.3s; }
+        .dash-card.highlight.danger { border-color: rgba(255, 59, 48, 0.4); background: rgba(255, 59, 48, 0.05); }
+        .dash-card.highlight.danger::before { background: var(--error-red); content: '쇼츠 60초 초과!'; }
+
+        .dash-label { font-size: 13px; font-weight: 700; color: var(--text-sub); margin-bottom: 8px; margin-top: 10px; }
+        .dash-time { font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 900; color: #fff; font-variant-numeric: tabular-nums; transition: color 0.3s; }
+        .dash-sub { font-size: 11px; color: #666; margin-top: 4px; }
+
+        .gauge-container { width: 100%; background: rgba(0,0,0,0.5); border-radius: 12px; padding: 16px; border: 1px solid rgba(255,255,255,0.05); }
+        .gauge-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 14px; font-weight: 700; }
+        .gauge-status { color: var(--accent-cyan); display: flex; align-items: center; gap: 6px; transition: color 0.3s; }
+        .gauge-status.danger { color: var(--error-red); }
+        
+        .gauge-track { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px; position: relative; overflow: hidden; }
+        .gauge-fill { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: var(--grad-cyan); border-radius: 10px; transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s; }
+        .gauge-fill.danger { background: var(--error-red); }
+
+        .btn-clear { width: 100%; padding: 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); background: transparent; color: var(--text-sub); font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-clear:hover { background: rgba(255,255,255,0.05); color: #fff; }
+
+        .seo-content { width: 100%; display: flex; flex-direction: column; gap: 24px; animation: slideUp 0.8s 0.2s both; }
+        .seo-box { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 20px; padding: 32px; }
+        .seo-box h2 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 16px; letter-spacing: -0.5px; }
+        .seo-box h3 { font-size: 16px; font-weight: 700; color: var(--accent-cyan); margin: 20px 0 10px; }
+        .seo-box p { color: var(--text-sub); font-size: 15px; line-height: 1.7; margin-bottom: 16px; word-break: keep-all; }
+        .seo-box ul { padding-left: 20px; color: var(--text-sub); font-size: 15px; line-height: 1.7; }
+        .seo-box li { margin-bottom: 8px; }
+        
+        .faq-item { border-bottom: 1px solid var(--card-border); padding: 16px 0; }
+        .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .faq-q { font-weight: 700; color: #fff; font-size: 15px; margin-bottom: 8px; display: flex; gap: 8px; }
+        .faq-q::before { content: 'Q.'; color: var(--accent-cyan); }
+        .faq-a { color: var(--text-sub); font-size: 14px; line-height: 1.6; padding-left: 24px; }
+
+        .footer { width: 100%; border-top: 1px solid var(--card-border); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); margin-top: auto; }
+        .footer-logo { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 900; color: #555; }
+        .footer-links { display: flex; gap: 16px; margin: 4px 0; font-family: 'Inter', sans-serif; }
+        .footer-links a { color: #8b95a1; text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+        .footer-links a:hover { color: #fff; }
+        .footer-copy { font-family: 'Inter', sans-serif; color: #555; font-size: 13px; font-weight: 500; text-align: center; line-height: 1.5; }
+        .duck-logo { color: #888; font-weight: 700; transition: color 0.3s; }
+        .duck-logo:hover { color: #fff; }
+
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="../" class="header-logo">
+            <svg width="28" height="28" viewBox="0 0 100 100"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>
+            1SecTools
+        </a>
+        <span class="header-badge">대본 타이머</span>
+    </header>
+
+    <div class="scale-wrapper">
+        <main class="main">
+            <div class="title-sec">
+                <div class="top-secure-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    100% 안전: 브라우저 자체 처리 (서버 저장 X)
+                </div>
+                <h1>대본 시간(초) 자동 계산기</h1>
+                <p>내가 쓴 쇼츠 대본, 과연 60초 안에 읽을 수 있을까?</p>
+            </div>
+
+            <div class="ad-container"><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110716268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+            <div class="app-box">
+                <div class="textarea-wrapper">
+                    <textarea id="scriptInput" placeholder="여기에 영상 대본을 복사해서 붙여넣으세요. 글자 수에 비례하여 영상 길이를 즉시 계산합니다."></textarea>
+                    <div class="char-count">읽는 글자 <span id="realCharCount" style="color: #fff;">0</span>자</div>
+                </div>
+
+                <div class="dashboard">
+                    <div class="dash-card">
+                        <div class="dash-label">느림 (브이로그)</div>
+                        <div class="dash-time" id="timeSlow">00:00</div>
+                        <div class="dash-sub">초당 약 3.5자</div>
+                    </div>
+                    <div class="dash-card highlight" id="shortsCard">
+                        <div class="dash-label">빠름 (쇼츠/정보성)</div>
+                        <div class="dash-time" id="timeFast">00:00</div>
+                        <div class="dash-sub">초당 약 5.5자</div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="dash-label">보통 (일반 롱폼)</div>
+                        <div class="dash-time" id="timeNormal">00:00</div>
+                        <div class="dash-sub">초당 약 4.5자</div>
+                    </div>
+                </div>
+
+                <div class="gauge-container">
+                    <div class="gauge-header">
+                        <span style="color: #fff;">쇼츠 60초 제한 판독 (빠름 속도 기준)</span>
+                        <span class="gauge-status" id="gaugeStatus">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            대기중
+                        </span>
+                    </div>
+                    <div class="gauge-track">
+                        <div class="gauge-fill" id="gaugeFill"></div>
+                    </div>
+                </div>
+
+                <button class="btn-clear" onclick="clearScript()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    대본 초기화
+                </button>
+            </div>
+
+            <!-- 🚨 SEO 최적화 텍스트 영역 -->
+            <div class="seo-content">
+                <div class="seo-box">
+                    <h2>쇼츠 대본 시간 계산기란 무엇인가요?</h2>
+                    <p>유튜브 쇼츠(Shorts), 인스타 릴스(Reels), 틱톡(TikTok)과 같은 숏폼 플랫폼은 '60초'라는 엄격한 영상 길이 제한이 있습니다. 크리에이터들은 대본을 작성한 뒤 "이 대본을 읽으면 과연 몇 초나 나올까?"를 확인하기 위해 매번 스톱워치를 켜고 직접 읽어보는 수고를 겪습니다.</p>
+                    <p><strong>1SecTools 대본 시간 계산기</strong>는 한국어 아나운서 및 유튜버들의 평균 말하기 속도(WPM) 데이터를 기반으로, 사용자가 작성한 대본 텍스트가 실제 영상으로 제작되었을 때 몇 분 몇 초가 걸릴지 <strong>1초 만에 자동 계산해 주는 필수 도구</strong>입니다.</p>
+                    
+                    <h3>왜 속도별로 계산해야 하나요?</h3>
+                    <ul>
+                        <li><strong>빠름 (쇼츠/정보 전달):</strong> 시청자의 이탈을 막기 위해 컷편집을 타이트하게 하고 빠르게 말하는 최신 숏폼 트렌드입니다. (초당 약 5.5~6음절)</li>
+                        <li><strong>보통 (일반 유튜브 롱폼):</strong> 편안하게 듣기 좋은 일반적인 유튜버나 뉴스 앵커의 리딩 속도입니다. (초당 약 4.5음절)</li>
+                        <li><strong>느림 (브이로그/감성):</strong> 감성적인 브이로그나 나레이션, 팟캐스트 등에 적합한 여유로운 속도입니다. (초당 약 3.5음절)</li>
+                    </ul>
+                </div>
+
+                <div class="seo-box">
+                    <h2>자주 묻는 질문 (FAQ)</h2>
+                    <div class="faq-item">
+                        <div class="faq-q">글자 수 기준은 기호와 공백을 포함하나요?</div>
+                        <div class="faq-a">아니요, 가장 정확한 리딩 타임을 측정하기 위해 본 계산기는 엔터(줄바꿈), 띄어쓰기뿐만 아니라 <strong>마침표(.), 쉼표(,), 물음표(?), 이모티콘 등 실제로 발음하지 않는 모든 특수기호를 완벽하게 제외</strong>한 순수 문자와 숫자만 추출하여 계산합니다.</div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-q">쇼츠 60초 게이지가 빨간색으로 변했습니다. 어떻게 해야 하나요?</div>
+                        <div class="faq-a">입력하신 대본을 가장 빠른 숏폼 속도로 읽어도 60초를 초과한다는 뜻입니다. 유튜브 쇼츠로 업로드 시 영상이 뒷부분에서 강제로 짤리게 되므로, 수식어구나 불필요한 문장을 삭제하여 대본의 길이를 요약하시는 것을 권장합니다.</div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-q">제 대본이 서버에 유출될 위험은 없나요?</div>
+                        <div class="faq-a">절대 없습니다. 유튜버의 대본은 귀중한 자산입니다. 1SecTools의 모든 계산과정은 오직 사용자의 브라우저(로컬) 안에서만 처리되며, 그 어떤 텍스트 데이터도 외부 서버로 전송되거나 저장되지 않습니다.</div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-logo">1SecTools</div>
+        <div class="footer-links">
+            <a href="../privacy.html">Privacy Policy</a>
+            <span style="color: rgba(255,255,255,0.1);">|</span>
+            <a href="../terms.html">Terms of Service</a>
+            <span style="color: rgba(255,255,255,0.1);">|</span>
+            <a href="../contact.html">Contact Us</a>
+        </div>
+        <div class="footer-copy">
+            &copy; 2026 1SecTools. All rights reserved.<br>
+            Designed & Engineered by <span class="duck-logo">🦆 LoserDuck</span>
+        </div>
+    </footer>
+
+    <script>
+        const scriptInput = document.getElementById('scriptInput');
+        const realCharCount = document.getElementById('realCharCount');
+        const timeSlow = document.getElementById('timeSlow');
+        const timeNormal = document.getElementById('timeNormal');
+        const timeFast = document.getElementById('timeFast');
+        
+        const gaugeFill = document.getElementById('gaugeFill');
+        const gaugeStatus = document.getElementById('gaugeStatus');
+        const shortsCard = document.getElementById('shortsCard');
+
+        const SPEED_SLOW = 3.5;
+        const SPEED_NORMAL = 4.5;
+        const SPEED_FAST = 5.5;
+
+        function formatTime(totalSeconds) {
+            const m = Math.floor(totalSeconds / 60);
+            const s = Math.floor(totalSeconds % 60);
+            return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+
+        scriptInput.addEventListener('input', () => {
+            const rawText = scriptInput.value.replace(/[^\p{L}\p{N}]/gu, ''); 
+            const length = rawText.length;
+            
+            realCharCount.innerText = length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+            if(length === 0) {
+                timeSlow.innerText = "00:00"; timeNormal.innerText = "00:00"; timeFast.innerText = "00:00";
+                timeFast.style.color = "#fff";
+                gaugeFill.style.width = "0%";
+                gaugeFill.classList.remove('danger');
+                shortsCard.classList.remove('danger');
+                gaugeStatus.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> 대기중';
+                gaugeStatus.classList.remove('danger');
+                gaugeStatus.style.color = "var(--text-sub)";
+                return;
+            }
+
+            const secSlow = length / SPEED_SLOW;
+            const secNormal = length / SPEED_NORMAL;
+            const secFast = length / SPEED_FAST;
+
+            timeSlow.innerText = formatTime(secSlow);
+            timeNormal.innerText = formatTime(secNormal);
+            timeFast.innerText = formatTime(secFast);
+
+            let percent = (secFast / 60) * 100;
+            gaugeFill.style.width = percent > 100 ? "100%" : `${percent}%`;
+
+            if(secFast > 60) {
+                gaugeFill.classList.add('danger');
+                shortsCard.classList.add('danger');
+                timeFast.style.color = "var(--error-red)";
+                gaugeStatus.classList.add('danger');
+                gaugeStatus.style.color = "var(--error-red)";
+                gaugeStatus.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> 60초 초과! (축소 필요)';
+            } else if (secFast > 50) {
+                gaugeFill.classList.remove('danger');
+                shortsCard.classList.remove('danger');
+                timeFast.style.color = "var(--warning-yellow)";
+                gaugeStatus.classList.remove('danger');
+                gaugeStatus.style.color = "var(--warning-yellow)";
+                gaugeStatus.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> 아슬아슬함';
+            } else {
+                gaugeFill.classList.remove('danger');
+                shortsCard.classList.remove('danger');
+                timeFast.style.color = "#fff";
+                gaugeStatus.classList.remove('danger');
+                gaugeStatus.style.color = "var(--accent-cyan)";
+                gaugeStatus.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> 안전 (쇼츠 통과)';
+            }
+        });
+
+        function clearScript() {
+            scriptInput.value = '';
+            scriptInput.dispatchEvent(new Event('input'));
+            scriptInput.focus();
+        }
+    </script>
+</body>
+</html>
