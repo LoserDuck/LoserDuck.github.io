@@ -41,8 +41,10 @@
         :root {
             --bg-base: #030305; --card-bg: rgba(255,255,255,0.03); --card-border: rgba(255,255,255,0.08);
             --text-title: #ffffff; --text-sub: #8b95a1;
-            --accent-cyan: #32ade6; --accent-blue: #3182f6;
-            --grad-magic: linear-gradient(135deg, #3182f6 0%, #ff2d55 100%);
+            /* ✅ 메인페이지 ic-yellow와 동일한 노란→주황 그라데이션으로 통일 */
+            --accent-yellow: #ffcc00;
+            --accent-orange: #ff9500;
+            --grad-yellow: linear-gradient(135deg, #ffcc00 0%, #ff9500 100%);
             --accent-green: #34c759; --error-red: #ff3b30; --warning-yellow: #ffcc00;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; }
@@ -59,7 +61,8 @@
         }
         .header { position: sticky; top: 0; z-index: 1000; background: rgba(3,3,5,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
         .header-logo { font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 900; font-size: 20px; letter-spacing: -0.5px; }
-        .header-badge { font-family: 'Inter','Noto Sans KR',sans-serif; background: rgba(50,173,230,0.15); border: 1px solid rgba(50,173,230,0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-cyan); font-weight: 700; }
+        /* ✅ 헤더 뱃지: 노란→주황 톤으로 변경 */
+        .header-badge { font-family: 'Inter','Noto Sans KR',sans-serif; background: rgba(255,204,0,0.15); border: 1px solid rgba(255,204,0,0.35); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-yellow); font-weight: 700; }
         .scale-wrapper { width: 100%; display: flex; flex-direction: column; align-items: center; flex: 1; transform-origin: top center; }
         @media (min-width: 2500px) { .scale-wrapper { transform: scale(1.3); margin-bottom: 250px; } }
         .main { padding: 60px 20px 80px; width: 100%; max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
@@ -81,7 +84,8 @@
         .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; min-height: 320px; }
         @media (max-width: 768px) { .editor-grid { grid-template-columns: 1fr; min-height: auto; } }
         .io-box { position: relative; width: 100%; display: flex; flex-direction: column; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; transition: border-color 0.3s; }
-        .io-box:focus-within { border-color: var(--accent-cyan); box-shadow: 0 0 0 4px rgba(50,173,230,0.15); }
+        /* ✅ 포커스 링: 노란→주황 톤으로 변경 */
+        .io-box:focus-within { border-color: var(--accent-yellow); box-shadow: 0 0 0 4px rgba(255,204,0,0.15); }
         .io-header { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; font-weight: 700; color: var(--text-sub); background: rgba(255,255,255,0.02); display: flex; justify-content: space-between; }
         textarea, .result-box { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.2) transparent; }
         textarea::-webkit-scrollbar, .result-box::-webkit-scrollbar { width: 6px; }
@@ -93,9 +97,10 @@
         @keyframes pulse-wait { 0%,100% { opacity: 0.6; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1.02); } }
         .hl-red { background: rgba(255,59,48,0.2); color: #ff6b6b; border: 1px solid rgba(255,59,48,0.4); font-weight: 700; padding: 2px 4px; border-radius: 4px; cursor: help; display: inline-block; }
         .hl-yellow { background: rgba(255,204,0,0.2); color: #ffd43b; border: 1px solid rgba(255,204,0,0.4); font-weight: 700; padding: 2px 4px; border-radius: 4px; cursor: help; display: inline-block; }
-        .btn-magic { width: 100%; padding: 18px; border-radius: 14px; border: none; background: var(--grad-magic); color: #fff; font-size: 16px; font-weight: 800; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 20px rgba(49,130,246,0.2); }
+        /* ✅ 메인 버튼: 노란→주황 그라데이션으로 변경 */
+        .btn-magic { width: 100%; padding: 18px; border-radius: 14px; border: none; background: var(--grad-yellow); color: #1a1000; font-size: 16px; font-weight: 800; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 20px rgba(255,149,0,0.25); }
         .btn-magic:disabled { opacity: 0.5; pointer-events: none; cursor: default; }
-        .btn-magic:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(49,130,246,0.3); }
+        .btn-magic:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(255,149,0,0.35); }
         .btn-clear { width: 100%; padding: 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); background: transparent; color: var(--text-sub); font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .btn-clear:hover { background: rgba(255,255,255,0.05); color: #fff; }
         .toast { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(52,199,89,0.95); backdrop-filter: blur(10px); color: white; padding: 14px 28px; border-radius: 100px; font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(52,199,89,0.3); opacity: 0; transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55); z-index: 9999; }
@@ -103,14 +108,16 @@
         .seo-content { width: 100%; display: flex; flex-direction: column; gap: 24px; animation: slideUp 0.8s 0.2s both; }
         .seo-box { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 20px; padding: 32px; }
         .seo-box h2 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 16px; letter-spacing: -0.5px; }
-        .seo-box h3 { font-size: 16px; font-weight: 700; color: var(--accent-cyan); margin: 20px 0 10px; }
+        /* ✅ SEO 박스 h3 강조색: 노란색으로 변경 */
+        .seo-box h3 { font-size: 16px; font-weight: 700; color: var(--accent-yellow); margin: 20px 0 10px; }
         .seo-box p { color: var(--text-sub); font-size: 15px; line-height: 1.7; margin-bottom: 16px; word-break: keep-all; }
         .seo-box ul { padding-left: 20px; color: var(--text-sub); font-size: 15px; line-height: 1.7; margin-bottom: 16px; }
         .seo-box li { margin-bottom: 8px; }
         .faq-item { border-bottom: 1px solid var(--card-border); padding: 16px 0; }
         .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
         .faq-q { font-weight: 700; color: #fff; font-size: 15px; margin-bottom: 8px; display: flex; gap: 8px; }
-        .faq-q::before { content: 'Q.'; color: var(--accent-cyan); }
+        /* ✅ FAQ Q. 강조색: 노란색으로 변경 */
+        .faq-q::before { content: 'Q.'; color: var(--accent-yellow); }
         .faq-a { color: var(--text-sub); font-size: 14px; line-height: 1.6; padding-left: 24px; }
         .footer { width: 100%; border-top: 1px solid var(--card-border); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); margin-top: auto; }
         .footer-logo { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 900; color: #555; }
@@ -123,9 +130,11 @@
         .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 10000; background: rgba(15,18,25,0.97); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.1); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
         .cookie-banner.show { transform: translateY(0); }
         .cookie-banner p { color: var(--text-sub); font-size: 13px; line-height: 1.6; flex: 1; min-width: 240px; }
-        .cookie-banner p a { color: var(--accent-cyan); text-decoration: underline; }
+        /* ✅ 쿠키 배너 링크색: 노란색으로 변경 */
+        .cookie-banner p a { color: var(--accent-yellow); text-decoration: underline; }
         .cookie-btn-group { display: flex; gap: 10px; flex-shrink: 0; }
-        .cookie-btn-accept { padding: 10px 22px; border-radius: 10px; border: none; background: var(--grad-magic); color: #fff; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
+        /* ✅ 쿠키 동의 버튼: 노란→주황 그라데이션으로 변경 */
+        .cookie-btn-accept { padding: 10px 22px; border-radius: 10px; border: none; background: var(--grad-yellow); color: #1a1000; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
         .cookie-btn-accept:hover { opacity: 0.85; }
         .cookie-btn-decline { padding: 10px 22px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: var(--text-sub); font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
         .cookie-btn-decline:hover { background: rgba(255,255,255,0.05); color: #fff; }
@@ -161,7 +170,6 @@
             <div class="app-box">
                 <div class="dashboard" role="status" aria-live="polite" aria-label="위험 단어 감지 현황">
                     <div class="dash-card">
-                        <!-- ✅ #① 이모지 깨짐 수정: SVG 아이콘으로 대체 (인코딩 문제 근본 해결) -->
                         <div class="dash-icon" aria-hidden="true">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--error-red)"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                         </div>
@@ -315,52 +323,38 @@
     };
 
     const yellowDict = {
-        // ── 씨발 계열 ──
         '씨발': 'ㅅㅂ',    '시발': 'ㅅㅂ',    '씌발': 'ㅆㅂ',    '싀발': 'ㅆㅂ',
         '슈발': 'ㅅㅂ',    '슈바': 'ㅅㅂ',    '쒸발': 'ㅆㅂ',    '시이발': 'ㅅㅂ',
         '쉬발': 'ㅅㅂ',    '쉬이발': 'ㅅㅂ',  '쉬바': 'ㅅㅂ',
-        // ✅ #⑧ 추가: 발음 유사 변형
         '씨팔': 'ㅅㅂ',    '씨빨': 'ㅅㅂ',    '시팔': 'ㅅㅂ',    '시빨': 'ㅅㅂ',
-        // ── 존나 계열 ──
         '썅': 'ㅆ',
         '존나': 'ㅈㄴ',    '좆나': 'ㅈㄴ',    '조온나': 'ㅈㄴ',
         '죤나': 'ㅈㄴ',    '줜나': 'ㅈㄴ',    '존내': 'ㅈㄴ',
-        // ── 좆/개 합성 ──
         '좆같': 'ㅈ같',    '개같': 'ㄱ같',    '좆': 'ㅈ',
-        // ── 련/년/놈 결합형 ──
         '년아': 'ㄴ아',    '놈아': 'ㄴ아',    '련아': 'ㄹ아',    '뇬아': 'ㄴ아',
         '년들': 'ㄴ들',    '놈들': 'ㄴ들',    '련들': 'ㄹ들',
-        // ── 개- 합성어 ──
         '개소리': 'ㄱ소리', '개돼지': 'ㄱ돼지', '개빡': 'ㄱ빡',
         '개웃': 'ㄱ웃',    '개구라': 'ㄱ구라', '개객끼': 'ㄱㅅㄲ',
         '개쓰레기': 'ㄱ쓰레기', '개호로': 'ㄱ호로',
-        // ── 병신 계열 ──
         '병신': 'ㅂㅅ',    '븅신': 'ㅂㅅ',    '뷩신': 'ㅂㅅ',    '벙신': 'ㅂㅅ',
-        // ── 새끼 계열 ──
         '새끼': 'ㅅㄲ',    '새기': 'ㅅㄲ',    '샛기': 'ㅅㄲ',
         '섀끼': 'ㅅㄲ',    '쌔끼': 'ㅅㄲ',    '쌔기': 'ㅅㄲ',
-        // ── 미친 계열 ──
         '미친': 'ㅁㅊ',    '미쳤': 'ㅁㅊ',    '미칩': 'ㅁㅊ',
-        // ✅ #⑧ 추가: 받침 변형
         '미칬': 'ㅁㅊ',
-        // ── 기타 욕설 ──
         '지랄': 'ㅈㄹ',    '염병': 'ㅇㅂ',    '빡쳐': 'ㅃ쳐',    '빡치': 'ㅃ치',
         '호로자식': 'ㅎ로자식', '호로새끼': 'ㅎ로ㅅㄲ',
         '찐따': 'ㅉㄸ',    '찐따새끼': 'ㅉㄸㅅㄲ',
         '관종': 'ㄱㅈ',    '현피': 'ㅎ피',
         '아가리': 'ㅇ가리', '닥쳐': 'ㄷ쳐',
         '뒤져': 'ㄷ져',    '뒈져': 'ㄷ져',    '디져': 'ㄷ져',    '뒈지': 'ㄷ지',
-        // ── 민감 키워드 ──
         '담배': 'ㄷ배',    '흡연': 'ㅎ연',    '음주': 'ㅇ주',
         '소주': 'ㅅ주',    '맥주': 'ㅁ주',
         '자살': 'ㅈ살',
-        // ── 배설 ──
         '오줌': 'ㅇㅈ',    '똥꼬': 'ㄷ꼬',
     };
 
     // ============================================================
-    // normalizeInput: 완성형 한글 사이 우회문자 수렴 제거
-    // MAX_ITER cap으로 무한루프 방어
+    // normalizeInput
     // ============================================================
     function normalizeInput(text) {
         const pattern = /([\uAC00-\uD7A3])[^\uAC00-\uD7A3\n]+([\uAC00-\uD7A3])/g;
