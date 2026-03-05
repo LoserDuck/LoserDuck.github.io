@@ -36,7 +36,8 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-4PG2DEJS2P');
+      gtag('consent', 'default', { 'analytics_storage': 'denied', 'ad_storage': 'denied', 'wait_for_update': 500 });
+      gtag('config', 'G-4PG2DEJS2P', { 'send_page_view': false });
     </script>
     <meta name="google-site-verification" content="KC_FGR3LD6TwJWG73cK14iJu44l-nzTBk9AvjvW4Mo8" />
 
@@ -196,6 +197,16 @@
 
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+        .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 10000; background: rgba(15,18,25,0.97); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.1); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+        .cookie-banner.show { transform: translateY(0); }
+        .cookie-banner p { color: var(--text-sub); font-size: 13px; line-height: 1.6; flex: 1; min-width: 240px; }
+        .cookie-banner p a { color: var(--accent-green); text-decoration: underline; }
+        .cookie-btn-group { display: flex; gap: 10px; flex-shrink: 0; }
+        .cookie-btn-accept { padding: 10px 22px; border-radius: 10px; border: none; background: linear-gradient(135deg, #34c759 0%, #248a3d 100%); color: #fff; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
+        .cookie-btn-accept:hover { opacity: 0.85; }
+        .cookie-btn-decline { padding: 10px 22px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: var(--text-sub); font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .cookie-btn-decline:hover { background: rgba(255,255,255,0.05); color: #fff; }
     </style>
 </head>
 <body>
@@ -366,6 +377,39 @@
             Designed &amp; Engineered by <span class="duck-logo">🦆 LoserDuck</span>
         </div>
     </footer>
+
+    <div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="쿠키 사용 동의" aria-modal="false">
+        <p>저희는 서비스 품질 개선을 위해 Google Analytics를 사용합니다. 방문 통계 수집에 동의하시겠습니까? 자세한 내용은 <a href="./privacy.html">개인정보처리방침</a>을 확인하세요.</p>
+        <div class="cookie-btn-group">
+            <button class="cookie-btn-decline" id="cookieDecline">거부</button>
+            <button class="cookie-btn-accept" id="cookieAccept">동의</button>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        const consent = localStorage.getItem('ga_consent');
+        if (consent === 'granted') enableGA();
+        else if (consent === null) setTimeout(() => document.getElementById('cookieBanner')?.classList.add('show'), 800);
+        document.getElementById('cookieAccept').addEventListener('click', () => {
+            localStorage.setItem('ga_consent', 'granted'); enableGA(); hideCookieBanner();
+        });
+        document.getElementById('cookieDecline').addEventListener('click', () => {
+            localStorage.setItem('ga_consent', 'denied'); hideCookieBanner();
+        });
+        function enableGA() {
+            gtag('consent', 'update', { 'analytics_storage': 'granted', 'ad_storage': 'granted' });
+            gtag('event', 'page_view');
+        }
+        function hideCookieBanner() {
+            const b = document.getElementById('cookieBanner');
+            if (!b) return;
+            b.style.transition = 'transform 0.3s ease';
+            b.style.transform = 'translateY(100%)';
+            setTimeout(() => b.remove(), 350);
+        }
+    })();
+    </script>
 
 </body>
 </html>
