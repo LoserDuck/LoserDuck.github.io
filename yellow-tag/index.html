@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>유튜브 노란딱지 금지어 필터기 (공식 가이드라인 기준) | 1SecTools</title>
+    <meta name="description" content="유튜브 '광고주 친화적 가이드라인' 기반! 수익 창출 정지를 유발하는 위험 단어(욕설, 폭력, 민감 키워드)를 1초 만에 찾아내고 안전한 초성으로 자동 변환해 줍니다.">
+    <meta name="keywords" content="유튜브 노란딱지, 틱톡 섀도우밴, 금지어 검사기, 유튜브 욕설 필터, 유튜브 가이드라인, 순화어 변환">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://1sectools.com/yellow-tag/">
+    <meta property="og:title" content="유튜브 노란딱지 필터 & 자동 변환기 | 1SecTools">
+    <meta property="og:description" content="유튜브 공식 가이드라인 기반! 수익 창출 정지를 유발하는 위험 단어를 찾아내 안전한 초성으로 변환해 드립니다.">
+    <meta property="og:image" content="https://1sectools.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:site_name" content="1SecTools">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="유튜브 노란딱지 필터 & 자동 변환기 | 1SecTools">
+    <meta name="twitter:description" content="유튜브 공식 가이드라인 기반! 수익 창출 정지를 유발하는 위험 단어를 찾아내 안전한 초성으로 변환해 드립니다.">
+    <meta name="twitter:image" content="https://1sectools.com/og-image.jpg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%233182f6'/><stop offset='100%' stop-color='%23ff2d55'/></linearGradient></defs><rect width='100' height='100' rx='25' fill='%23191f28'/><path d='M60 20 L25 60 L45 60 L40 85 L75 45 L55 45 Z' fill='url(%23grad)'/></svg>">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4PG2DEJS2P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('consent', 'default', { 'analytics_storage': 'denied', 'ad_storage': 'denied', 'wait_for_update': 500 });
+      gtag('config', 'G-4PG2DEJS2P', { 'send_page_view': false });
+    </script>
+    <meta name="google-site-verification" content="KC_FGR3LD6TwJWG73cK14iJu44l-nzTBk9AvjvW4Mo8" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7273110816268085" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --bg-base: #030305; --card-bg: rgba(255,255,255,0.03); --card-border: rgba(255,255,255,0.08);
+            --text-title: #ffffff; --text-sub: #8b95a1;
+            --accent-cyan: #32ade6; --accent-blue: #3182f6;
+            --grad-magic: linear-gradient(135deg, #3182f6 0%, #ff2d55 100%);
+            --accent-green: #34c759; --error-red: #ff3b30; --warning-yellow: #ffcc00;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; }
+        body {
+            background-color: var(--bg-base); color: var(--text-title); min-height: 100vh; display: flex; flex-direction: column;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            background-image:
+                radial-gradient(circle at 10% 0%, rgba(49,130,246,0.08) 0%, transparent 45%),
+                radial-gradient(circle at 90% 100%, rgba(175,82,222,0.08) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+        }
+        .header { position: sticky; top: 0; z-index: 1000; background: rgba(3,3,5,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .header-logo { font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 900; font-size: 20px; letter-spacing: -0.5px; }
+        .header-badge { font-family: 'Inter','Noto Sans KR',sans-serif; background: rgba(50,173,230,0.15); border: 1px solid rgba(50,173,230,0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--accent-cyan); font-weight: 700; }
+        .scale-wrapper { width: 100%; display: flex; flex-direction: column; align-items: center; flex: 1; transform-origin: top center; }
+        @media (min-width: 2500px) { .scale-wrapper { transform: scale(1.3); margin-bottom: 250px; } }
+        .main { padding: 60px 20px 80px; width: 100%; max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+        .title-sec { text-align: center; margin-bottom: 28px; animation: fadeInDown 0.6s cubic-bezier(0.16,1,0.3,1); display: flex; flex-direction: column; align-items: center; }
+        .title-sec h1 { font-size: clamp(26px,4.5vw,36px); font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; line-height: 1.3; word-break: keep-all; }
+        .top-secure-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(52,199,89,0.1); border: 1px solid rgba(52,199,89,0.3); color: var(--accent-green); padding: 6px 14px; border-radius: 100px; font-size: 13px; font-weight: 700; margin-bottom: 16px; box-shadow: 0 4px 15px rgba(52,199,89,0.1); }
+        .title-sec p { color: var(--text-sub); font-size: 15px; line-height: 1.6; }
+        .ad-container { width: 100%; min-height: 90px; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .app-box { width: 100%; background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--card-border); border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); animation: slideUp 0.6s cubic-bezier(0.16,1,0.3,1); margin-bottom: 40px; }
+        .dashboard { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+        @media (max-width: 480px) { .dashboard { grid-template-columns: 1fr; } }
+        .dash-card { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 16px; padding: 16px 20px; display: flex; align-items: center; gap: 16px; transition: all 0.3s; }
+        .dash-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+        .dash-card:nth-child(1) .dash-icon { background: rgba(255,59,48,0.15); color: var(--error-red); }
+        .dash-card:nth-child(2) .dash-icon { background: rgba(255,204,0,0.15); color: var(--warning-yellow); }
+        .dash-text { display: flex; flex-direction: column; }
+        .dash-text h4 { font-size: 13px; color: var(--text-sub); font-weight: 600; margin-bottom: 4px; }
+        .dash-text span { font-size: 24px; font-weight: 800; color: #fff; font-family: 'Inter', sans-serif; }
+        .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; min-height: 320px; }
+        @media (max-width: 768px) { .editor-grid { grid-template-columns: 1fr; min-height: auto; } }
+        .io-box { position: relative; width: 100%; display: flex; flex-direction: column; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; transition: border-color 0.3s; }
+        .io-box:focus-within { border-color: var(--accent-cyan); box-shadow: 0 0 0 4px rgba(50,173,230,0.15); }
+        .io-header { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; font-weight: 700; color: var(--text-sub); background: rgba(255,255,255,0.02); display: flex; justify-content: space-between; }
+        textarea, .result-box { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.2) transparent; }
+        textarea::-webkit-scrollbar, .result-box::-webkit-scrollbar { width: 6px; }
+        textarea::-webkit-scrollbar-thumb, .result-box::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        textarea { flex: 1; width: 100%; min-height: 280px; background: transparent; border: none; padding: 20px; color: #fff; font-size: 15px; line-height: 1.7; resize: none; outline: none; }
+        textarea::placeholder { color: rgba(255,255,255,0.2); }
+        .result-box { position: relative; flex: 1; width: 100%; min-height: 280px; padding: 20px; font-size: 15px; line-height: 1.7; color: #e2e8f0; overflow-y: auto; white-space: pre-wrap; word-break: break-word; text-align: left; }
+        .empty-state { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: rgba(255,255,255,0.25); font-weight: 600; text-align: center; gap: 14px; font-size: 15px; pointer-events: none; white-space: normal; animation: pulse-wait 3s infinite ease-in-out; }
+        @keyframes pulse-wait { 0%,100% { opacity: 0.6; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1.02); } }
+        .hl-red { background: rgba(255,59,48,0.2); color: #ff6b6b; border: 1px solid rgba(255,59,48,0.4); font-weight: 700; padding: 2px 4px; border-radius: 4px; cursor: help; display: inline-block; }
+        .hl-yellow { background: rgba(255,204,0,0.2); color: #ffd43b; border: 1px solid rgba(255,204,0,0.4); font-weight: 700; padding: 2px 4px; border-radius: 4px; cursor: help; display: inline-block; }
+        .btn-magic { width: 100%; padding: 18px; border-radius: 14px; border: none; background: var(--grad-magic); color: #fff; font-size: 16px; font-weight: 800; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 20px rgba(49,130,246,0.2); }
+        .btn-magic:disabled { opacity: 0.5; pointer-events: none; cursor: default; }
+        .btn-magic:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(49,130,246,0.3); }
+        .btn-clear { width: 100%; padding: 16px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); background: transparent; color: var(--text-sub); font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-clear:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        .toast { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(52,199,89,0.95); backdrop-filter: blur(10px); color: white; padding: 14px 28px; border-radius: 100px; font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(52,199,89,0.3); opacity: 0; transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55); z-index: 9999; }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .seo-content { width: 100%; display: flex; flex-direction: column; gap: 24px; animation: slideUp 0.8s 0.2s both; }
+        .seo-box { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 20px; padding: 32px; }
+        .seo-box h2 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 16px; letter-spacing: -0.5px; }
+        .seo-box h3 { font-size: 16px; font-weight: 700; color: var(--accent-cyan); margin: 20px 0 10px; }
+        .seo-box p { color: var(--text-sub); font-size: 15px; line-height: 1.7; margin-bottom: 16px; word-break: keep-all; }
+        .seo-box ul { padding-left: 20px; color: var(--text-sub); font-size: 15px; line-height: 1.7; margin-bottom: 16px; }
+        .seo-box li { margin-bottom: 8px; }
+        .faq-item { border-bottom: 1px solid var(--card-border); padding: 16px 0; }
+        .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .faq-q { font-weight: 700; color: #fff; font-size: 15px; margin-bottom: 8px; display: flex; gap: 8px; }
+        .faq-q::before { content: 'Q.'; color: var(--accent-cyan); }
+        .faq-a { color: var(--text-sub); font-size: 14px; line-height: 1.6; padding-left: 24px; }
+        .footer { width: 100%; border-top: 1px solid var(--card-border); padding: 40px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); margin-top: auto; }
+        .footer-logo { font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 900; color: #555; }
+        .footer-links { display: flex; gap: 16px; margin: 4px 0; font-family: 'Inter', sans-serif; }
+        .footer-links a { color: #8b95a1; text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+        .footer-links a:hover { color: #fff; }
+        .footer-copy { font-family: 'Inter', sans-serif; color: #555; font-size: 13px; font-weight: 500; text-align: center; line-height: 1.5; }
+        .duck-logo { color: #888; font-weight: 700; transition: color 0.3s; }
+        .duck-logo:hover { color: #fff; }
+        .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 10000; background: rgba(15,18,25,0.97); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.1); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+        .cookie-banner.show { transform: translateY(0); }
+        .cookie-banner p { color: var(--text-sub); font-size: 13px; line-height: 1.6; flex: 1; min-width: 240px; }
+        .cookie-banner p a { color: var(--accent-cyan); text-decoration: underline; }
+        .cookie-btn-group { display: flex; gap: 10px; flex-shrink: 0; }
+        .cookie-btn-accept { padding: 10px 22px; border-radius: 10px; border: none; background: var(--grad-magic); color: #fff; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
+        .cookie-btn-accept:hover { opacity: 0.85; }
+        .cookie-btn-decline { padding: 10px 22px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: var(--text-sub); font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+        .cookie-btn-decline:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="../" class="header-logo" aria-label="1SecTools 홈으로 이동">
+            <svg width="28" height="28" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3182f6"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient></defs><path d="M60 10 L20 60 L45 60 L35 95 L80 40 L55 40 Z" fill="url(#nav-grad)"/></svg>
+            1SecTools
+        </a>
+        <span class="header-badge">노란딱지 필터기</span>
+    </header>
+
+    <div class="scale-wrapper">
+        <main class="main">
+            <div class="title-sec">
+                <div class="top-secure-badge" role="note">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    100% 안전: 브라우저 자체 처리 (서버 저장 X)
+                </div>
+                <h1>유튜브 노란딱지 1초 필터기</h1>
+                <p>가이드라인 위반 위험 단어를 찾아내고, AI가 모르는 초성으로 변환하세요.</p>
+            </div>
+
+            <div class="ad-container" aria-label="광고 영역">
+                <ins class="adsbygoogle" style="display:block;text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-7273110816268085" data-ad-slot="YOUR_AD_SLOT_HERE"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+
+            <div class="app-box">
+                <div class="dashboard" role="status" aria-live="polite" aria-label="위험 단어 감지 현황">
+                    <div class="dash-card">
+                        <!-- ✅ #① 이모지 깨짐 수정: SVG 아이콘으로 대체 (인코딩 문제 근본 해결) -->
+                        <div class="dash-icon" aria-hidden="true">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--error-red)"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        </div>
+                        <div class="dash-text">
+                            <h4>빨간딱지 (절대 금지)</h4>
+                            <span id="countRed" aria-label="빨간딱지 단어 수">0</span>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="dash-icon" aria-hidden="true">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--warning-yellow)"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        </div>
+                        <div class="dash-text">
+                            <h4>노란딱지 (주의/제한)</h4>
+                            <span id="countYellow" aria-label="노란딱지 단어 수">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor-grid">
+                    <div class="io-box">
+                        <div class="io-header" id="input-label">원본 대본 (자막) 입력 <span id="charCount" aria-live="polite">0 자</span></div>
+                        <textarea id="scriptInput" aria-labelledby="input-label" placeholder="여기에 대본이나 자막을 복사해서 붙여넣으세요.&#10;유튜브 알고리즘 기준에 맞춰 실시간으로 분석합니다."></textarea>
+                    </div>
+                    <div class="io-box">
+                        <div class="io-header" id="result-label">필터링 결과</div>
+                        <div class="result-box" id="resultBox" role="region" aria-labelledby="result-label" aria-live="polite"></div>
+                    </div>
+                </div>
+
+                <button id="copySafeBtn" class="btn-magic" aria-label="위험 단어를 초성으로 변환한 텍스트 복사하기" disabled>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12l5 5l10 -10"></path></svg>
+                    위험 단어 안전하게 변환 후 복사하기
+                </button>
+                <button class="btn-clear" onclick="clearScript()" aria-label="입력한 대본 전체 초기화">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    대본 초기화
+                </button>
+            </div>
+
+            <div class="seo-content">
+                <div class="seo-box">
+                    <h2>유튜브 공식 노란딱지 기준 완벽 대응</h2>
+                    <p>유튜브의 <strong>광고주 친화적 콘텐츠 가이드라인</strong>에 따르면, 영상 내 자막이나 음성에 부적절한 언어가 포함될 경우 즉각적인 수익 창출 제한(노란딱지)을 받게 됩니다. 본 1SecTools 필터기는 실제 유튜브 AI가 검열하는 2가지 핵심 등급으로 단어를 분류합니다.</p>
+                    <h3>🚨 빨간딱지 (수익 창출 불가 및 영상 삭제)</h3>
+                    <ul>
+                        <li><strong>기준:</strong> 매우 강한 욕설, 혐오 표현, 성폭력, 불법 약물, 살상 및 극단적 폭력을 묘사하는 단어.</li>
+                        <li><strong>결과:</strong> 단 1회라도 사용될 경우 영상 수익이 0원이 되거나, 연령 제한(19금), 심하면 채널 경고를 받을 수 있습니다. <strong>무조건 순화해야 합니다.</strong></li>
+                    </ul>
+                    <h3>⚠️ 노란딱지 (제한적 수익 창출 및 7초 룰 주의)</h3>
+                    <ul>
+                        <li><strong>기준:</strong> 일상적인 비속어(존나, 개-, 미친 등), 가벼운 욕설, 배설물 등과 관련된 단어.</li>
+                        <li><strong>7초 룰(Rule):</strong> 유튜브 공식 규정에 따라, 이러한 단어가 <strong>영상 시작 후 첫 7초 이내</strong>에 등장하거나 썸네일과 제목에 쓰이면 즉시 노란딱지가 붙습니다.</li>
+                    </ul>
+                </div>
+                <div class="seo-box">
+                    <h2>자주 묻는 질문 (FAQ)</h2>
+                    <div class="faq-item">
+                        <div class="faq-q">안전한 단어로 변환(초성 변환)하면 AI가 정말 못 잡나요?</div>
+                        <div class="faq-a">네, 그렇습니다. 유튜브 AI는 자막(텍스트)과 영상의 음성 인식을 대조하여 검열합니다. 욕설을 자막에서 초성으로 우회 표기하고, 영상 편집 시 해당 음성을 삐- 소리나 효과음으로 덮어버리면 AI 알고리즘이 이를 정책 위반으로 인식할 근거가 없어집니다.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q">단어의 일부(예: 개-, 년)도 필터링이 되나요?</div>
+                        <div class="faq-a">완벽하게 필터링됩니다. 1SecTools의 검열 알고리즘은 접두사나 접미사가 결합된 파생 욕설까지 모두 찾아내어 붉은색과 노란색으로 경고해 줍니다.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q">제 대본이 서버에 저장되거나 유출되지 않나요?</div>
+                        <div class="faq-a">절대 저장되지 않습니다. 본 서비스의 모든 금지어 검사 및 변환 연산은 100% 사용자의 기기(웹 브라우저) 로컬 환경에서만 실행됩니다.</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-logo">1SecTools</div>
+        <div class="footer-links">
+            <a href="../privacy.html">Privacy Policy</a>
+            <span style="color:rgba(255,255,255,0.1);" aria-hidden="true">|</span>
+            <a href="../terms.html">Terms of Service</a>
+            <span style="color:rgba(255,255,255,0.1);" aria-hidden="true">|</span>
+            <a href="../contact.html">Contact Us</a>
+        </div>
+        <div class="footer-copy">
+            &copy; 2026 1SecTools. All rights reserved.<br>
+            Designed &amp; Engineered by <span class="duck-logo">🦆 LoserDuck</span>
+        </div>
+    </footer>
+
+    <div id="toast" class="toast" role="alert" aria-live="assertive">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        안전한 초성으로 변환되어 복사되었습니다!
+    </div>
+
+    <div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="쿠키 사용 동의" aria-modal="false">
+        <p>저희는 서비스 품질 개선을 위해 Google Analytics를 사용합니다. 방문 통계 수집에 동의하시겠습니까? 자세한 내용은 <a href="../privacy.html">개인정보처리방침</a>을 확인하세요.</p>
+        <div class="cookie-btn-group">
+            <button class="cookie-btn-decline" id="cookieDecline">거부</button>
+            <button class="cookie-btn-accept" id="cookieAccept">동의</button>
+        </div>
+    </div>
+
+    <script>
+    // ============================================================
+    // 쿠키 동의
+    // ============================================================
+    (function() {
+        const consent = localStorage.getItem('ga_consent');
+        if (consent === 'granted') enableGA();
+        else if (consent === null) setTimeout(() => document.getElementById('cookieBanner').classList.add('show'), 800);
+        document.getElementById('cookieAccept').addEventListener('click', () => {
+            localStorage.setItem('ga_consent', 'granted'); enableGA(); hideCookieBanner();
+        });
+        document.getElementById('cookieDecline').addEventListener('click', () => {
+            localStorage.setItem('ga_consent', 'denied'); hideCookieBanner();
+        });
+        function enableGA() {
+            gtag('consent', 'update', { 'analytics_storage': 'granted', 'ad_storage': 'granted' });
+            gtag('event', 'page_view');
+        }
+        function hideCookieBanner() {
+            const b = document.getElementById('cookieBanner');
+            if (!b) return;
+            b.style.transition = 'transform 0.3s ease';
+            b.style.transform = 'translateY(100%)';
+            setTimeout(() => b.remove(), 350);
+        }
+    })();
+
+    // ============================================================
+    // 딕셔너리
+    // ============================================================
+    const redDict = {
+        '미친년': 'ㅁㅊㄴ',    '미친놈': 'ㅁㅊㄴ',    '미친련': 'ㅁㅊㄴ',
+        '씨발년': 'ㅅㅂㄴ',    '씨발놈': 'ㅅㅂㄴ',    '씨발련': 'ㅅㅂㄴ',
+        '시발년': 'ㅅㅂㄴ',    '시발놈': 'ㅅㅂㄴ',    '시발련': 'ㅅㅂㄴ',
+        '개같은련': 'ㄱ같은ㄴ', '개같은년': 'ㄱ같은ㄴ', '개같은놈': 'ㄱ같은ㄴ',
+        '씨발같은': 'ㅅㅂ같은',
+        '개새끼': 'ㄱㅅㄲ',    '씹새끼': 'ㅆㅅㄲ',
+        '애미뒤져': 'ㅇㅁㄷ져', '애미씨발': 'ㅇㅁㅅㅂ',
+        '느금마': 'ㄴㄱㅁ',    '니미씨발': 'ㄴㅁㅅㅂ',
+        '애미': 'ㅇㅁ',        '애비': 'ㅇㅂ',        '니미': 'ㄴㅁ',
+        '강간': 'ㄱ간',        '성폭행': 'ㅅ폭행',
+        '창녀': 'ㅊ녀',        '창년': 'ㅊ년',        '걸레년': 'ㄱㄹㄴ',
+        '시체': 'ㅅ체',        '피범벅': 'ㅍ범벅',
+        '살해': 'ㅅ해',        '자해': 'ㅈ해',
+        '테러': 'ㅌ러',        '폭행': 'ㅍ행',
+        '죽여': 'ㅈ여',        '죽음': 'ㅈ음',
+        '자위': 'ㅈ위',        '섹스': 'ㅅ스',        '야동': 'ㅇ동',
+        '좆물': 'ㅈ물',        '정액': 'ㅈㅇ',
+    };
+
+    const yellowDict = {
+        // ── 씨발 계열 ──
+        '씨발': 'ㅅㅂ',    '시발': 'ㅅㅂ',    '씌발': 'ㅆㅂ',    '싀발': 'ㅆㅂ',
+        '슈발': 'ㅅㅂ',    '슈바': 'ㅅㅂ',    '쒸발': 'ㅆㅂ',    '시이발': 'ㅅㅂ',
+        '쉬발': 'ㅅㅂ',    '쉬이발': 'ㅅㅂ',  '쉬바': 'ㅅㅂ',
+        // ✅ #⑧ 추가: 발음 유사 변형
+        '씨팔': 'ㅅㅂ',    '씨빨': 'ㅅㅂ',    '시팔': 'ㅅㅂ',    '시빨': 'ㅅㅂ',
+        // ── 존나 계열 ──
+        '썅': 'ㅆ',
+        '존나': 'ㅈㄴ',    '좆나': 'ㅈㄴ',    '조온나': 'ㅈㄴ',
+        '죤나': 'ㅈㄴ',    '줜나': 'ㅈㄴ',    '존내': 'ㅈㄴ',
+        // ── 좆/개 합성 ──
+        '좆같': 'ㅈ같',    '개같': 'ㄱ같',    '좆': 'ㅈ',
+        // ── 련/년/놈 결합형 ──
+        '년아': 'ㄴ아',    '놈아': 'ㄴ아',    '련아': 'ㄹ아',    '뇬아': 'ㄴ아',
+        '년들': 'ㄴ들',    '놈들': 'ㄴ들',    '련들': 'ㄹ들',
+        // ── 개- 합성어 ──
+        '개소리': 'ㄱ소리', '개돼지': 'ㄱ돼지', '개빡': 'ㄱ빡',
+        '개웃': 'ㄱ웃',    '개구라': 'ㄱ구라', '개객끼': 'ㄱㅅㄲ',
+        '개쓰레기': 'ㄱ쓰레기', '개호로': 'ㄱ호로',
+        // ── 병신 계열 ──
+        '병신': 'ㅂㅅ',    '븅신': 'ㅂㅅ',    '뷩신': 'ㅂㅅ',    '벙신': 'ㅂㅅ',
+        // ── 새끼 계열 ──
+        '새끼': 'ㅅㄲ',    '새기': 'ㅅㄲ',    '샛기': 'ㅅㄲ',
+        '섀끼': 'ㅅㄲ',    '쌔끼': 'ㅅㄲ',    '쌔기': 'ㅅㄲ',
+        // ── 미친 계열 ──
+        '미친': 'ㅁㅊ',    '미쳤': 'ㅁㅊ',    '미칩': 'ㅁㅊ',
+        // ✅ #⑧ 추가: 받침 변형
+        '미칬': 'ㅁㅊ',
+        // ── 기타 욕설 ──
+        '지랄': 'ㅈㄹ',    '염병': 'ㅇㅂ',    '빡쳐': 'ㅃ쳐',    '빡치': 'ㅃ치',
+        '호로자식': 'ㅎ로자식', '호로새끼': 'ㅎ로ㅅㄲ',
+        '찐따': 'ㅉㄸ',    '찐따새끼': 'ㅉㄸㅅㄲ',
+        '관종': 'ㄱㅈ',    '현피': 'ㅎ피',
+        '아가리': 'ㅇ가리', '닥쳐': 'ㄷ쳐',
+        '뒤져': 'ㄷ져',    '뒈져': 'ㄷ져',    '디져': 'ㄷ져',    '뒈지': 'ㄷ지',
+        // ── 민감 키워드 ──
+        '담배': 'ㄷ배',    '흡연': 'ㅎ연',    '음주': 'ㅇ주',
+        '소주': 'ㅅ주',    '맥주': 'ㅁ주',
+        '자살': 'ㅈ살',
+        // ── 배설 ──
+        '오줌': 'ㅇㅈ',    '똥꼬': 'ㄷ꼬',
+    };
+
+    // ============================================================
+    // normalizeInput: 완성형 한글 사이 우회문자 수렴 제거
+    // MAX_ITER cap으로 무한루프 방어
+    // ============================================================
+    function normalizeInput(text) {
+        const pattern = /([\uAC00-\uD7A3])[^\uAC00-\uD7A3\n]+([\uAC00-\uD7A3])/g;
+        let prev = '';
+        let curr = text;
+        const MAX_ITER = 20;
+        let iter = 0;
+        while (curr !== prev && iter < MAX_ITER) {
+            prev = curr;
+            curr = curr.replace(pattern, '$1$2');
+            iter++;
+        }
+        return curr;
+    }
+
+    // ============================================================
+    // 통합 Regex 엔진
+    // ============================================================
+    const combinedEntries = [
+        ...Object.entries(redDict).map(([k, v]) => ({ key: k, value: v, type: 'red' })),
+        ...Object.entries(yellowDict).map(([k, v]) => ({ key: k, value: v, type: 'yellow' }))
+    ].sort((a, b) => b.key.length - a.key.length);
+
+    const seenKeys = new Set();
+    const dedupedEntries = combinedEntries.filter(e => {
+        if (seenKeys.has(e.key)) return false;
+        seenKeys.add(e.key);
+        return true;
+    });
+
+    const combinedMap = {};
+    dedupedEntries.forEach(e => { combinedMap[e.key] = e; });
+
+    const combinedRegex = new RegExp(
+        dedupedEntries.map(e => e.key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'),
+        'g'
+    );
+
+    function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, t => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[t]));
+    }
+
+    function buildIndexMap(original, normalized) {
+        const map = new Array(normalized.length);
+        let ni = 0;
+        for (let oi = 0; oi < original.length && ni < normalized.length; oi++) {
+            if (original[oi] === normalized[ni]) { map[ni] = oi; ni++; }
+        }
+        for (let i = 0; i < map.length; i++) {
+            if (map[i] === undefined) map[i] = (i > 0 ? map[i - 1] : -1) + 1;
+        }
+        return map;
+    }
+
+    function getOrigRange(indexMap, normStart, normEnd) {
+        const origStart   = indexMap[normStart] ?? normStart;
+        const lastNormIdx = Math.min(normEnd - 1, indexMap.length - 1);
+        const origEnd     = (indexMap[lastNormIdx] ?? lastNormIdx) + 1;
+        return { origStart, origEnd };
+    }
+
+    const scriptInput = document.getElementById('scriptInput');
+    const resultBox   = document.getElementById('resultBox');
+    const charCount   = document.getElementById('charCount');
+    const countRed    = document.getElementById('countRed');
+    const countYellow = document.getElementById('countYellow');
+    const copySafeBtn = document.getElementById('copySafeBtn');
+    const toast       = document.getElementById('toast');
+
+    const emptyStateHTML = '<div class="empty-state"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>텍스트를 입력하면<br>위험 단어가 자동 하이라이트 됩니다.</div>';
+
+    function debounce(fn, delay) {
+        let timer;
+        return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), delay); };
+    }
+
+    function processInput() {
+        const originalNFC = scriptInput.value.normalize('NFC');
+        const normalized  = normalizeInput(originalNFC);
+
+        charCount.innerText = `${originalNFC.length.toLocaleString()} 자`;
+
+        if (!originalNFC.trim()) {
+            resultBox.innerHTML   = emptyStateHTML;
+            countRed.innerText    = '0';
+            countYellow.innerText = '0';
+            copySafeBtn.disabled  = true;
+            return;
+        }
+
+        copySafeBtn.disabled = false;
+
+        let rCount = 0, yCount = 0;
+        combinedRegex.lastIndex = 0;
+        normalized.replace(combinedRegex, match => {
+            combinedMap[match]?.type === 'red' ? rCount++ : yCount++;
+            return match;
+        });
+        countRed.innerText    = rCount;
+        countYellow.innerText = yCount;
+
+        const indexMap = buildIndexMap(originalNFC, normalized);
+        const matches  = [];
+        combinedRegex.lastIndex = 0;
+        let m;
+        while ((m = combinedRegex.exec(normalized)) !== null) {
+            const { origStart, origEnd } = getOrigRange(indexMap, m.index, m.index + m[0].length);
+            matches.push({ origStart, origEnd, origText: originalNFC.slice(origStart, origEnd), entry: combinedMap[m[0]] });
+        }
+
+        let html = '', lastIdx = 0;
+        for (const match of matches) {
+            if (match.origStart < lastIdx) continue;
+            if (match.origStart > lastIdx) html += escapeHTML(originalNFC.slice(lastIdx, match.origStart));
+            const safeOrig = escapeHTML(match.origText);
+            const safeHint = escapeHTML(match.entry.value);
+            html += match.entry.type === 'red'
+                ? `<span class="hl-red" title="[빨간딱지] 우회 권장: ${safeHint}">${safeOrig}</span>`
+                : `<span class="hl-yellow" title="[노란딱지] 우회 권장: ${safeHint}">${safeOrig}</span>`;
+            lastIdx = match.origEnd;
+        }
+        if (lastIdx < originalNFC.length) html += escapeHTML(originalNFC.slice(lastIdx));
+        resultBox.innerHTML = html;
+    }
+
+    scriptInput.addEventListener('input', debounce(processInput, 300));
+
+    function clearScript() {
+        scriptInput.value = '';
+        processInput();
+        scriptInput.focus();
+    }
+
+    copySafeBtn.addEventListener('click', () => {
+        const originalNFC = scriptInput.value.normalize('NFC');
+        if (!originalNFC.trim()) return;
+
+        const normalized = normalizeInput(originalNFC);
+        const indexMap   = buildIndexMap(originalNFC, normalized);
+        const matches    = [];
+        combinedRegex.lastIndex = 0;
+        let m;
+        while ((m = combinedRegex.exec(normalized)) !== null) {
+            const { origStart, origEnd } = getOrigRange(indexMap, m.index, m.index + m[0].length);
+            matches.push({ origStart, origEnd, entry: combinedMap[m[0]] });
+        }
+
+        let result = originalNFC;
+        for (let i = matches.length - 1; i >= 0; i--) {
+            const { origStart, origEnd, entry } = matches[i];
+            result = result.slice(0, origStart) + entry.value + result.slice(origEnd);
+        }
+
+        const finalText = result.normalize('NFC');
+        navigator.clipboard.writeText(finalText)
+            .then(showToast)
+            .catch(() => {
+                const ta = document.createElement('textarea');
+                ta.value = finalText;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                showToast();
+            });
+    });
+
+    function showToast() {
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    processInput();
+    </script>
+</body>
+</html>
