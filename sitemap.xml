@@ -56,6 +56,13 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- 📍 8호점: 유튜브 노란딱지 필터기 -->
+<url>
+  <loc>https://1sectools.com/yellow-tag/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
   <!-- 🛡️ 신뢰도/정책 페이지 (이전 누락분인 Contact 추가 완료!) -->
   <url>
     <loc>https://1sectools.com/privacy.html</loc>
