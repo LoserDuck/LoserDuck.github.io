@@ -10,7 +10,7 @@
     <meta name="keywords" content="1초툴, youtube thumbnail, safe zone simulator, 인스타공백, 세금계산기, 1sectools, no data saved">
     <meta name="author" content="LoserDuck">
 
-        <!-- ✅ 카카오톡/디스코드/페이���북/인스타 링크 공유 미리보기 (OG Tag) -->
+    <!-- ✅ 카카오톡/디스코드/페이스북/인스타 링크 공유 미리보기 (OG Tag) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://1sectools.com/">
     <meta property="og:title" content="1SecTools | 크리에이터 필수 1초 도구 모음">
@@ -61,6 +61,7 @@
             --grad-green: linear-gradient(135deg, #34c759 0%, #248a3d 100%);
             --grad-orange: linear-gradient(135deg, #ff9500 0%, #d17a00 100%);
             --grad-cyan: linear-gradient(135deg, #64d2ff 0%, #0a84ff 100%);
+            --grad-yellow: linear-gradient(135deg, #ffcc00 0%, #ff9500 100%); /* ✅ 8호점 추가 */
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Noto Sans KR', sans-serif; }
@@ -166,6 +167,7 @@
         .ic-safe { background: var(--grad-orange); }
         .ic-preview { background: linear-gradient(135deg, #ff2d55 0%, #ff9500 100%); }
         .ic-script { background: var(--grad-cyan); }
+        .ic-yellow { background: var(--grad-yellow); } /* ✅ 8호점 추가 */
 
         .scale-wrapper { width: 100%; display: flex; flex-direction: column; align-items: center; flex: 1; transform-origin: top center; }
         @media (min-width: 2500px) {
@@ -325,6 +327,21 @@
                 </div>
             </a>
 
+            <!-- ✅ 8호점: 유튜브 노란딱지 필터기 -->
+            <a href="./yellow-tag/" class="tool-card">
+                <div class="icon-box ic-yellow">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                </div>
+                <div class="card-content">
+                    <h2>유튜브 노란딱지 필터기</h2>
+                    <p>수익 창출 위험 단어를 1초 만에 탐지하고 안전한 초성으로 자동 변환해 줍니다.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag ko">KR Only</span>
+                    <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
         </div>
     </main>
 
@@ -346,7 +363,7 @@
         <div class="footer-copy">
             Images and texts are processed locally in your browser.<br>
             &copy; 2026 1SecTools. All rights reserved.<br>
-            Designed & Engineered by <span class="duck-logo">🦆 LoserDuck</span>
+            Designed &amp; Engineered by <span class="duck-logo">🦆 LoserDuck</span>
         </div>
     </footer>
 
